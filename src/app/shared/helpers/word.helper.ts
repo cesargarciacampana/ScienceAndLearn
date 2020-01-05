@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElementService } from '../services/element.service';
+import { StringHelper } from './string.helper';
 
 @Injectable({providedIn: 'root'})
 export class WordHelper {
@@ -48,9 +49,10 @@ export class WordHelper {
       private findElement(symbol : String){
         let elements = this.elementService.elements;
         let lower = symbol.toLowerCase();
+        let normalized = StringHelper.removeAccents(lower);
         for(let i = 0; i < elements.length; i++){
           let current = elements[i];
-          if (current.symbol.toLowerCase() == lower)
+          if (current.symbol.toLowerCase() == normalized)
             return current;
         }
         return null;

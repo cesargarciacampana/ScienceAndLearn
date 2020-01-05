@@ -16,8 +16,8 @@ export class ResolutorComponent implements OnInit {
   ngOnInit() {
   }
 
-  calculate(word: HTMLInputElement){
+  calculate(word: String){
     if (word)
-      this.solvedWords = this.wordHelper.calculateElements(word.value);
+      this.solvedWords = this.wordHelper.calculateElements(word);
   }
 }
