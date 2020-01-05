@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GameComponent } from './components/game/game.component';
+import { ResolutorComponent } from './components/resolutor/resolutor.component';
 
 const routes: Routes = [
   { path: '', component: GameComponent },
+  { path: 'solve', component: ResolutorComponent },
 ];
 
 @NgModule({
