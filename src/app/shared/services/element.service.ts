@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Element } from '../models/element';
-import { ElementsDTO } from '../DTO/ElementsDTO';
+import { ElementsDTO } from '../dtos/elements.dto';
 
 @Injectable({providedIn: 'root'})
 export class ElementService {
