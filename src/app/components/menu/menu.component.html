@@ -1,0 +1,9 @@
+<mat-sidenav-container class="container">
+    <mat-sidenav mode="side" opened class="menu">
+        <div><button mat-button class="button" [routerLink]="['/']">Jugar</button></div>
+        <div><button mat-button class="button" [routerLink]="['/solve']">Resolver</button></div>
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

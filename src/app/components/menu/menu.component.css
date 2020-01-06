@@ -1,0 +1,13 @@
+.container{
+    height: 100%;
+}
+.button{
+    width: 100%;
+}
+.menu{
+    width: 150px;
+    padding-top: 20px;
+}
+.content{
+    padding: 20px;
+}
