@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { GameComponent } from './components/game/game.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ResolutorComponent } from './components/resolutor/resolutor.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ResolutorComponent } from './components/resolutor/resolutor.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
