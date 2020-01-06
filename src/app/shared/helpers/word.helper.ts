@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElementService } from '../services/element.service';
+import { PeriodicTableElement } from '../models/periodic.table.element';
 import { StringHelper } from './string.helper';
 
 @Injectable({providedIn: 'root'})
@@ -8,13 +9,13 @@ export class WordHelper {
         private elementService : ElementService,
     ) { }
     
-    calculateElements(word: String){
+    calculateElements(word: String) : PeriodicTableElement[][]{
         let list = [];
-        this.auxCalculateElements(list, word, '');
+        this.auxCalculateElements(list, word, []);
         return list;
     }
 
-    private auxCalculateElements(list : String[], word : String, prefix : String){
+    private auxCalculateElements(list : PeriodicTableElement[][], word : String, prefix : PeriodicTableElement[]){
         let calculated = prefix;
         for(let i = 0; i < word.length; i++) {
           let current = word[i];
@@ -29,18 +30,23 @@ export class WordHelper {
     
           if (!element){
             if (element2){
-              this.auxCalculateElements(list, word.substring(i + 2), calculated + '[' + element2.symbol + ']');
+              let temp = Array.from(calculated);
+              temp.push(element2);
+              this.auxCalculateElements(list, word.substring(i + 2), temp);
               let element3 = this.findElement(next);
               if (!element3)
                 return;
             }
-            calculated += current;
+            calculated.push(new PeriodicTableElement(current, ''));
           }
           else{
-            if (element2)
-              this.auxCalculateElements(list, word.substring(i + 2), calculated + '[' + element2.symbol + ']');
+            if (element2){
+              let temp = Array.from(calculated);
+              temp.push(element2);
+              this.auxCalculateElements(list, word.substring(i + 2), temp);
+            }
     
-            calculated += '[' + element.symbol + ']';
+            calculated.push(element);
           }
         }
         list.push(calculated);
