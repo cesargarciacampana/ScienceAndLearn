@@ -1,6 +1,10 @@
 <form>
-<p>Introduce una palabra para descomponerla usando elementos de la tabla periódica</p>
-<input type="text" #wordInput (keyup)="calculate(wordInput.value)"/>
+    <p>Introduce una palabra para descomponerla usando elementos de la tabla periódica</p>
+<mat-form-field>
+    <input matInput #wordInput
+        placeholder="Introduce una palabra" 
+        (keyup)="calculate(wordInput.value)"/>
+</mat-form-field>
 <div *ngIf="wordInput.value">
     <h2>{{ wordInput.value }}</h2>
     <h3 *ngFor="let solvedWord of solvedWords">{{ solvedWord }}</h3>
