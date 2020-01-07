@@ -8,8 +8,8 @@
 <div *ngIf="wordInput.value">
     <h2>{{ wordInput.value }}</h2>
     <h3 *ngFor="let solvedWord of solvedWords">
-        <span *ngFor="let element of solvedWord">
-            {{ elementToString(element) }}
+        <span *ngFor="let wordPart of solvedWord.parts">
+            {{ wordPart.visualString }}
         </span>
     </h3>
 </div>

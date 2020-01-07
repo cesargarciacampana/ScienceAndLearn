@@ -1,7 +1,7 @@
-import { PeriodicTableElement } from '../models/periodic.table.element'
+import { ElementDTO } from './element.dto'
 
 export class ElementsDTO{
     constructor(
-        public elements : PeriodicTableElement[]
+        public elements : ElementDTO[]
     ) {}
 }

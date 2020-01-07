@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PeriodicTableElement } from '../models/periodic.table.element';
+import { ElementDTO } from '../dtos/element.dto';
 import { ElementsDTO } from '../dtos/elements.dto';
 
 @Injectable({providedIn: 'root'})
 export class ElementService {
-    elements : PeriodicTableElement[];
+    elements : ElementDTO[];
 
     constructor(
         private httpClient: HttpClient

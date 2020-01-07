@@ -4,4 +4,8 @@
 
 <p  *ngIf="word">Construye la palabra usando elementos de la tabla periódica</p>
 <h2>{{ word }}</h2>
-<h3 *ngFor="let solvedWord of solvedWords">{{ solvedWord }}</h3>
+<h3 *ngFor="let solvedWord of solvedWords">
+    <span *ngFor="let wordPart of solvedWord.parts">
+        {{ wordPart.visualString }}
+    </span>
+</h3>

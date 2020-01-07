@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ElementService } from '../services/element.service';
-import { PeriodicTableElement } from '../models/periodic.table.element';
+import { ElementDTO } from '../dtos/element.dto';
 import { StringHelper } from './string.helper';
+import { WordPart } from '../models/word.part';
+import { Word } from '../models/word';
 
 @Injectable({providedIn: 'root'})
 export class WordHelper {
@@ -9,14 +11,13 @@ export class WordHelper {
         private elementService : ElementService,
     ) { }
     
-    calculateElements(word: String) : PeriodicTableElement[][]{
+    calculateElements(word: String) : Word[][]{
         let list = [];
-        this.auxCalculateElements(list, word, []);
+        this.auxCalculateElements(list, word, new Word());
         return list;
     }
 
-    private auxCalculateElements(list : PeriodicTableElement[][], word : String, prefix : PeriodicTableElement[]){
-        let calculated = prefix;
+    private auxCalculateElements(list : Word[], word : String, prefix : Word){
         for(let i = 0; i < word.length; i++) {
           let current = word[i];
           let next = null;
@@ -30,26 +31,26 @@ export class WordHelper {
     
           if (!element){
             if (element2){
-              let temp = Array.from(calculated);
-              temp.push(element2);
+              let temp = prefix.clone();
+              temp.parts.push(new WordPart(element2));
               this.auxCalculateElements(list, word.substring(i + 2), temp);
               let element3 = this.findElement(next);
               if (!element3)
                 return;
             }
-            calculated.push(new PeriodicTableElement(current, ''));
+            prefix.parts.push(new WordPart(new ElementDTO(current, '')));
           }
           else{
             if (element2){
-              let temp = Array.from(calculated);
-              temp.push(element2);
+              let temp = prefix.clone();
+              temp.parts.push(new WordPart(element2));
               this.auxCalculateElements(list, word.substring(i + 2), temp);
             }
     
-            calculated.push(element);
+            prefix.parts.push(new WordPart(element));
           }
         }
-        list.push(calculated);
+        list.push(prefix);
       }
     
       private findElement(symbol : String){
