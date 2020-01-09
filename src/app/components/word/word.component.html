@@ -1,0 +1,11 @@
+<span *ngFor="let wordPart of word.parts">
+    <span *ngIf="wordPart.isElement; else plain">
+        <a [href]="wordPart.element.source" target="_blank"
+            [matTooltip]="wordPart.element.name">
+            {{ wordPart.visualString }}
+        </a>
+    </span>
+    <ng-template #plain>
+        {{ wordPart.visualString }}
+    </ng-template>
+</span>

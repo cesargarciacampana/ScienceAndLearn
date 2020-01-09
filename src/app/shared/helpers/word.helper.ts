@@ -29,24 +29,21 @@ export class WordHelper {
           if (next)
             element2 = this.findElement(current + next);
     
+          if (element2){
+            let temp = prefix.clone();
+            temp.parts.push(new WordPart(element2));
+            this.auxCalculateElements(list, word.substring(i + 2), temp);
+          }
+
           if (!element){
             if (element2){
-              let temp = prefix.clone();
-              temp.parts.push(new WordPart(element2));
-              this.auxCalculateElements(list, word.substring(i + 2), temp);
               let element3 = this.findElement(next);
               if (!element3)
                 return;
             }
-            prefix.parts.push(new WordPart(new ElementDTO(current, '', '')));
+            prefix.parts.push(new WordPart(null, current));
           }
-          else{
-            if (element2){
-              let temp = prefix.clone();
-              temp.parts.push(new WordPart(element2));
-              this.auxCalculateElements(list, word.substring(i + 2), temp);
-            }
-    
+          else{    
             prefix.parts.push(new WordPart(element));
           }
         }

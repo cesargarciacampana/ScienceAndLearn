@@ -15,6 +15,7 @@ import { ResolutorComponent } from './components/resolutor/resolutor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
+import { WordComponent } from './components/word/word.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HeaderComponent } from './components/header/header.component';
     GameComponent,
     ResolutorComponent,
     MenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    WordComponent
   ],
   imports: [
     BrowserModule,
