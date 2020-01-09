@@ -5,10 +5,17 @@
         placeholder="Introduce una palabra" 
         (keyup)="calculate(wordInput.value)"/>
 </mat-form-field>
+<div>
+    <mat-checkbox #checkbox="matCheckbox">
+        Mostrar soluciones que necesitan letras añadidas
+    </mat-checkbox>
+</div>
 <div *ngIf="wordInput.value">
     <h2>{{ wordInput.value }}</h2>
-    <h3 *ngFor="let solvedWord of solvedWords">
-        <app-word [word]="solvedWord"></app-word>
+    <h3 *ngFor="let solvedWord of solvedWords;">
+        <span *ngIf="checkbox.checked || solvedWord.isCompleteSolution">
+            <app-word [word]="solvedWord"></app-word>
+        </span>
     </h3>
 </div>
 </form>

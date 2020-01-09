@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ import { WordComponent } from './components/word/word.component';
     MatButtonModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
