@@ -7,12 +7,12 @@ export class WordPart{
     }
 
     
-    get isRealElement() : boolean {
+    get isElement() : boolean {
         return this.element.name != '';
     }
 
     get visualString() : String {
-        if (this.isRealElement)
+        if (this.isElement)
           return '[' + this.element.symbol + ']';
         else
           return this.element.symbol;

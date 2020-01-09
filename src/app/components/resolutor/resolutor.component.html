@@ -9,7 +9,15 @@
     <h2>{{ wordInput.value }}</h2>
     <h3 *ngFor="let solvedWord of solvedWords">
         <span *ngFor="let wordPart of solvedWord.parts">
-            {{ wordPart.visualString }}
+            <span *ngIf="wordPart.isElement; else plain">
+                <a [href]="wordPart.element.source" target="_blank"
+                    [matTooltip]="wordPart.element.name">
+                    {{ wordPart.visualString }}
+                </a>
+            </span>
+            <ng-template #plain>
+                {{ wordPart.visualString }}
+            </ng-template>
         </span>
     </h3>
 </div>

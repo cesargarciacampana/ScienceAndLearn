@@ -38,7 +38,7 @@ export class WordHelper {
               if (!element3)
                 return;
             }
-            prefix.parts.push(new WordPart(new ElementDTO(current, '')));
+            prefix.parts.push(new WordPart(new ElementDTO(current, '', '')));
           }
           else{
             if (element2){
