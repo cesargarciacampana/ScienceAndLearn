@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ResolutorComponent } from './components/resolutor/resolutor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
-import { HeaderComponent } from './components/header/header.component';
 import { WordComponent } from './components/word/word.component';
 
 @NgModule({
@@ -24,7 +24,6 @@ import { WordComponent } from './components/word/word.component';
     GameComponent,
     ResolutorComponent,
     MenuComponent,
-    HeaderComponent,
     WordComponent
   ],
   imports: [
@@ -38,6 +37,7 @@ import { WordComponent } from './components/word/word.component';
     MatToolbarModule,
     MatTooltipModule,
     MatCheckboxModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
