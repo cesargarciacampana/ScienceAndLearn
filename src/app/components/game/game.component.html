@@ -1,9 +1,11 @@
-<button mat-raised-button (click)="newGame()">
-    Jugar
-</button>
+<div class="game">
+    <button mat-raised-button (click)="newGame()">
+        Jugar
+    </button>
 
-<p  *ngIf="word">Construye la palabra usando elementos de la tabla periódica</p>
-<h2>{{ word }}</h2>
-<h3 *ngFor="let solvedWord of solvedWords">
-    <app-word [word]="solvedWord"></app-word>
-</h3>
+    <p  *ngIf="word">Construye la palabra usando elementos de la tabla periódica</p>
+    <h2>{{ word }}</h2>
+    <h3 *ngFor="let solvedWord of solvedWords">
+        <app-word [word]="solvedWord"></app-word>
+    </h3>
+</div>

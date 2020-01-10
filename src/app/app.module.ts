@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule} from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { WordComponent } from './components/word/word.component';
     MatTooltipModule,
     MatCheckboxModule,
     MatIconModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

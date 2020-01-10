@@ -12,9 +12,11 @@
                     [opened]="!mobileQuery.matches || showsidenav"
                     (closed)="resetSidenav()"
                     [mode]="mobileQuery.matches ? 'over' : 'side'" 
-                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="64">
-            <div><button mat-button class="button" [routerLink]="['/']">Jugar</button></div>
-            <div><button mat-button class="button" [routerLink]="['/solve']">Resolver</button></div>
+                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+            <mat-nav-list>
+                <a mat-list-item [routerLink]="['/']">Jugar</a>
+                <a mat-list-item [routerLink]="['/solve']">Resolver</a>
+            </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="content">
             <router-outlet></router-outlet>
