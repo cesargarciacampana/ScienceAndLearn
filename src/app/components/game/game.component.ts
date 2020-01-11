@@ -18,6 +18,7 @@ export class GameComponent implements OnInit {
   word : String;
   userWord : Word;
   checkedElements : String[];
+  puntos: number;
   private solvedWords : Word[];
   private solvedWordElements : String[];
   private _sortedElements : ElementDTO[];
@@ -53,16 +54,20 @@ export class GameComponent implements OnInit {
     this.solvedWordElements = [];
     this.calculateSolutionElements();
     this.checkedElements = [];
+    this.puntos = 0;
   }
 
   selectElement(element : ElementDTO){
     this.checkedElements.push(element.name);
-    if (this.solvedWordElements.includes(element.symbol)){   
+    if (!this.solvedWordElements.includes(element.symbol)) 
+        this.puntos -= 5;
+    else{ 
       let parts = this.userWord.parts;
       for (let i=0; i < parts.length; i++){
         if (element.symbol.length == 1){
           if (!parts[i].isElement && this.word[i] == element.symbol.toLowerCase()){      
             parts[i] = new WordPart(element);
+            this.puntos += 20;
           }
         }
         else if (parts.length > i + 1){
@@ -71,6 +76,7 @@ export class GameComponent implements OnInit {
             && this.word[i + 1] == element.symbol[1].toLowerCase()){
               parts[i+1] = new WordPart(null, '');
               parts[i] = new WordPart(element);
+              this.puntos += 20;
           }
         }
       }

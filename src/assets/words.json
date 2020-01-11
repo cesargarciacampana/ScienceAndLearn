@@ -1,7 +1,20 @@
 [
     "casa",
+    "edificio",
+    "armario",
+    "diccionario",
+    "libro",
+    "juego",
+    "televisor",
     "perro",
     "gato",
+    "elefante",
+    "rinoceronte",
+    "impresora",
+    "ordenador",
+    "oficina",
+    "parque",
+    "flor",
     "silla",
     "mesa",
     "coche",
@@ -10,5 +23,6 @@
     "plato",
     "tenedor",
     "cuchara",
-    "juego"
+    "juego",
+    "ciencia"
 ]

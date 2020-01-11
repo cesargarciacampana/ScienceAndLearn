@@ -1,9 +1,9 @@
 <div class="game">
     <div class="gameheader">
+        <h3>Completa usando elementos de la tabla periódica</h3>
         <button mat-raised-button (click)="newGame()">
             Nueva palabra
         </button>
-        <p *ngIf="word">Completa usando elementos de la tabla periódica</p>
     </div>
     <div *ngIf="word" class="gamearea">   
         <mat-sidenav-container class="sidenav-container">
@@ -17,7 +17,8 @@
             </mat-sidenav>
             <mat-sidenav-content class="sidenav-content">
                 <h2>{{ word }}</h2>
-                <app-word [word]="userWord"></app-word>
+                <div>Puntos: {{ puntos }}</div>
+                <app-word [word]="userWord"></app-word>       
             </mat-sidenav-content>       
         </mat-sidenav-container>
     </div>

@@ -1,12 +1,11 @@
 .game{
-    padding-top: 20px;
     height: calc(100% - 20px);
 }
 .gamearea{
-    height: calc(100% - 90px);
+    height: calc(100% - 100px);
 }
 .gameheader{
-    height: 90px;
+    height: 100px;
 }
 .sidenav-container{
     height: 100%;
