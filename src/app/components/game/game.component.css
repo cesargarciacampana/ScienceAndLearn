@@ -1,3 +1,19 @@
 .game{
     padding-top: 20px;
+    height: calc(100% - 20px);
+}
+.gamearea{
+    height: calc(100% - 90px);
+}
+.gameheader{
+    height: 90px;
+}
+.sidenav-container{
+    height: 100%;
+}
+.sidenav{
+    width: 200px;
+}
+.sidenav-content{
+    padding-left: 20px;
 }
