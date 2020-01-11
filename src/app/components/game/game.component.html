@@ -3,9 +3,14 @@
         Jugar
     </button>
 
-    <p  *ngIf="word">Construye la palabra usando elementos de la tabla periódica</p>
-    <h2>{{ word }}</h2>
-    <h3 *ngFor="let solvedWord of solvedWords">
-        <app-word [word]="solvedWord"></app-word>
-    </h3>
+    <div *ngIf="word">
+        <p>Construye la palabra usando elementos de la tabla periódica</p>
+        <h2>{{ word }}</h2>
+        <app-word [word]="userWord"></app-word>
+        <div *ngFor="let element of sortedElements">
+            <mat-checkbox #chk (click)="selectElement(element)" [disabled]="chk.checked">
+                {{ element.name }}
+            </mat-checkbox>
+        </div>
+    </div>
 </div>

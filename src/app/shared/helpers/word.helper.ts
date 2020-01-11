@@ -11,7 +11,7 @@ export class WordHelper {
         private elementService : ElementService,
     ) { }
     
-    calculateElements(word: String) : Word[][]{
+    calculateElements(word: String) : Word[]{
         let list = [];
         this.auxCalculateElements(list, word, new Word());
         return list;
