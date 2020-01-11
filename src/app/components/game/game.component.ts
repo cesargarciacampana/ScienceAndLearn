@@ -17,6 +17,7 @@ export class GameComponent implements OnInit {
 
   word : String;
   userWord : Word;
+  checkedElements : String[];
   private solvedWords : Word[];
   private solvedWordElements : String[];
   private _sortedElements : ElementDTO[];
@@ -51,9 +52,11 @@ export class GameComponent implements OnInit {
     this.solvedWords = this.wordHelper.calculateElements(this.word);
     this.solvedWordElements = [];
     this.calculateSolutionElements();
+    this.checkedElements = [];
   }
 
   selectElement(element : ElementDTO){
+    this.checkedElements.push(element.name);
     if (this.solvedWordElements.includes(element.symbol)){   
       let parts = this.userWord.parts;
       for (let i=0; i < parts.length; i++){
@@ -90,5 +93,9 @@ export class GameComponent implements OnInit {
           this.solvedWordElements.push(part.element.symbol);
       }
     }
+  }
+
+  isElementChecked(name : String){
+    return this.checkedElements.includes(name);
   }
 }
