@@ -1,6 +1,6 @@
 <div class="game">
     <div class="gameheader">
-        <h3>Completa usando elementos de la tabla periódica</h3>
+        <h3>Completa usando la tabla periódica</h3>
         <button mat-raised-button (click)="newGame()">
             Nueva palabra
         </button>
@@ -9,7 +9,7 @@
         <mat-sidenav-container class="sidenav-container">
             <mat-sidenav opened="true" mode="side" class="sidenav">
                 <div *ngFor="let element of sortedElements">
-                    <mat-checkbox #chk (click)="selectElement(element)" 
+                    <mat-checkbox #chk (click)="selectElement(chk, element)" 
                     [checked]="isElementChecked(element.name)" [disabled]="isElementChecked(element.name)">
                         {{ element.name }}
                     </mat-checkbox>

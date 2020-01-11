@@ -6,6 +6,7 @@ import { ElementDTO } from 'src/app/shared/dtos/element.dto';
 import { MAT_HAMMER_OPTIONS } from '@angular/material/core';
 import { Word } from 'src/app/shared/models/word';
 import { WordPart } from 'src/app/shared/models/word.part';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 
 @Component({
@@ -57,7 +58,10 @@ export class GameComponent implements OnInit {
     this.puntos = 0;
   }
 
-  selectElement(element : ElementDTO){
+  selectElement(chk : MatCheckbox, element : ElementDTO){
+    if (chk.disabled)
+      return;
+      
     this.checkedElements.push(element.name);
     if (!this.solvedWordElements.includes(element.symbol)) 
         this.puntos -= 5;
