@@ -12,8 +12,11 @@ export class WordService {
     }
 
     private init(){
-        this.httpClient.get<string[]>('/assets/words.json')
-            .subscribe((data : string[]) => this.words = data);
+        //this.httpClient.get<string[]>('/assets/words.json')
+        //   .subscribe((data : string[]) => this.words = data);
+
+        this.httpClient.get('/assets/words.txt')
+            .subscribe((data : String[]) => this.words = data[0].split(','));
     }
 
     private randomIntFromInterval(min, max) { // min included, max excluded 

@@ -6,6 +6,8 @@ import { ResolutorComponent } from './components/resolutor/resolutor.component';
 const routes: Routes = [
   { path: '', component: GameComponent },
   { path: 'solve', component: ResolutorComponent },
+
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
