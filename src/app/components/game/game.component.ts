@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { WordService } from '../../shared/services/word.service';
 import { WordHelper } from '../../shared/helpers/word.helper';
-import { ElementService } from 'src/app/shared/services/element.service';
 import { ElementDTO } from 'src/app/shared/dtos/element.dto';
-import { MAT_HAMMER_OPTIONS } from '@angular/material/core';
 import { Word } from 'src/app/shared/models/word';
 import { WordPart } from 'src/app/shared/models/word.part';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { ElementsComponent } from '../elements/elements.component'
 
 
 @Component({
@@ -18,34 +16,18 @@ export class GameComponent implements OnInit {
 
   word : String;
   userWord : Word;
-  checkedElements : String[];
   puntos: number;
   private solvedWords : Word[];
   private solvedWordElements : String[];
-  private _sortedElements : ElementDTO[];
+
+  @ViewChild(ElementsComponent, { static: false }) elementsComponent: ElementsComponent;
 
   constructor(
     private wordService : WordService,
     private wordHelper : WordHelper,
-    private elementService : ElementService,
   ) { }
 
   ngOnInit() {
-  }
-
-  get sortedElements() {
-    if (!this._sortedElements && this.elementService.elements)
-    {
-        let temp = Array.from(this.elementService.elements);
-        temp.sort(this.compare);
-        this._sortedElements = temp;
-    }
-      
-    return this._sortedElements;
-  }
-
-  private compare(e1: ElementDTO, e2 : ElementDTO){
-    return e1.name.localeCompare(e2.name);
   }
 
   newGame() {
@@ -54,15 +36,15 @@ export class GameComponent implements OnInit {
     this.solvedWords = this.wordHelper.calculateElements(this.word);
     this.solvedWordElements = [];
     this.calculateSolutionElements();
-    this.checkedElements = [];
+    if (this.elementsComponent)
+      this.elementsComponent.reset();
     this.puntos = 0;
   }
 
-  selectElement(chk : MatCheckbox, element : ElementDTO){
-    if (chk.disabled)
-      return;
-      
-    this.checkedElements.push(element.name);
+  elementSelected(event: any){
+    let element : ElementDTO = event.element;
+    let checked : boolean = event.checked;
+
     if (!this.solvedWordElements.includes(element.symbol)) 
         this.puntos -= 5;
     else{ 
@@ -103,9 +85,5 @@ export class GameComponent implements OnInit {
           this.solvedWordElements.push(part.element.symbol);
       }
     }
-  }
-
-  isElementChecked(name : String){
-    return this.checkedElements.includes(name);
   }
 }

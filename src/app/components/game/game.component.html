@@ -8,12 +8,7 @@
     <div *ngIf="word" class="gamearea">   
         <mat-sidenav-container class="sidenav-container">
             <mat-sidenav opened="true" mode="side" class="sidenav">
-                <div *ngFor="let element of sortedElements">
-                    <mat-checkbox #chk (click)="selectElement(chk, element)" 
-                    [checked]="isElementChecked(element.name)" [disabled]="isElementChecked(element.name)">
-                        {{ element.name }}
-                    </mat-checkbox>
-                </div>
+                <app-elements (valueChanged)="elementSelected($event)"></app-elements>
             </mat-sidenav>
             <mat-sidenav-content class="sidenav-content">
                 <h2>{{ word }}</h2>
