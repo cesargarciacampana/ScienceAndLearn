@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ElementService } from 'src/app/shared/services/element.service';
 import { ElementDTO } from 'src/app/shared/dtos/element.dto';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { ElementCheckable } from './element.checkable';
 
 @Component({
   selector: 'app-elements',
@@ -10,10 +11,11 @@ import { MatCheckbox } from '@angular/material/checkbox';
 })
 export class ElementsComponent implements OnInit {
 
-  checkedElements : String[];
-  private _sortedElements : ElementDTO[];
+  @Input()
+  disableOnCheck : boolean = false;
+  private _sortedElements : ElementCheckable[];
 
-  @Output() valueChanged = new EventEmitter<any>();
+  @Output() valueChanged = new EventEmitter<ElementCheckable>();
 
   constructor(
     private elementService : ElementService,
@@ -29,7 +31,9 @@ export class ElementsComponent implements OnInit {
     {
         let temp = Array.from(this.elementService.elements);
         temp.sort(this.compare);
-        this._sortedElements = temp;
+        this._sortedElements = [];
+        for(let i = 0; i < temp.length; i++)
+          this._sortedElements.push(new ElementCheckable(temp[i]));
     }
       
     return this._sortedElements;
@@ -40,19 +44,16 @@ export class ElementsComponent implements OnInit {
   }
 
   reset(){
-    this.checkedElements = [];
+    if (this._sortedElements){
+      for(let i = 0; i < this._sortedElements.length; i++)
+        this._sortedElements[i].checked = false;
+    }
   }
 
-  selectElement(chk : MatCheckbox, element : ElementDTO){ 
-    if (chk.disabled)
-      return;
-
-    this.valueChanged.emit({checked: chk.checked, element: element});
-
-    this.checkedElements.push(element.name);
-  }
-  
-  isElementChecked(name : String){
-    return this.checkedElements.includes(name);
+  updateElement(chk : MatCheckbox, elementChk : ElementCheckable){
+    if (elementChk.checked != chk.checked){
+      elementChk.checked = chk.checked;
+      this.valueChanged.emit(elementChk);
+    }
   }
 }

@@ -1,6 +1,6 @@
-<div *ngFor="let element of sortedElements">
-    <mat-checkbox #chk (click)="selectElement(chk, element)" 
-    [checked]="isElementChecked(element.name)" [disabled]="isElementChecked(element.name)">
-        {{ element.name }}
+<div *ngFor="let elementChk of sortedElements">
+    <mat-checkbox #chk (change)="updateElement(chk, elementChk)" 
+    [checked]="elementChk.checked" [disabled]="disableOnCheck && elementChk.checked">
+        {{ elementChk.element.name }}
     </mat-checkbox>
 </div>
