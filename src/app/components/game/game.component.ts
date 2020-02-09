@@ -57,6 +57,7 @@ export class GameComponent implements OnInit {
           if (element.name.length > 1)
             parts[i+1] = this.emptyPart;
           this.puntos -= 20;
+          event.valid = false;
         }
       }
     }
@@ -70,6 +71,7 @@ export class GameComponent implements OnInit {
             if (!parts[i].isElement && this.word[i] == element.symbol.toLowerCase()){      
               parts[i] = new WordPart(element);
               this.puntos += 20;
+              event.valid = true;
             }
           }
           else if (parts.length > i + 1){
@@ -79,6 +81,7 @@ export class GameComponent implements OnInit {
                 parts[i+1] = new WordPart(null, '');
                 parts[i] = new WordPart(element);
                 this.puntos += 20;
+                event.valid = true;
             }
           }
         }
