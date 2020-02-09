@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class WordService {
-    private words : string[];
+    private words : Observable<string[]>;
 
     constructor(
         private httpClient: HttpClient
@@ -12,19 +14,20 @@ export class WordService {
     }
 
     private init(){
-        //this.httpClient.get<string[]>('/assets/words.json')
-        //   .subscribe((data : string[]) => this.words = data);
-
-        this.httpClient.get('/assets/words.txt')
-            .subscribe((data : String[]) => this.words = data[0].split(','));
+        this.words = this.httpClient.get<string[]>('/assets/words.txt')
+            .pipe(map((data) => data[0].split(',')));
     }
 
     private randomIntFromInterval(min, max) { // min included, max excluded 
         return Math.floor(Math.random() * (max - min) + min);
     }
 
-    randomWord(){
-        let i = this.randomIntFromInterval(0, this.words.length);
-        return this.words[i];
+    randomWord() : Observable<string>{
+        return this.words.pipe(
+            map(data =>{
+                let i = this.randomIntFromInterval(0, data.length);
+                return data[i];
+            })
+        );
     }
 }

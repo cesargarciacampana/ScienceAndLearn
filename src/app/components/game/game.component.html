@@ -4,20 +4,13 @@
         <button mat-raised-button (click)="newGame()">
             Nueva palabra
         </button>
-        <mat-checkbox #checkbox="matCheckbox">
-            Permitir cambiar los elementos ya seleccionados
-        </mat-checkbox>
     </div>
-    <div *ngIf="word" class="gamearea">   
-        <mat-sidenav-container class="sidenav-container">
-            <mat-sidenav opened="true" mode="side" class="sidenav">
-                <app-elements (valueChanged)="elementSelected($event)" [disableOnCheck]="!checkbox.checked"></app-elements>
-            </mat-sidenav>
-            <mat-sidenav-content class="sidenav-content">
-                <h2>{{ word }}</h2>
-                <div>Puntos: {{ puntos }}</div>
-                <app-word [word]="userWord"></app-word>       
-            </mat-sidenav-content>       
-        </mat-sidenav-container>
+    <div *ngIf="word" class="gamearea">
+        <div class="mbottom">
+            <h2>{{ word }}</h2>
+            <div>Puntos: {{ puntos }}</div>
+            <app-word [word]="userWord"></app-word>
+        </div>
+        <app-elements (valueChanged)="elementSelected($event)"></app-elements>
     </div>
 </div>

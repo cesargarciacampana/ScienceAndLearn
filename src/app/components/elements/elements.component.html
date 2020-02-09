@@ -1,6 +1,21 @@
-<div *ngFor="let elementChk of sortedElements">
-    <mat-checkbox #chk (change)="updateElement(chk, elementChk)" 
-    [checked]="elementChk.checked" [disabled]="disableOnCheck && elementChk.checked">
+<mat-chip-list #elementList>
+    <mat-chip
+        *ngFor="let elementChk of selectedElements"
+        [selectable]="false"
+        [removable]="true"
+        (removed)="updateElement(elementChk, false)">
         {{ elementChk.element.name }}
-    </mat-checkbox>
-</div>
+        <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+</mat-chip-list>
+<mat-form-field>
+    <input matInput
+        placeholder="Selecciona un elemento"
+        #elementInput
+        [matAutocomplete]="auto" />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let elementChk of filteredElements" [value]="elementChk">
+        {{elementChk.element.name}}
+      </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

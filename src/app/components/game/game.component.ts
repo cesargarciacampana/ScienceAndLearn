@@ -33,14 +33,16 @@ export class GameComponent implements OnInit {
   }
 
   newGame() {
-    this.word = this.wordService.randomWord();
-    this.resetUserWord();
-    this.solvedWords = this.wordHelper.calculateElements(this.word);
-    this.solvedWordElements = [];
-    this.calculateSolutionElements();
-    if (this.elementsComponent)
-      this.elementsComponent.reset();
-    this.puntos = 0;
+    this.wordService.randomWord().subscribe(word => {
+      this.word = word;
+      this.resetUserWord();
+      this.solvedWords = this.wordHelper.calculateElements(this.word);
+      this.solvedWordElements = [];
+      this.calculateSolutionElements();
+      if (this.elementsComponent)
+        this.elementsComponent.reset();
+      this.puntos = 0;
+    });
   }
 
   elementSelected(event: ElementCheckable){

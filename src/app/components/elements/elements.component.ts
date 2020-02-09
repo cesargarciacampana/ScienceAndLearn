@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild } from '@angular/core';
 import { ElementService } from 'src/app/shared/services/element.service';
 import { ElementDTO } from 'src/app/shared/dtos/element.dto';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
 import { ElementCheckable } from './element.checkable';
 
 @Component({
@@ -11,11 +11,10 @@ import { ElementCheckable } from './element.checkable';
 })
 export class ElementsComponent implements OnInit {
 
-  @Input()
-  disableOnCheck : boolean = false;
   private _sortedElements : ElementCheckable[];
-
   @Output() valueChanged = new EventEmitter<ElementCheckable>();
+
+  @ViewChild('elementInput', {static:true}) elementInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private elementService : ElementService,
@@ -25,8 +24,16 @@ export class ElementsComponent implements OnInit {
     this.reset();
   }
 
-  
-  get sortedElements() {
+  get selectedElements(){
+    let list = [];
+    for(let i = 0; i < this.sortedElements.length; i++){
+      if (this.sortedElements[i].checked)
+      list.push(this.sortedElements[i]);
+    }
+    return list;
+  }
+
+  private get sortedElements() {
     if (!this._sortedElements && this.elementService.elements)
     {
         let temp = Array.from(this.elementService.elements);
@@ -37,6 +44,14 @@ export class ElementsComponent implements OnInit {
     }
       
     return this._sortedElements;
+  }
+
+  get filteredElements() {
+    let emptyFilter = !this.elementInput || !this.elementInput.nativeElement.value;
+
+    return this.sortedElements.filter(x => 
+      !x.checked 
+      && (emptyFilter || x.element.name.toLowerCase().indexOf(this.elementInput.nativeElement.value) >= 0));
   }
 
   private compare(e1: ElementDTO, e2 : ElementDTO){
@@ -50,10 +65,16 @@ export class ElementsComponent implements OnInit {
     }
   }
 
-  updateElement(chk : MatCheckbox, elementChk : ElementCheckable){
-    if (elementChk.checked != chk.checked){
-      elementChk.checked = chk.checked;
+  updateElement(elementChk : ElementCheckable, selected: boolean){
+    if (elementChk.checked != selected){
+      elementChk.checked = selected;
       this.valueChanged.emit(elementChk);
     }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.updateElement(event.option.value, true);
+    this.elementInput.nativeElement.value = '';
+    this.elementInput.nativeElement.blur();
   }
 }

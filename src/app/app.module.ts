@@ -1,14 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule} from '@angular/material/list';
+import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
+  MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
+  MatAutocompleteModule, MatChipsModule
+} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +38,8 @@ import { ElementsComponent } from './components/elements/elements.component';
     MatCheckboxModule,
     MatIconModule,
     MatListModule,
+    MatAutocompleteModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
