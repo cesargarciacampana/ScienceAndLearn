@@ -7,6 +7,8 @@ import { ElementsDTO } from '../dtos/elements.dto';
 export class ElementService {
     elements : ElementDTO[];
 
+    private language = 'es';
+
     constructor(
         private httpClient: HttpClient
     ) { 
@@ -14,7 +16,7 @@ export class ElementService {
     }
 
     private init(){
-        this.httpClient.get<ElementsDTO>('/assets/elements.json')
+        this.httpClient.get<ElementsDTO>(`/assets/elements-${this.language}.json`)
             .subscribe((data : ElementsDTO) => this.elements = data.elements);
     }
 }

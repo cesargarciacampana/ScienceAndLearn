@@ -3,6 +3,7 @@ import { ElementService } from 'src/app/shared/services/element.service';
 import { ElementDTO } from 'src/app/shared/dtos/element.dto';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
 import { ElementCheckable } from './element.checkable';
+import { StringHelper } from 'src/app/shared/helpers/string.helper';
 
 @Component({
   selector: 'app-elements',
@@ -51,7 +52,7 @@ export class ElementsComponent implements OnInit {
 
     return this.sortedElements.filter(x => 
       !x.checked 
-      && (emptyFilter || x.element.name.toLowerCase().indexOf(this.elementInput.nativeElement.value) >= 0));
+      && (emptyFilter || StringHelper.removeAccents(x.element.name.toLowerCase()).indexOf(StringHelper.removeAccents(this.elementInput.nativeElement.value.toLowerCase())) >= 0));
   }
 
   private compare(e1: ElementDTO, e2 : ElementDTO){
