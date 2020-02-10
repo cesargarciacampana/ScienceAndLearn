@@ -36,9 +36,8 @@ export class WordHelper {
           }
 
           if (!element){
-            if (element2){
-              let element3 = this.findElement(next);
-              if (!element3)
+            if (element2 && !this.findElement(next)){
+              if (i >= word.length - 2 || !this.findElement(next + word[i + 2]))
                 return;
             }
             prefix.parts.push(new WordPart(null, current));

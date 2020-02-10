@@ -3,10 +3,10 @@
         *ngFor="let elementChk of selectedElements"
         [style.background-color]="elementChk.valid ? 'green' : 'red'"
         [selectable]="false"
-        [removable]="elementChk.valid"
+        [removable]="true"
         (removed)="updateElement(elementChk, false)">
         {{ elementChk.element.name }} ({{ elementChk.valid ? '+20' : '-5' }})
-        <mat-icon matChipRemove *ngIf="elementChk.valid" matTooltip="Quitar">cancel</mat-icon>
+        <mat-icon matChipRemove matTooltip="Quitar">cancel</mat-icon>
     </mat-chip>
 </mat-chip-list>
 <mat-form-field>

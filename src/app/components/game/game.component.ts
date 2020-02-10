@@ -45,6 +45,10 @@ export class GameComponent implements OnInit {
     });
   }
 
+  private isElementPart(part: WordPart){
+    return part.isElement || part.plainSymbol === '';
+  }
+
   elementSelected(event: ElementCheckable){
     let element : ElementDTO = event.element;
     let checked : boolean = event.checked;
@@ -52,9 +56,9 @@ export class GameComponent implements OnInit {
     if (!checked){
       let parts = this.userWord.parts;
       for (let i=0; i < parts.length; i++){
-        if (parts[i].isElement && parts[i].element.name == element.name){
+        if (parts[i].isElement && parts[i].element.symbol == element.symbol){
           parts[i] = this.emptyPart;
-          if (element.name.length > 1)
+          if (element.symbol.length > 1)
             parts[i+1] = this.emptyPart;
           this.puntos -= 20;
           event.valid = false;
@@ -68,14 +72,14 @@ export class GameComponent implements OnInit {
         let parts = this.userWord.parts;
         for (let i=0; i < parts.length; i++){
           if (element.symbol.length == 1){
-            if (!parts[i].isElement && this.word[i] == element.symbol.toLowerCase()){      
+            if (!this.isElementPart(parts[i]) && this.word[i] == element.symbol.toLowerCase()){      
               parts[i] = new WordPart(element);
               this.puntos += 20;
               event.valid = true;
             }
           }
           else if (parts.length > i + 1){
-            if (!parts[i].isElement && !parts[i+1].isElement 
+            if (!this.isElementPart(parts[i]) && !this.isElementPart(parts[i+1]) 
               && this.word[i] == element.symbol[0].toLowerCase()
               && this.word[i + 1] == element.symbol[1].toLowerCase()){
                 parts[i+1] = new WordPart(null, '');

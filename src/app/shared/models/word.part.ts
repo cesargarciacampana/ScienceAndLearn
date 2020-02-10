@@ -10,7 +10,7 @@ export class WordPart{
 
     
     get isElement() : boolean {
-        return this.element != undefined;
+        return this.element != undefined && this.element != null;
     }
 
     get visualString() : String {
