@@ -1,0 +1,8 @@
+<div *ngIf="word" class="gamearea">
+    <div class="mbottom">
+        <h2>{{ word }}</h2>
+        <div>Puntos: {{ puntos }}</div>
+        <app-word [word]="userWord"></app-word>
+    </div>
+    <app-elements (valueChanged)="elementSelected($event)"></app-elements>
+</div>

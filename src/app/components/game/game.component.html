@@ -1,16 +1,10 @@
 <div class="game">
     <div class="gameheader">
-        <h3>Completa usando la tabla periódica</h3>
-        <button mat-raised-button (click)="newGame()">
-            Nueva palabra
+        <h3>Construye usando la tabla periódica</h3>
+        <span class="puntos" *ngIf="started">Puntos: {{ puntos }}</span>
+        <button mat-raised-button (click)="newWord(gameWord)">
+            {{ started ? 'Siguiente palabra' : 'Jugar' }}
         </button>
     </div>
-    <div *ngIf="word" class="gamearea">
-        <div class="mbottom">
-            <h2>{{ word }}</h2>
-            <div>Puntos: {{ puntos }}</div>
-            <app-word [word]="userWord"></app-word>
-        </div>
-        <app-elements (valueChanged)="elementSelected($event)"></app-elements>
-    </div>
+    <app-gameword #gameWord></app-gameword>
 </div>

@@ -14,8 +14,9 @@
                     [mode]="mobileQuery.matches ? 'over' : 'side'" 
                     [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
             <mat-nav-list>
-                <a mat-list-item [routerLink]="['/']" (click)="resetSidenav()">Jugar</a>
-                <a mat-list-item [routerLink]="['/solve']" (click)="resetSidenav()">Resolver</a>
+                <a mat-list-item [routerLink]="['/']" (click)="resetSidenav()">Juego: Construye la palabra</a>
+                <!--<a mat-list-item [routerLink]="['/hanged']" (click)="resetSidenav()">Juego: Ahorcado</a>-->
+                <a mat-list-item [routerLink]="['/solve']" (click)="resetSidenav()">Resolver palabras</a>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="content">

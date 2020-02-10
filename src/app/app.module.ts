@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './components/menu/menu.component';
 import { WordComponent } from './components/word/word.component';
 import { ElementsComponent } from './components/elements/elements.component';
+import { GameWordComponent } from './components/game.word/game-word.component';
+import { HangedGameComponent } from './components/hanged-game/hanged-game.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ElementsComponent } from './components/elements/elements.component';
     ResolutorComponent,
     MenuComponent,
     WordComponent,
-    ElementsComponent
+    ElementsComponent,
+    GameWordComponent,
+    HangedGameComponent
   ],
   imports: [
     BrowserModule,
