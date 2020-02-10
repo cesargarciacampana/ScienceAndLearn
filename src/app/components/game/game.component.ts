@@ -24,7 +24,10 @@ export class GameComponent implements OnInit {
 
   newWord(gameWord: GameWordComponent){
     this.started = true;
-    this.puntos += gameWord.puntos;
     gameWord.newWord();
+  }
+
+  cambiarPuntos(puntos: number){
+    this.puntos += puntos;
   }
 }

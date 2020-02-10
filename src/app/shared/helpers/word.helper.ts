@@ -13,7 +13,7 @@ export class WordHelper {
     
     calculateElements(word: String) : Word[]{
         let list = [];
-        this.auxCalculateElements(list, word, new Word());
+        this.auxCalculateElements(list, StringHelper.removeAccents(word), new Word());
         return list;
     }
 

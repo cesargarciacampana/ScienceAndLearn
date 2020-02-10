@@ -6,5 +6,5 @@
             {{ started ? 'Siguiente palabra' : 'Jugar' }}
         </button>
     </div>
-    <app-gameword #gameWord></app-gameword>
+    <app-gameword #gameWord (puntosCambiados)="cambiarPuntos($event)"></app-gameword>
 </div>
