@@ -16,7 +16,7 @@ import { StringHelper } from 'src/app/shared/helpers/string.helper';
 export class GameWordComponent implements OnInit {
 
   word : String;
-  private userWord : Word;
+  userWord : Word;
   private solvedWords : Word[];
   private solvedWordElements : String[];
   private emptyPart : WordPart = new WordPart(null, '_');
