@@ -182,7 +182,7 @@ export class GameWordComponent implements OnInit {
   }
 
   private checkIfCompleted(){
-    if (this.GetRemainingLetterCount() == 0)
+    if (this.GetRemainingLetterCount() > 0)
       return;
 
     this.wordCompleted = true;
