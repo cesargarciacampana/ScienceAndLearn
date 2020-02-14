@@ -1,7 +1,8 @@
-<div *ngIf="word" class="gamearea">
+<div *ngIf="userWord" class="gamearea">
     <div class="mbottom">
         <h2>{{ word }}</h2>
         <app-word [word]="userWord"></app-word>
     </div>
-    <app-elements (valueChanged)="elementSelected($event)"></app-elements>
+    <app-elements [readonly]="wordCompleted" (valueChanged)="elementSelected($event)"></app-elements>
+    <div class="success" *ngIf="wordCompleted">¡Bien hecho!</div>
 </div>

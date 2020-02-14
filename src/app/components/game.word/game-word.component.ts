@@ -17,9 +17,12 @@ export class GameWordComponent implements OnInit {
 
   word : String;
   userWord : Word;
+  wordCompleted: boolean;
   private solvedWords : Word[];
   private solvedWordElements : String[];
-  private emptyPart : WordPart = new WordPart(null, '_');
+  private emptyParts : WordPart[];
+
+  private readonly emptyPart = new WordPart(null, '_');
 
   @Output() pointsChanged = new EventEmitter<number>();
 
@@ -35,10 +38,11 @@ export class GameWordComponent implements OnInit {
 
   newWord() {
     this.wordService.randomWord().subscribe(word => {
+      this.wordCompleted = false;
       this.word = word;
-      this.resetUserWord();
       this.solvedWords = this.wordHelper.calculateElements(this.word);
-      this.solvedWordElements = [];
+      this.calculateEmptyParts();
+      this.resetUserWord();
       this.calculateSolutionElements();
       if (this.elementsComponent)
         this.elementsComponent.reset();
@@ -47,6 +51,10 @@ export class GameWordComponent implements OnInit {
 
   private isElementPart(part: WordPart){
     return part.isElement || part.plainSymbol === '';
+  }
+
+  private isDoubleLetter(element: ElementDTO){
+    return element.symbol.length > 1;
   }
 
   elementSelected(event: ElementCheckable){
@@ -60,19 +68,16 @@ export class GameWordComponent implements OnInit {
         let parts = this.userWord.parts;
         for (let i=0; i < parts.length; i++){
           if (parts[i].isElement && parts[i].element.symbol == element.symbol){
-            parts[i] = this.emptyPart;
-            if (element.symbol.length > 1)
-              parts[i+1] = this.emptyPart;
+            parts[i] = this.emptyParts[i];
+            if (this.isDoubleLetter(element))
+              parts[i+1] = this.emptyParts[i];
             this.changePoints(event, -20, false);
           }
         }
       }
     }
     else{
-      if (!this.solvedWordElements.includes(element.symbol)){
-        this.changePoints(event, -5, false);
-      }
-      else{ 
+      if (this.solvedWordElements.includes(element.symbol)){
         let parts = this.userWord.parts;
         let normalized = StringHelper.removeAccents(this.word);
         for (let i=0; i < parts.length; i++){
@@ -93,17 +98,43 @@ export class GameWordComponent implements OnInit {
           }
         }
       }
+      
+      if (!event.valid)
+        this.changePoints(event, -5, false);
+
+      this.checkIfCompleted();
     }
   }
 
   private resetUserWord(){
     this.userWord = new Word();
     for (let i=0; i < this.word.length; i++){
-      this.userWord.parts.push(this.emptyPart);
+      this.userWord.parts.push(this.emptyParts[i]);
+    }
+  }
+
+  private calculateEmptyParts(){
+    this.emptyParts = new Array<WordPart>(this.word.length);
+    for (let i=0; i < this.solvedWords.length; i++){
+      let parts = this.solvedWords[i].parts;
+      let index = 0;
+      for (let j=0; j < parts.length; j++){
+        if (!this.emptyParts[index] && parts[j].isElement){
+          this.emptyParts[index] = this.emptyPart;
+          if (this.isDoubleLetter(parts[j].element))
+            this.emptyParts[++index] = this.emptyPart;
+        }
+        index++;
+      }
+    }
+    for (let i=0; i < this.word.length; i++){
+      if (!this.emptyParts[i])
+        this.emptyParts[i] = new WordPart(null, this.word[i]);
     }
   }
 
   private calculateSolutionElements(){
+    this.solvedWordElements = [];
     for(let i=0; i < this.solvedWords.length; i++){
       let word = this.solvedWords[i];
       for (let j=0; j < word.parts.length; j++){
@@ -118,5 +149,13 @@ export class GameWordComponent implements OnInit {
     event.valid = valid;
     event.points += points;
     this.pointsChanged.emit(points);
+  }
+
+  private checkIfCompleted(){
+    for (let i = 0; i < this.userWord.parts.length; i++)
+      if (this.userWord.parts[i] == this.emptyPart)
+        return;
+    
+    this.wordCompleted = true;
   }
 }

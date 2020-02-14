@@ -13,9 +13,12 @@ import { StringHelper } from 'src/app/shared/helpers/string.helper';
 export class ElementsComponent implements OnInit {
 
   private _sortedElements : ElementCheckable[];
+
+  @Input() readonly = false;
+
   @Output() valueChanged = new EventEmitter<ElementCheckable>();
 
-  @ViewChild('elementInput', {static:true}) elementInput: ElementRef<HTMLInputElement>;
+  @ViewChild('elementInput', {static:false}) elementInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private elementService : ElementService,
