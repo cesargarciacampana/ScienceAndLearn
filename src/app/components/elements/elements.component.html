@@ -5,7 +5,7 @@
         [selectable]="false"
         [removable]="true"
         (removed)="updateElement(elementChk, false)">
-        {{ elementChk.element.name }} ({{ elementChk.valid ? '+20' : '-5' }})
+        {{ elementChk.element.name }} ({{ (elementChk.points > 0 ? '+' : '') + elementChk.points }})
         <mat-icon matChipRemove matTooltip="Quitar">cancel</mat-icon>
     </mat-chip>
 </mat-chip-list>

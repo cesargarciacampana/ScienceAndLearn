@@ -21,7 +21,7 @@ export class GameWordComponent implements OnInit {
   private solvedWordElements : String[];
   private emptyPart : WordPart = new WordPart(null, '_');
 
-  @Output() puntosCambiados = new EventEmitter<number>();
+  @Output() pointsChanged = new EventEmitter<number>();
 
   @ViewChild(ElementsComponent, { static: false }) elementsComponent: ElementsComponent;
 
@@ -54,21 +54,23 @@ export class GameWordComponent implements OnInit {
     let checked : boolean = event.checked;
 
     if (!checked){
-      let parts = this.userWord.parts;
-      for (let i=0; i < parts.length; i++){
-        if (parts[i].isElement && parts[i].element.symbol == element.symbol){
-          parts[i] = this.emptyPart;
-          if (element.symbol.length > 1)
-            parts[i+1] = this.emptyPart;
-          this.cambiarPuntos(-20);
-          event.valid = false;
+      if (!event.valid)
+        event.points = 0;
+      else{
+        let parts = this.userWord.parts;
+        for (let i=0; i < parts.length; i++){
+          if (parts[i].isElement && parts[i].element.symbol == element.symbol){
+            parts[i] = this.emptyPart;
+            if (element.symbol.length > 1)
+              parts[i+1] = this.emptyPart;
+            this.changePoints(event, -20, false);
+          }
         }
       }
     }
     else{
       if (!this.solvedWordElements.includes(element.symbol)){
-        this.cambiarPuntos(-5);
-        event.valid = false;
+        this.changePoints(event, -5, false);
       }
       else{ 
         let parts = this.userWord.parts;
@@ -77,8 +79,7 @@ export class GameWordComponent implements OnInit {
           if (element.symbol.length == 1){
             if (!this.isElementPart(parts[i]) && normalized[i] == element.symbol.toLowerCase()){      
               parts[i] = new WordPart(element);
-              this.cambiarPuntos(20);
-              event.valid = true;
+              this.changePoints(event, 20, true);
             }
           }
           else if (parts.length > i + 1){
@@ -87,8 +88,7 @@ export class GameWordComponent implements OnInit {
               && normalized[i + 1] == element.symbol[1].toLowerCase()){
                 parts[i+1] = new WordPart(null, '');
                 parts[i] = new WordPart(element);
-                this.cambiarPuntos(20);
-                event.valid = true;
+                this.changePoints(event, 20, true);
             }
           }
         }
@@ -114,7 +114,9 @@ export class GameWordComponent implements OnInit {
     }
   }
 
-  private cambiarPuntos(puntos: number){
-    this.puntosCambiados.emit(puntos);
+  private changePoints(event: ElementCheckable, points: number, valid: boolean){
+    event.valid = valid;
+    event.points += points;
+    this.pointsChanged.emit(points);
   }
 }

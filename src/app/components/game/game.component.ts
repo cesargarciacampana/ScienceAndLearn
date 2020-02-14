@@ -9,9 +9,9 @@ import { GameWordComponent } from '../game.word/game-word.component';
 export class GameComponent implements OnInit {
 
   started = false;
-  puntos = 0;
+  points = 0;
 
-  constructor(
+  constructor (
   ) { }
 
   @ViewChild(GameWordComponent, { static: false }) gameWordComponent: GameWordComponent;
@@ -27,7 +27,7 @@ export class GameComponent implements OnInit {
     gameWord.newWord();
   }
 
-  cambiarPuntos(puntos: number){
-    this.puntos += puntos;
+  changePoints(points: number){
+    this.points += points;
   }
 }

@@ -62,8 +62,10 @@ export class ElementsComponent implements OnInit {
   reset(){
     if (this._sortedElements){
       for(let i = 0; i < this._sortedElements.length; i++){
-        this._sortedElements[i].checked = false;
-        this._sortedElements[i].valid = false;
+        let element = this._sortedElements[i];
+        element.checked = false;
+        element.valid = false;
+        element.points = 0;
       }
     }
   }
