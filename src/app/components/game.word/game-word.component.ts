@@ -7,6 +7,7 @@ import { WordService } from 'src/app/shared/services/word.service';
 import { WordHelper } from 'src/app/shared/helpers/word.helper';
 import { ElementsComponent } from '../elements/elements.component';
 import { StringHelper } from 'src/app/shared/helpers/string.helper';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-gameword',
@@ -23,6 +24,8 @@ export class GameWordComponent implements OnInit {
   private emptyParts : WordPart[];
 
   private readonly emptyPart = new WordPart(null, '_');
+  private readonly missingPoints = -5;
+  private readonly matchingPoints = 20;
 
   @Output() pointsChanged = new EventEmitter<number>();
 
@@ -30,13 +33,30 @@ export class GameWordComponent implements OnInit {
 
   constructor(
     private wordService : WordService,
-    private wordHelper : WordHelper
+    private wordHelper : WordHelper,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
   }
 
   newWord() {
+    if (this.word && !this.wordCompleted)
+    {
+      let remaining = this.GetRemainingLetterCount();
+      let substraction = this.missingPoints * remaining;
+
+      if (!window.confirm(`Se te restarán puntos por las letras que faltan, ¿quieres ir a la siguiente palabra?`))
+        return;
+
+      this.changePoints(null, substraction, false);
+      this.snackBar.open(`Faltaban ${remaining} letras, se te restan ${-substraction} puntos`
+        , null,{ duration: 3000 });
+    }
+    this.generateWord();
+  }
+
+  private generateWord(){
     this.wordService.randomWord().subscribe(word => {
       this.wordCompleted = false;
       this.word = word;
@@ -71,7 +91,7 @@ export class GameWordComponent implements OnInit {
             parts[i] = this.emptyParts[i];
             if (this.isDoubleLetter(element))
               parts[i+1] = this.emptyParts[i];
-            this.changePoints(event, -20, false);
+            this.changePoints(event, -1 * this.matchingPoints, false);
           }
         }
       }
@@ -84,7 +104,7 @@ export class GameWordComponent implements OnInit {
           if (element.symbol.length == 1){
             if (!this.isElementPart(parts[i]) && normalized[i] == element.symbol.toLowerCase()){      
               parts[i] = new WordPart(element);
-              this.changePoints(event, 20, true);
+              this.changePoints(event, this.matchingPoints, true);
             }
           }
           else if (parts.length > i + 1){
@@ -93,14 +113,14 @@ export class GameWordComponent implements OnInit {
               && normalized[i + 1] == element.symbol[1].toLowerCase()){
                 parts[i+1] = new WordPart(null, '');
                 parts[i] = new WordPart(element);
-                this.changePoints(event, 20, true);
+                this.changePoints(event, this.matchingPoints, true);
             }
           }
         }
       }
       
       if (!event.valid)
-        this.changePoints(event, -5, false);
+        this.changePoints(event, this.missingPoints, false);
 
       this.checkIfCompleted();
     }
@@ -146,16 +166,25 @@ export class GameWordComponent implements OnInit {
   }
 
   private changePoints(event: ElementCheckable, points: number, valid: boolean){
-    event.valid = valid;
-    event.points += points;
+    if (event){
+      event.valid = valid;
+      event.points += points;
+    }
     this.pointsChanged.emit(points);
   }
 
-  private checkIfCompleted(){
+  private GetRemainingLetterCount(){
+    let count = 0;
     for (let i = 0; i < this.userWord.parts.length; i++)
       if (this.userWord.parts[i] == this.emptyPart)
-        return;
-    
+        count++;
+    return count;
+  }
+
+  private checkIfCompleted(){
+    if (this.GetRemainingLetterCount() == 0)
+      return;
+
     this.wordCompleted = true;
   }
 }

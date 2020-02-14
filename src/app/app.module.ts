@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
-  MatAutocompleteModule, MatChipsModule
+  MatAutocompleteModule, MatChipsModule, MatSnackBarModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +43,8 @@ import { HangedGameComponent } from './components/hanged-game/hanged-game.compon
     MatIconModule,
     MatListModule,
     MatAutocompleteModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
