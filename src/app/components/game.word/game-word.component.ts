@@ -27,6 +27,8 @@ export class GameWordComponent implements OnInit {
   private readonly missingPoints = -5;
   private readonly matchingPoints = 20;
 
+  started = false;
+
   @Output() pointsChanged = new EventEmitter<number>();
 
   @ViewChild(ElementsComponent, { static: false }) elementsComponent: ElementsComponent;
@@ -41,6 +43,7 @@ export class GameWordComponent implements OnInit {
   }
 
   newWord() {
+    this.started = true;
     if (this.word && !this.wordCompleted)
     {
       let remaining = this.GetRemainingLetterCount();

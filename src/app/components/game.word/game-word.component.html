@@ -1,4 +1,4 @@
-<div *ngIf="userWord" class="gamearea">
+<div *ngIf="userWord; else loading" class="gamearea">
     <div class="mbottom">
         <h2>{{ word }}</h2>
         <app-word [word]="userWord"></app-word>
@@ -6,3 +6,6 @@
     <app-elements [readonly]="wordCompleted" (valueChanged)="elementSelected($event)"></app-elements>
     <div class="success" *ngIf="wordCompleted">¡Bien hecho!</div>
 </div>
+<ng-template #loading>
+    <mat-spinner *ngIf="started"></mat-spinner>
+</ng-template>
