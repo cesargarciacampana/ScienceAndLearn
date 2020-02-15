@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WordHelper } from '../../shared/helpers/word.helper';
+import { WordHelper } from '@chem-shared/helpers/word.helper';
 
 @Component({
   selector: 'app-resolutor',

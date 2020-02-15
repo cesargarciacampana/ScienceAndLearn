@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { WordPart } from 'src/app/shared/models/word.part';
+import { WordPart } from '@chem-shared/models/word.part';
 import { ElementCheckable } from '../elements/element.checkable';
-import { ElementDTO } from 'src/app/shared/dtos/element.dto';
-import { Word } from 'src/app/shared/models/word';
-import { WordService } from 'src/app/shared/services/word.service';
-import { WordHelper } from 'src/app/shared/helpers/word.helper';
+import { ElementDTO } from '@chem-shared/dtos/element.dto';
+import { Word } from '@chem-shared/models/word';
+import { WordService } from '@chem-shared/services/word.service';
+import { WordHelper } from '@chem-shared/helpers/word.helper';
 import { ElementsComponent } from '../elements/elements.component';
-import { StringHelper } from 'src/app/shared/helpers/string.helper';
+import { StringHelper } from '@shared/helpers/string.helper';
 import { MatSnackBar } from '@angular/material';
 
 @Component({

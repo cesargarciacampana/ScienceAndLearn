@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Word } from 'src/app/shared/models/word';
+import { Word } from '@chem-shared/models/word';
 
 @Component({
   selector: 'app-word',

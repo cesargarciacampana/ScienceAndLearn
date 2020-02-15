@@ -1,4 +1,4 @@
-import { ElementDTO } from 'src/app/shared/dtos/element.dto';
+import { ElementDTO } from '@chem-shared/dtos/element.dto';
 
 export class ElementCheckable{
 

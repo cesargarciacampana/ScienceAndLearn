@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild } from '@angular/core';
-import { ElementService } from 'src/app/shared/services/element.service';
-import { ElementDTO } from 'src/app/shared/dtos/element.dto';
+import { ElementService } from '@chem-shared/services/element.service';
+import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
 import { ElementCheckable } from './element.checkable';
-import { StringHelper } from 'src/app/shared/helpers/string.helper';
+import { StringHelper } from '@shared/helpers/string.helper';
 
 @Component({
   selector: 'app-elements',

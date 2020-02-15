@@ -8,15 +8,14 @@ import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GameComponent } from './components/game/game.component';
+import { GameComponent } from '@chem/game/game.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ResolutorComponent } from './components/resolutor/resolutor.component';
+import { ResolutorComponent } from '@chem/resolutor/resolutor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MenuComponent } from './components/menu/menu.component';
-import { WordComponent } from './components/word/word.component';
-import { ElementsComponent } from './components/elements/elements.component';
-import { GameWordComponent } from './components/game.word/game-word.component';
-import { HangedGameComponent } from './components/hanged-game/hanged-game.component';
+import { MenuComponent } from '@chem/menu/menu.component';
+import { WordComponent } from '@chem/word/word.component';
+import { ElementsComponent } from '@chem/elements/elements.component';
+import { GameWordComponent } from '@chem/game.word/game-word.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,7 @@ import { HangedGameComponent } from './components/hanged-game/hanged-game.compon
     MenuComponent,
     WordComponent,
     ElementsComponent,
-    GameWordComponent,
-    HangedGameComponent
+    GameWordComponent
   ],
   imports: [
     BrowserModule,
