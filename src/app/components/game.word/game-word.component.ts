@@ -16,12 +16,11 @@ import { MatSnackBar } from '@angular/material';
 })
 export class GameWordComponent implements OnInit {
 
-  word : String;
+  word : string;
+  private cleanWord : string;
   userWord : Word;
   wordCompleted: boolean;
-  private solvedWords : Word[];
-  private solvedWordElements : String[];
-  private emptyParts : WordPart[];
+  private posibleElements : string[];
 
   private readonly emptyPart = new WordPart(null, '_');
   private readonly missingPoints = -5;
@@ -63,17 +62,17 @@ export class GameWordComponent implements OnInit {
     this.wordService.randomWord().subscribe(word => {
       this.wordCompleted = false;
       this.word = word;
-      this.solvedWords = this.wordHelper.calculateElements(this.word);
+      this.cleanWord = StringHelper.removeAccents(word);
+      this.userWord = new Word();
+      this.calculatePosibleElements();
       this.calculateEmptyParts();
-      this.resetUserWord();
-      this.calculateSolutionElements();
       if (this.elementsComponent)
         this.elementsComponent.reset();
     });
   }
 
   private isElementPart(part: WordPart){
-    return part.isElement || part.plainSymbol === '';
+    return part && (part.isElement || part.plainSymbol === '');
   }
 
   private isDoubleLetter(element: ElementDTO){
@@ -91,29 +90,29 @@ export class GameWordComponent implements OnInit {
         let parts = this.userWord.parts;
         for (let i=0; i < parts.length; i++){
           if (parts[i].isElement && parts[i].element.symbol == element.symbol){
-            parts[i] = this.emptyParts[i];
+            parts[i] = this.emptyPart;
             if (this.isDoubleLetter(element))
-              parts[i+1] = this.emptyParts[i];
+              parts[i+1] = this.emptyPart;
             this.changePoints(event, -1 * this.matchingPoints, false);
           }
         }
       }
     }
     else{
-      if (this.solvedWordElements.includes(element.symbol)){
+      let lowerSymbol = element.symbol.toLowerCase();
+      if (this.posibleElements.includes(lowerSymbol)){
         let parts = this.userWord.parts;
-        let normalized = StringHelper.removeAccents(this.word);
         for (let i=0; i < parts.length; i++){
-          if (element.symbol.length == 1){
-            if (!this.isElementPart(parts[i]) && normalized[i] == element.symbol.toLowerCase()){      
+          if (!this.isDoubleLetter(element)){
+            if (!this.isElementPart(parts[i]) && this.cleanWord[i] == lowerSymbol){      
               parts[i] = new WordPart(element);
               this.changePoints(event, this.matchingPoints, true);
             }
           }
           else if (parts.length > i + 1){
             if (!this.isElementPart(parts[i]) && !this.isElementPart(parts[i+1]) 
-              && normalized[i] == element.symbol[0].toLowerCase()
-              && normalized[i + 1] == element.symbol[1].toLowerCase()){
+              && this.cleanWord[i] == lowerSymbol[0]
+              && this.cleanWord[i + 1] == lowerSymbol[1]){
                 parts[i+1] = new WordPart(null, '');
                 parts[i] = new WordPart(element);
                 this.changePoints(event, this.matchingPoints, true);
@@ -124,49 +123,42 @@ export class GameWordComponent implements OnInit {
       
       if (!event.valid)
         this.changePoints(event, this.missingPoints, false);
+    }
+    
+    this.calculateEmptyParts();
 
+    if (event.valid)
       this.checkIfCompleted();
-    }
-  }
-
-  private resetUserWord(){
-    this.userWord = new Word();
-    for (let i=0; i < this.word.length; i++){
-      this.userWord.parts.push(this.emptyParts[i]);
-    }
   }
 
   private calculateEmptyParts(){
-    this.emptyParts = new Array<WordPart>(this.word.length);
-    for (let i=0; i < this.solvedWords.length; i++){
-      let parts = this.solvedWords[i].parts;
-      let index = 0;
-      for (let j=0; j < parts.length; j++){
-        if (parts[j].isElement){
-          if (!this.emptyParts[index])
-            this.emptyParts[index] = this.emptyPart;
-          if (this.isDoubleLetter(parts[j].element) && !this.emptyParts[++index])
-            this.emptyParts[index] = this.emptyPart;
-        }
-        index++;
+    let i = -1;
+    let ignoreSingleLetter = [];
+    while(++i < this.word.length){
+      if (this.isElementPart(this.userWord.parts[i]))
+        continue;
+
+      let single = this.cleanWord[i];
+      let canBeDouble = i < this.word.length - 1 && !this.isElementPart(this.userWord.parts[i+1]);
+      let double = canBeDouble ? this.cleanWord[i] + this.cleanWord[i+1] : null;
+
+      if (this.posibleElements.includes(single) || (canBeDouble && this.posibleElements.includes(double)))
+        this.userWord.parts[i] = this.emptyPart;
+      else if (!ignoreSingleLetter.includes(i))
+        this.userWord.parts[i] = new WordPart(null, this.word[i]);
+
+      if (canBeDouble && this.posibleElements.includes(double)){
+        this.userWord.parts[i+1] = this.emptyPart;
+        ignoreSingleLetter.push(i+1);
       }
-    }
-    for (let i=0; i < this.word.length; i++){
-      if (!this.emptyParts[i])
-        this.emptyParts[i] = new WordPart(null, this.word[i]);
     }
   }
 
-  private calculateSolutionElements(){
-    this.solvedWordElements = [];
-    for(let i=0; i < this.solvedWords.length; i++){
-      let word = this.solvedWords[i];
-      for (let j=0; j < word.parts.length; j++){
-        let part = word.parts[j];
-        if (part.isElement && !this.solvedWordElements.includes(part.element.symbol))
-          this.solvedWordElements.push(part.element.symbol);
-      }
-    }
+  private calculatePosibleElements(){
+    let list = this.wordHelper.getPosibleElements(this.word);
+    this.posibleElements = [];
+    for (let i = 0; i < list.length; i++)
+      this.posibleElements.push(list[i].symbol.toLowerCase());
   }
 
   private changePoints(event: ElementCheckable, points: number, valid: boolean){

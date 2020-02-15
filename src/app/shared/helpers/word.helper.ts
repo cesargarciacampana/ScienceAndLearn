@@ -7,6 +7,9 @@ import { Word } from '../models/word';
 
 @Injectable({providedIn: 'root'})
 export class WordHelper {
+
+    static readonly MAX_SYMBOL_LENGTH = 2;
+
     constructor(
         private elementService : ElementService,
     ) { }
@@ -59,5 +62,20 @@ export class WordHelper {
             return current;
         }
         return null;
+      }
+
+      getPosibleElements(word: string) : ElementDTO[]{
+        let list : ElementDTO[] = [];
+        for(let i = 0; i < word.length; i++) {
+          let symbol = '';
+          for (let j = 0; j <= WordHelper.MAX_SYMBOL_LENGTH; j++){
+            symbol += word[i+j];
+            let element = this.findElement(symbol);
+            if (element && !list.includes(element))
+              list.push(element);
+          }
+        }
+
+        return list;
       }
 }
