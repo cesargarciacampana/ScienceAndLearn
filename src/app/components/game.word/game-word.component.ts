@@ -77,7 +77,7 @@ export class GameWordComponent implements OnInit {
   }
 
   private isDoubleLetter(element: ElementDTO){
-    return element.symbol.length > 1;
+    return element && element.symbol.length > 1;
   }
 
   elementSelected(event: ElementCheckable){
@@ -142,10 +142,11 @@ export class GameWordComponent implements OnInit {
       let parts = this.solvedWords[i].parts;
       let index = 0;
       for (let j=0; j < parts.length; j++){
-        if (!this.emptyParts[index] && parts[j].isElement){
-          this.emptyParts[index] = this.emptyPart;
-          if (this.isDoubleLetter(parts[j].element))
-            this.emptyParts[++index] = this.emptyPart;
+        if (parts[j].isElement){
+          if (!this.emptyParts[index])
+            this.emptyParts[index] = this.emptyPart;
+          if (this.isDoubleLetter(parts[j].element) && !this.emptyParts[++index])
+            this.emptyParts[index] = this.emptyPart;
         }
         index++;
       }
