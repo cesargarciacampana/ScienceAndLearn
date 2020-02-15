@@ -19,8 +19,8 @@
       "dom"
     ],
     "paths": {
-      "@chem/*": ["src/app/components/*"],
-      "@chem-shared/*": ["src/app/shared/*"],
+      "@chem/*": ["src/app/chemistry/components/*"],
+      "@chem-shared/*": ["src/app/chemistry/shared/*"],
       "@shared/*": ["src/app/shared/*"]
     }
   },
