@@ -12,10 +12,12 @@ import { GameComponent } from '@chem/game/game.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ResolutorComponent } from '@chem/resolutor/resolutor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MenuComponent } from '@chem/menu/menu.component';
+import { MenuComponent } from '@main/menu/menu.component';
 import { WordComponent } from '@chem/word/word.component';
 import { ElementsComponent } from '@chem/elements/elements.component';
 import { GameWordComponent } from '@chem/game.word/game-word.component';
+import { IndexComponent } from './main/components/index/index.component';
+import { CalculationComponent } from './mathematics/components/calculation/calculation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { GameWordComponent } from '@chem/game.word/game-word.component';
     MenuComponent,
     WordComponent,
     ElementsComponent,
-    GameWordComponent
+    GameWordComponent,
+    IndexComponent,
+    CalculationComponent
   ],
   imports: [
     BrowserModule,

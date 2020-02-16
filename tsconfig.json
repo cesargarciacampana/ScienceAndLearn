@@ -21,6 +21,9 @@
     "paths": {
       "@chem/*": ["src/app/chemistry/components/*"],
       "@chem-shared/*": ["src/app/chemistry/shared/*"],
+      "@math/*": ["src/app/mathematics/components/*"],
+      "@math-shared/*": ["src/app/mathematics/shared/*"],
+      "@main/*": ["src/app/main/components/*"],
       "@shared/*": ["src/app/shared/*"]
     }
   },

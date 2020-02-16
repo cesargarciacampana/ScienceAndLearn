@@ -4,7 +4,7 @@
         <span *ngIf="mobileQuery.matches">
             <button mat-icon-button (click)="toggleSidenav()"><mat-icon>menu</mat-icon></button>
         </span>
-        <span>Juega con la tabla periódica</span>
+        <div class="title" [routerLink]="['/']">Juega y aprende</div>
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container">
@@ -13,10 +13,14 @@
                     (closed)="resetSidenav()"
                     [mode]="mobileQuery.matches ? 'over' : 'side'" 
                     [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+            <div class="section">QUÍMICA</div>
             <mat-nav-list>
-                <a mat-list-item [routerLink]="['/']" (click)="resetSidenav()">Juego: Construye la palabra</a>
-                <!--<a mat-list-item [routerLink]="['/hanged']" (click)="resetSidenav()">Juego: Ahorcado</a>-->
-                <a mat-list-item [routerLink]="['/solve']" (click)="resetSidenav()">Resolver palabras</a>
+                <a mat-list-item [routerLink]="['/spell']" (click)="resetSidenav()">Juego: Crea palabras usando la tabla periódica</a>
+                <a mat-list-item [routerLink]="['/solve']" (click)="resetSidenav()">Deletreador</a>
+            </mat-nav-list>
+            <div class="section">MATEMÁTICAS</div>
+            <mat-nav-list>
+                <a mat-list-item [routerLink]="['/calculation']" (click)="resetSidenav()">Juego: Cálculo mental</a>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="content">

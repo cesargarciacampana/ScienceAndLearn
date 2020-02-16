@@ -24,8 +24,15 @@
 }
 
 .menu{
-    width: 200px;
+    width: 250px;
 }
 .content{
     padding-left: 20px;
+}
+.section{
+    font-weight: bold;
+    margin: 10px;
+}
+.title{
+    cursor: pointer;
 }
