@@ -8,30 +8,9 @@ import {MediaMatcher} from '@angular/cdk/layout';
 })
 export class MenuComponent implements OnInit {
 
-  showsidenav = false;
-  mobileQuery: MediaQueryList;
-
-  private _mobileQueryListener: () => void;
-
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 800px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-  }
-
-  toggleSidenav(){
-    this.showsidenav = !this.showsidenav;
-    this._mobileQueryListener();
-  }
-
-  resetSidenav(){
-    this.showsidenav = false
+  constructor() {
   }
 
   ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }
