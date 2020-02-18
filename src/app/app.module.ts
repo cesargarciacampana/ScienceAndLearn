@@ -18,6 +18,7 @@ import { ElementsComponent } from '@chem/elements/elements.component';
 import { GameWordComponent } from '@chem/game.word/game-word.component';
 import { IndexComponent } from './main/components/index/index.component';
 import { CalculationComponent } from './mathematics/components/calculation/calculation.component';
+import { CalculationGameComponent } from './mathematics/components/calculation-game/calculation-game.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CalculationComponent } from './mathematics/components/calculation/calcu
     ElementsComponent,
     GameWordComponent,
     IndexComponent,
-    CalculationComponent
+    CalculationComponent,
+    CalculationGameComponent
   ],
   imports: [
     BrowserModule,

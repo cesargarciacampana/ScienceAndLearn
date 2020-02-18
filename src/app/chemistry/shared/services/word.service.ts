@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { RandomHelper } from '@shared/helpers/random.helper';
 
 @Injectable({providedIn: 'root'})
 export class WordService {
@@ -18,14 +19,10 @@ export class WordService {
             .pipe(map((data) => data[0].split(',')));
     }
 
-    private randomIntFromInterval(min, max) { // min included, max excluded 
-        return Math.floor(Math.random() * (max - min) + min);
-    }
-
     randomWord() : Observable<string>{
         return this.words.pipe(
             map(data =>{
-                let i = this.randomIntFromInterval(0, data.length);
+                let i = RandomHelper.randomIntFromInterval(0, data.length);
                 return data[i];
             })
         );
