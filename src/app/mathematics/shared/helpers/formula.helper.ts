@@ -23,16 +23,12 @@ export class FormulaHelper {
             let divisor = 1;
             let multiplications = FormulaHelper.split(adds[i], 'x');
             for(let j = 0; j < multiplications.length; j++){
-                let divisions = multiplications[j].split('/');
-                if (!divisions)
-                    temp *= parseInt(multiplications[j]);
-                else{
-                    temp *= parseInt(divisions[0]);
-                    for(let k = 1; k < divisions.length; k++)
-                        divisor *= parseInt(divisions[k]);
-                }
-                temp /= divisor;
-            }       
+                let divisions = FormulaHelper.split(multiplications[j], '/');
+                temp *= parseInt(divisions[0]);
+                for(let k = 1; k < divisions.length; k++)
+                    divisor *= parseInt(divisions[k]);
+            }
+            temp /= divisor;
             result += temp;
         }
         return result;

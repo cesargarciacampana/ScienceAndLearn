@@ -10,7 +10,7 @@ import { FormulaHelper } from '@math-shared/helpers/formula.helper';
 export class CalculationComponent implements OnInit {
 
   formula: string;
-  result: number;
+  results: number[];
 
   constructor() { }
 
@@ -35,6 +35,25 @@ export class CalculationComponent implements OnInit {
         formula += this.randomOperation();
     }
     this.formula = formula;
-    this.result = FormulaHelper.parse(this.formula);
+
+    this.generateResults();
+  }
+
+  private generateResults(){
+    let nResults = 4;
+    let results = [];
+    let rightPos = RandomHelper.randomIntFromInterval(0, nResults);
+    let rightValue = FormulaHelper.parse(this.formula);
+    while(results.length < nResults){
+      let value;
+      if (results.length == rightPos)
+        value = rightValue;
+      else
+        value = rightValue + RandomHelper.randomIntFromInterval(-15, 15);
+
+      if (!results.includes(value))
+        results.push(value);
+    }
+    this.results = results;
   }
 }
