@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { RandomHelper } from '@shared/helpers/random.helper';
 import { FormulaHelper } from '@math-shared/helpers/formula.helper';
 import { Result } from '@math-shared/models/result';
+import { FormulaOptions } from '@math-shared/models/formula-options';
 
 @Component({
   selector: 'app-calculation',
@@ -19,26 +20,22 @@ export class CalculationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.newFormula();
+    
   }
 
-  private randomOperation(){
-    return FormulaHelper.operations[RandomHelper.randomIntFromInterval(1, FormulaHelper.operations.length)];
+  private randomOperation(operations: string[]){
+    return operations[RandomHelper.randomIntFromInterval(1, operations.length)];
   }
 
-  newFormula(){
+  newFormula(options: FormulaOptions){
     this.optionSelected = false;
 
-    let nElements = 3;
-    let minNumber = 1;
-    let maxNumber = 9;
-
     let formula = '';
-    for(let i = 0; i < nElements; i++){
+    for(let i = 0; i < options.nElements; i++){
       formula += 
-        RandomHelper.randomIntFromInterval(minNumber, maxNumber + 1);
-      if (i < nElements - 1)
-        formula += this.randomOperation();
+        RandomHelper.randomIntFromInterval(options.minNumber, options.maxNumber + 1);
+      if (i < options.nElements - 1)
+        formula += this.randomOperation(options.operations);
     }
     this.formula = formula;
 

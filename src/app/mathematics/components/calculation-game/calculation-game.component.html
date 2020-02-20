@@ -1,12 +1,19 @@
 <div class="title">
-    ¿Puedes calcular el resultado mentalmente?<br/>
-    Suma 5 segundos por cada acierto, ¡pero no te quedes sin tiempo!
+    <h3>Calcula mentalmente el resultado de las operaciones</h3>
+    <div>Consigue 5 segundos por cada acierto, ¡no te quedes sin tiempo!</div>
 </div>
 <div *ngIf="started">
-    <span class="points"><b>Tiempo restante:</b> {{ seconds }}</span>
-    <span class="points"><b>Puntos:</b> {{ points }}</span>
+    <h3>Nivel {{ level }}</h3>
+    <span class="points">Tiempo restante: <b class="big">{{ seconds }}</b></span>
+    <span class="points">Puntos: <b class="big">{{ points }}</b></span>
 </div>
 <button *ngIf="!started" mat-raised-button (click)="start(calculation)">
     Jugar
 </button>
 <app-calculation #calculation *ngIf="started" (Selected)="selected($event)"></app-calculation>
+<div *ngIf="finished">
+    <h2>¡Fin del juego!</h2>
+    <div>Total Puntos: <b class="big">{{ points }}</b></div>
+    <div>Aciertos: {{ numSuccess }}</div>
+    <div>Fallos: {{ numFails }}</div>
+</div>
