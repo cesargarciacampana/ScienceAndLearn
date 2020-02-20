@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { RandomHelper } from '@shared/helpers/random.helper';
 import { FormulaHelper } from '@math-shared/helpers/formula.helper';
 import { Result } from '@math-shared/models/result';
@@ -13,6 +13,8 @@ export class CalculationComponent implements OnInit {
   formula: string;
   results: Result[];
   optionSelected = false;
+
+  @Output() Selected = new EventEmitter<Result>()
 
   constructor() { }
 
@@ -75,9 +77,6 @@ export class CalculationComponent implements OnInit {
     result.selected = true;
     this.optionSelected = true;
 
-    const that = this;
-    setTimeout(function(){
-      that.newFormula();
-    }, 1000);
+    this.Selected.emit(result);
   }
 }
