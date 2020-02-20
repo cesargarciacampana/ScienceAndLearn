@@ -7,10 +7,10 @@
     <span class="points">Tiempo restante: <b class="big">{{ seconds }}</b></span>
     <span class="points">Puntos: <b class="big">{{ points }}</b></span>
 </div>
-<button *ngIf="!started" mat-raised-button (click)="start(calculation)">
+<button *ngIf="!started" mat-raised-button (click)="start()">
     Jugar
 </button>
-<app-calculation #calculation *ngIf="started" (Selected)="selected($event)"></app-calculation>
+<app-calculation *ngIf="started" (Selected)="selected($event)"></app-calculation>
 <div *ngIf="finished">
     <h2>¡Fin del juego!</h2>
     <div>Total Puntos: <b class="big">{{ points }}</b></div>
