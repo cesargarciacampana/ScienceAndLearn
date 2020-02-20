@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RandomHelper } from '@shared/helpers/random.helper';
 import { FormulaHelper } from '@math-shared/helpers/formula.helper';
+import { Result } from '@math-shared/models/result';
 
 @Component({
   selector: 'app-calculation',
@@ -10,7 +11,8 @@ import { FormulaHelper } from '@math-shared/helpers/formula.helper';
 export class CalculationComponent implements OnInit {
 
   formula: string;
-  results: number[];
+  results: Result[];
+  optionSelected = false;
 
   constructor() { }
 
@@ -23,7 +25,9 @@ export class CalculationComponent implements OnInit {
   }
 
   newFormula(){
-    let nElements = 5;
+    this.optionSelected = false;
+
+    let nElements = 3;
     let minNumber = 1;
     let maxNumber = 9;
 
@@ -41,19 +45,39 @@ export class CalculationComponent implements OnInit {
 
   private generateResults(){
     let nResults = 4;
+    let values = [];
     let results = [];
     let rightPos = RandomHelper.randomIntFromInterval(0, nResults);
     let rightValue = FormulaHelper.parse(this.formula);
     while(results.length < nResults){
       let value;
-      if (results.length == rightPos)
+      if (results.length == rightPos && !values.includes(rightValue))
         value = rightValue;
       else
         value = rightValue + RandomHelper.randomIntFromInterval(-15, 15);
 
-      if (!results.includes(value))
-        results.push(value);
+      if (!values.includes(value)){
+        values.push(value);
+        let result = new Result();
+        result.value = value;
+        result.correct = value === rightValue;
+        result.selected = false;
+        results.push(result);
+      }
     }
     this.results = results;
+  }
+
+  selectResult(result: Result){
+    if (this.optionSelected)
+      return;
+
+    result.selected = true;
+    this.optionSelected = true;
+
+    const that = this;
+    setTimeout(function(){
+      that.newFormula();
+    }, 1000);
   }
 }

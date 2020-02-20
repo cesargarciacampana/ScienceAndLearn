@@ -1,3 +1,5 @@
-<div>Selecciona el resultado de la operación</div>
 <h2>{{ formula }}</h2>
-<button *ngFor="let result of results" mat-raised-button>{{result}}</button>
+<button *ngFor="let result of results" mat-raised-button (click)="selectResult(result)"
+    [ngClass]="'mright ' + (optionSelected ? (result.correct ? (result.selected ? 'right' : 'rightFailed') : (result.selected ? 'wrong' : '')) : '')">
+    {{result.value}}
+</button>

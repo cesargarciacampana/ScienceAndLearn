@@ -1,6 +1,7 @@
 export class FormulaHelper {
 
-    static operations = [ '+', '-', 'x', '/' ];
+    //static operations = [ '+', '-', 'x', '/' ];
+    static operations = [ '+', '-', 'x' ];
 
     private static isNumber(c: string){
         return c >= '0' && c <= '9';

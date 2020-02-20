@@ -1,0 +1,12 @@
+.mright{
+    margin-right: 10px;
+}
+.right{
+    background-color: green;
+}
+.rightFailed{
+    background-color: lightgreen;
+}
+.wrong{
+    background-color: red;
+}
