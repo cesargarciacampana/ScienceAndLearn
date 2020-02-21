@@ -7,7 +7,7 @@ export class FormatTimePipe {
         let ss = s.toString();
         if (s < 10) { ss = "0" + ss; }
 
-        let m = seconds - s;
+        let m = (seconds - s) / 60;
         let mm = m.toString();
         if (m < 10) { mm = "0" + mm; }
 
