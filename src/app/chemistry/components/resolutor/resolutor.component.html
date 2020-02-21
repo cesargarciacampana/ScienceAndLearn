@@ -1,4 +1,4 @@
-<form (keydown.enter)="false">
+<form *ngIf="elements | async; else loading" (keydown.enter)="false">
     <h3>Introduce una palabra para descomponerla usando elementos de la tabla periódica</h3>
 <mat-form-field>
     <input matInput #wordInput
@@ -19,3 +19,6 @@
     </h3>
 </div>
 </form>
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

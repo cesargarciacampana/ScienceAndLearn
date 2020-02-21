@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { RandomHelper } from '@shared/helpers/random.helper';
+import { ElementService } from './element.service';
 
 @Injectable({providedIn: 'root'})
 export class WordService {
     private words : Observable<string[]>;
 
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private elementService: ElementService
     ) { 
         this.init();
     }
@@ -20,11 +22,14 @@ export class WordService {
     }
 
     randomWord() : Observable<string>{
-        return this.words.pipe(
-            map(data =>{
-                let i = RandomHelper.randomIntFromInterval(0, data.length);
-                return data[i];
-            })
+        return this.elementService.elementsObservable.pipe(
+            mergeMap(dummy => {
+                return this.words.pipe(
+                    map(data =>{
+                        let i = RandomHelper.randomIntFromInterval(0, data.length);
+                        return data[i];
+                    })
+                )})
         );
     }
 }
