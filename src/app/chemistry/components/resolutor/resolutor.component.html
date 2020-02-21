@@ -7,13 +7,13 @@
 </mat-form-field>
 <div>
     <mat-checkbox #checkbox="matCheckbox">
-        Mostrar soluciones que necesitan letras añadidas
+        Mostrar solo resultados que no necesitan letras añadidas
     </mat-checkbox>
 </div>
 <div *ngIf="wordInput.value">
     <h2>{{ wordInput.value }}</h2>
     <h3 *ngFor="let solvedWord of solvedWords;">
-        <span *ngIf="checkbox.checked || solvedWord.isCompleteSolution">
+        <span *ngIf="!checkbox.checked || solvedWord.isCompleteSolution">
             <app-word [word]="solvedWord"></app-word>
         </span>
     </h3>
