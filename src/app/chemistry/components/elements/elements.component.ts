@@ -37,7 +37,7 @@ export class ElementsComponent implements OnInit {
     return list;
   }
 
-  private get sortedElements() {
+  get sortedElements() {
     if (!this._sortedElements && this.elementService.elements)
     {
         let temp = Array.from(this.elementService.elements);
@@ -69,6 +69,7 @@ export class ElementsComponent implements OnInit {
         element.checked = false;
         element.valid = false;
         element.points = 0;
+        element.isClue = false;
       }
     }
   }

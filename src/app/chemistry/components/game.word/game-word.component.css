@@ -1,9 +1,14 @@
 .mbottom{
     margin-bottom:40px;
 }
-.success{
+.result{
     font-weight: bold;
     margin-top: 15px;
     font-size: 36px;
+}
+.success{
     color: green;
+}
+.failed{
+    color: orange;
 }

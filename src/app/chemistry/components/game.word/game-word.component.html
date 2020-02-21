@@ -4,7 +4,10 @@
         <app-word [word]="userWord"></app-word>
     </div>
     <app-elements [readonly]="wordCompleted" (valueChanged)="elementSelected($event)"></app-elements>
-    <div class="success" *ngIf="wordCompleted">¡Bien hecho!</div>
+    <div *ngIf="wordCompleted">
+        <div *ngIf="wordPoints > 0" class="result success" >¡Bien hecho!</div>
+        <div *ngIf="wordPoints <= 0" class="result failed" >Sigue intentándolo</div>
+    </div>
 </div>
 <ng-template #loading>
     <mat-spinner *ngIf="started"></mat-spinner>

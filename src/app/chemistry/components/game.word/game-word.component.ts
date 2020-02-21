@@ -22,6 +22,7 @@ export class GameWordComponent implements OnInit {
   private cleanWord : string;
   userWord : Word;
   wordCompleted: boolean;
+  wordPoints : number;
   private posibleElements : string[];
 
   private readonly emptyPart = new WordPart(null, '_');
@@ -51,13 +52,27 @@ export class GameWordComponent implements OnInit {
       let substraction = this.missingPoints * remaining;
 
       if (!window.confirm(`Se te restarán puntos por las letras que faltan, ¿quieres ir a la siguiente palabra?`))
-        return;
+        return of(false);
 
       this.changePoints(null, substraction, false);
       this.snackBar.open(`Faltaban ${remaining} letras, se te restan ${-substraction} puntos`
         , null,{ duration: 3000 });
     }
     return this.generateWord();
+  }
+
+  clue(){
+    let elements = this.elementsComponent.sortedElements;
+    for(let i = 0; i < this.posibleElements.length; i++){
+      for (let j = 0; j < elements.length; j++){
+        if (elements[j].element.symbol.toLowerCase() == this.posibleElements[i]){
+          if (!elements[j].checked && this.elementSelected(elements[j], true))
+            return;
+          else
+            break;
+        }
+      }
+    }
   }
 
   private generateWord() : Observable<boolean>{
@@ -67,6 +82,7 @@ export class GameWordComponent implements OnInit {
           this.word = word;
           this.cleanWord = StringHelper.removeAccents(word);
           this.userWord = new Word();
+          this.wordPoints = 0;
           this.calculatePosibleElements();
           this.calculateEmptyParts();
           if (this.elementsComponent)
@@ -85,11 +101,11 @@ export class GameWordComponent implements OnInit {
     return element && element.symbol.length > 1;
   }
 
-  elementSelected(event: ElementCheckable){
+  elementSelected(event: ElementCheckable, isClue = false) : boolean{
     let element : ElementDTO = event.element;
     let checked : boolean = event.checked;
 
-    if (!checked){
+    if (!isClue && !checked){
       if (!event.valid)
         event.points = 0;
       else{
@@ -112,7 +128,11 @@ export class GameWordComponent implements OnInit {
           if (!this.isDoubleLetter(element)){
             if (!this.isElementPart(parts[i]) && this.cleanWord[i] == lowerSymbol){      
               parts[i] = new WordPart(element);
-              this.changePoints(event, this.matchingPoints, true);
+              this.changePoints(event, isClue ? this.missingPoints : this.matchingPoints, true);
+              if (isClue){
+                  event.checked = true;
+                  event.isClue = true;
+              }
             }
           }
           else if (parts.length > i + 1){
@@ -121,20 +141,27 @@ export class GameWordComponent implements OnInit {
               && this.cleanWord[i + 1] == lowerSymbol[1]){
                 parts[i+1] = new WordPart(null, '');
                 parts[i] = new WordPart(element);
-                this.changePoints(event, this.matchingPoints, true);
+                this.changePoints(event, isClue ? this.missingPoints : this.matchingPoints, true);
+                if (isClue){
+                  event.checked = true;
+                  event.isClue = true;
+                }
             }
           }
         }
       }
       
-      if (!event.valid)
+      if (!event.valid && !isClue)
         this.changePoints(event, this.missingPoints, false);
     }
     
-    this.calculateEmptyParts();
+    if (!isClue || (isClue && event.valid))
+      this.calculateEmptyParts();
 
     if (event.valid)
       this.checkIfCompleted();
+
+      return event.valid;
   }
 
   private calculateEmptyParts(){
@@ -172,6 +199,7 @@ export class GameWordComponent implements OnInit {
       event.valid = valid;
       event.points += points;
     }
+    this.wordPoints += points;
     this.pointsChanged.emit(points);
   }
 

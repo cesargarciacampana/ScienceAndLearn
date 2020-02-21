@@ -7,7 +7,7 @@
         </div>
     </div>
     <app-gameword #gameWord (pointsChanged)="changePoints($event)"></app-gameword>
-    <button *ngIf="!started || gameWord.userWord" mat-raised-button (click)="newWord(gameWord)">
-        {{ started ? 'Siguiente palabra' : 'Jugar' }}
+    <button *ngIf="!started || gameWord.userWord" mat-raised-button (click)="btnClick(gameWord)">
+        {{ started ? (!gameWord.wordCompleted ? 'Dame una pista (-5 puntos)' : 'Siguiente palabra') : 'Jugar' }}
     </button>
 </div>

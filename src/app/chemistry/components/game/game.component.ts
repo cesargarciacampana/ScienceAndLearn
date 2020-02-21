@@ -23,11 +23,18 @@ export class GameComponent implements OnInit {
   ngAfterViewInit() {
   }
 
-  newWord(gameWord: GameWordComponent){
-    this.started = true;
-    gameWord.newWord().subscribe(dummy => {
-      this.checkTime();
-    });
+  btnClick(gameWord: GameWordComponent){
+    const started = this.started;
+    if (started && !gameWord.wordCompleted){
+      gameWord.clue();
+    }
+    else{
+      gameWord.newWord().subscribe(dummy => {
+        if (dummy && !started)
+          this.checkTime();
+      });
+      this.started = true;
+    }
   }
 
   private checkTime(){
