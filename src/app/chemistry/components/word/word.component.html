@@ -1,7 +1,7 @@
 <span *ngFor="let wordPart of word.parts">
     <span *ngIf="wordPart.isElement; else plain">
-        <a [href]="wordPart.element.source" target="_blank"
-            [matTooltip]="wordPart.element.name" onclick="return false;">
+        <a [href]="wordPart.element.source" target="_blank" #tooltip="matTooltip"
+            [matTooltip]="wordPart.element.name" (click)="click(tooltip)">
             {{ wordPart.visualString }}
         </a>
     </span>

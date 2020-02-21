@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Word } from '@chem-shared/models/word';
+import { MatTooltip } from '@angular/material';
 
 @Component({
   selector: 'app-word',
@@ -16,4 +17,8 @@ export class WordComponent implements OnInit {
   ngOnInit() {
   }
 
+  click(tooltip: MatTooltip){
+    tooltip.show();
+    return false;
+  }
 }
