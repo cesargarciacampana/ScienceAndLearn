@@ -19,6 +19,7 @@ import { GameWordComponent } from '@chem/game.word/game-word.component';
 import { IndexComponent } from './main/components/index/index.component';
 import { CalculationComponent } from './mathematics/components/calculation/calculation.component';
 import { CalculationGameComponent } from './mathematics/components/calculation-game/calculation-game.component';
+import { FormatTimePipe } from '@shared/pipes/format-time.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CalculationGameComponent } from './mathematics/components/calculation-g
     GameWordComponent,
     IndexComponent,
     CalculationComponent,
-    CalculationGameComponent
+    CalculationGameComponent,
+    FormatTimePipe
   ],
   imports: [
     BrowserModule,

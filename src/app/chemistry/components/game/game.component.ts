@@ -10,6 +10,7 @@ export class GameComponent implements OnInit {
 
   started = false;
   points = 0;
+  seconds = 0;
 
   constructor (
   ) { }
@@ -24,7 +25,19 @@ export class GameComponent implements OnInit {
 
   newWord(gameWord: GameWordComponent){
     this.started = true;
-    gameWord.newWord();
+    gameWord.newWord().subscribe(dummy => {
+      this.checkTime();
+    });
+  }
+
+  private checkTime(){
+    const that = this;
+    setTimeout(function(){
+      {
+        that.seconds += 1;
+        that.checkTime();
+      }
+    }, 1000);
   }
 
   changePoints(points: number){

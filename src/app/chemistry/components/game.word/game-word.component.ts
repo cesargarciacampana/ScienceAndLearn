@@ -8,6 +8,8 @@ import { WordHelper } from '@chem-shared/helpers/word.helper';
 import { ElementsComponent } from '../elements/elements.component';
 import { StringHelper } from '@shared/helpers/string.helper';
 import { MatSnackBar } from '@angular/material';
+import { Observable, of } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-gameword',
@@ -41,7 +43,7 @@ export class GameWordComponent implements OnInit {
   ngOnInit() {
   }
 
-  newWord() {
+  newWord() : Observable<boolean> {
     this.started = true;
     if (this.word && !this.wordCompleted)
     {
@@ -55,20 +57,24 @@ export class GameWordComponent implements OnInit {
       this.snackBar.open(`Faltaban ${remaining} letras, se te restan ${-substraction} puntos`
         , null,{ duration: 3000 });
     }
-    this.generateWord();
+    return this.generateWord();
   }
 
-  private generateWord(){
-    this.wordService.randomWord().subscribe(word => {
-      this.wordCompleted = false;
-      this.word = word;
-      this.cleanWord = StringHelper.removeAccents(word);
-      this.userWord = new Word();
-      this.calculatePosibleElements();
-      this.calculateEmptyParts();
-      if (this.elementsComponent)
-        this.elementsComponent.reset();
-    });
+  private generateWord() : Observable<boolean>{
+    return this.wordService.randomWord().pipe(
+      mergeMap(word => {
+          this.wordCompleted = false;
+          this.word = word;
+          this.cleanWord = StringHelper.removeAccents(word);
+          this.userWord = new Word();
+          this.calculatePosibleElements();
+          this.calculateEmptyParts();
+          if (this.elementsComponent)
+            this.elementsComponent.reset();
+          return of(true);
+        }
+      )
+    );
   }
 
   private isElementPart(part: WordPart){

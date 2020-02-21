@@ -4,7 +4,7 @@
 </div>
 <div *ngIf="started">
     <h3>Nivel {{ level }}</h3>
-    <span class="points">Tiempo restante: <b class="big">{{ seconds }}</b></span>
+    <span class="points">Tiempo restante: <b class="big">{{ seconds | formatTime }}</b></span>
     <span class="points">Puntos: <b class="big">{{ points }}</b></span>
 </div>
 <button *ngIf="!started" mat-raised-button (click)="start()">
