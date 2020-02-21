@@ -2,12 +2,8 @@
     height: calc(100% - 20px);
 }
 .gamearea{
-    height: calc(100% - 140px);
-}
-.gameheader{
-    height: 100px;
+    height: calc(100% - 40px);
 }
 .points{
     margin-right: 40px;
-    font-weight: bold;;
 }
