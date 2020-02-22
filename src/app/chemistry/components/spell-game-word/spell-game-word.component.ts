@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { WordPart } from '@chem-shared/models/word.part';
-import { ElementCheckable } from '../element-selector/element.checkable';
+import { WordPart } from '@chem-shared/models/word-part';
+import { ElementCheckable } from '../../shared/models/element-checkable';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { Word } from '@chem-shared/models/word';
 import { WordService } from '@chem-shared/services/word.service';

@@ -1,4 +1,4 @@
-import { WordPart } from './word.part';
+import { WordPart } from './word-part';
 
 export class Word{
     parts : WordPart[] = [];

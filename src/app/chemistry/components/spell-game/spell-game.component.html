@@ -1,13 +1,13 @@
 <div class="game">
     <div>
         <h3>Crea palabras usando la tabla periódica</h3>
-        <div *ngIf="started" class="points">
-            <div>Puntos: <b>{{ points }}</b></div>
-            <div>Tiempo: <b>{{ seconds | formatTime }}</b></div>
+        <div *ngIf="info.started" class="points">
+            <div>Puntos: <b>{{ info.points }}</b></div>
+            <div>Tiempo: <b>{{ info.seconds | formatTime }}</b></div>
         </div>
     </div>
     <app-spellgameword #gameWord (pointsChanged)="changePoints($event)"></app-spellgameword>
-    <button *ngIf="!started || gameWord.userWord" mat-raised-button (click)="btnClick(gameWord)">
-        {{ started ? (!gameWord.wordCompleted ? 'Dame una pista (-5 puntos)' : 'Siguiente palabra') : 'Jugar' }}
+    <button class="button" *ngIf="!info.started || gameWord.userWord" mat-raised-button (click)="btnClick(gameWord)">
+        {{ info.started ? (!gameWord.wordCompleted ? 'Dame una pista (-5 puntos)' : 'Siguiente palabra') : 'Jugar' }}
     </button>
 </div>

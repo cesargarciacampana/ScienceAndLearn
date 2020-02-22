@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild }
 import { ElementService } from '@chem-shared/services/element.service';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
-import { ElementCheckable } from './element.checkable';
+import { ElementCheckable } from '../../shared/models/element-checkable';
 import { StringHelper } from '@shared/helpers/string.helper';
 
 @Component({

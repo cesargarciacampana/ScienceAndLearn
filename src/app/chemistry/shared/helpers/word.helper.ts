@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ElementService } from '../services/element.service';
 import { ElementDTO } from '../dtos/element.dto';
 import { StringHelper } from '@shared/helpers/string.helper';
-import { WordPart } from '../models/word.part';
+import { WordPart } from '../models/word-part';
 import { Word } from '../models/word';
 
 @Injectable({providedIn: 'root'})
