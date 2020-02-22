@@ -1,7 +1,13 @@
 import { Word } from './word';
 
+export enum Difficulty{
+    Easy = 0,
+    Normal = 1
+}
+
 export class SpellGameInfo{
 
+    difficulty = Difficulty.Easy;
     started = false;
     finished = false;
     points = 0;

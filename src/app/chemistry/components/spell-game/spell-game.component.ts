@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SpellGameWordComponent } from '../spell-game-word/spell-game-word.component';
-import { SpellGameInfo } from '../../shared/models/spell-game-info';
+import { SpellGameInfo, Difficulty } from '../../shared/models/spell-game-info';
 import { Observable } from 'rxjs';
+import { MatBottomSheet } from '@angular/material';
+import { SpellGameOptionsComponent } from '@chem/spell-game-options/spell-game-options.component';
 
 @Component({
   selector: 'app-spellgame',
@@ -14,7 +16,10 @@ export class SpellGameComponent implements OnInit {
   current = 0;
   maxWords = 5;
 
+  Difficulty: any = Difficulty;
+
   constructor (
+    private bottomSheet: MatBottomSheet
   ) { }
 
   @ViewChild(SpellGameWordComponent, { static: true }) gameWordComponent: SpellGameWordComponent;
@@ -44,9 +49,16 @@ export class SpellGameComponent implements OnInit {
   }
 
   private newGame(){
-    this.newWord(true);
-    this.info.started = true;
-    this.current = 1;
+    let data = { level: null };
+    this.bottomSheet.open(SpellGameOptionsComponent, { data: data} )
+    .afterDismissed().subscribe(() => {
+      if (data.level != null){
+        this.info.difficulty = data.level;
+        this.newWord(true);
+        this.info.started = true;
+        this.current = 1;
+        }
+    });
   }
 
   private newWord(newGame: boolean){

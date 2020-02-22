@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
-  MatAutocompleteModule, MatChipsModule, MatSnackBarModule, MatProgressSpinnerModule
+  MatAutocompleteModule, MatChipsModule, MatSnackBarModule, MatProgressSpinnerModule,
+  MatBottomSheetModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +21,7 @@ import { IndexComponent } from './main/components/index/index.component';
 import { CalculationComponent } from './mathematics/components/calculation/calculation.component';
 import { CalculationGameComponent } from './mathematics/components/calculation-game/calculation-game.component';
 import { FormatTimePipe } from '@shared/pipes/format-time.pipe';
+import { SpellGameOptionsComponent } from './chemistry/components/spell-game-options/spell-game-options.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { FormatTimePipe } from '@shared/pipes/format-time.pipe';
     IndexComponent,
     CalculationComponent,
     CalculationGameComponent,
-    FormatTimePipe
+    FormatTimePipe,
+    SpellGameOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,11 @@ import { FormatTimePipe } from '@shared/pipes/format-time.pipe';
     MatAutocompleteModule,
     MatChipsModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatBottomSheetModule
+  ],
+  entryComponents: [
+    SpellGameOptionsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

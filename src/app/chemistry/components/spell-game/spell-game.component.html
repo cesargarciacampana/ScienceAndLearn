@@ -5,6 +5,7 @@
             <div>Puntos: <b>{{ info.points }}</b></div>
             <div>Tiempo: <b>{{ info.seconds | formatTime }}</b></div>
             <div>Palabra <b>{{ current }}</b> de <b>{{ maxWords}}</b></div>
+            <div>Nivel <b>{{ info.difficulty == Difficulty.Normal ? 'Normal' : 'Fácil'}}</b></div>
         </div>
     </div>
     <app-spellgameword #gameWord (pointsChanged)="changePoints($event)" (completed)="wordCompleted()"></app-spellgameword>
