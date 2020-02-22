@@ -6,11 +6,11 @@ import { ElementCheckable } from './element.checkable';
 import { StringHelper } from '@shared/helpers/string.helper';
 
 @Component({
-  selector: 'app-elements',
-  templateUrl: './elements.component.html',
-  styleUrls: ['./elements.component.css']
+  selector: 'app-elementselector',
+  templateUrl: './element-selector.component.html',
+  styleUrls: ['./element-selector.component.css']
 })
-export class ElementsComponent implements OnInit {
+export class ElementSelectorComponent implements OnInit {
 
   private _sortedElements : ElementCheckable[];
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameWordComponent } from './game-word.component';
+import { ElementSelectorComponent } from './element-selector.component';
 
-describe('Game.WordComponent', () => {
-  let component: GameWordComponent;
-  let fixture: ComponentFixture<GameWordComponent>;
+describe('ElementSelectorComponent', () => {
+  let component: ElementSelectorComponent;
+  let fixture: ComponentFixture<ElementSelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameWordComponent ]
+      declarations: [ ElementSelectorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameWordComponent);
+    fixture = TestBed.createComponent(ElementSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

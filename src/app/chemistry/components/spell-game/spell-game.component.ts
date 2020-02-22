@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { GameWordComponent } from '../game.word/game-word.component';
+import { SpellGameWordComponent } from '../spell-game-word/spell-game-word.component';
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  selector: 'app-spellgame',
+  templateUrl: './spell-game.component.html',
+  styleUrls: ['./spell-game.component.css']
 })
-export class GameComponent implements OnInit {
+export class SpellGameComponent implements OnInit {
 
   started = false;
   points = 0;
@@ -15,7 +15,7 @@ export class GameComponent implements OnInit {
   constructor (
   ) { }
 
-  @ViewChild(GameWordComponent, { static: false }) gameWordComponent: GameWordComponent;
+  @ViewChild(SpellGameWordComponent, { static: false }) gameWordComponent: SpellGameWordComponent;
 
   ngOnInit() {
   }
@@ -23,7 +23,7 @@ export class GameComponent implements OnInit {
   ngAfterViewInit() {
   }
 
-  btnClick(gameWord: GameWordComponent){
+  btnClick(gameWord: SpellGameWordComponent){
     const started = this.started;
     if (started && !gameWord.wordCompleted){
       gameWord.clue();

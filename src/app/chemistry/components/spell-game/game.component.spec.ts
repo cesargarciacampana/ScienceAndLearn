@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameComponent } from './game.component';
+import { GameComponent } from './spell-game.component';
 
 describe('GameComponent', () => {
   let component: GameComponent;

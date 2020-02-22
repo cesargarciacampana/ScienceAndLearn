@@ -1,22 +1,22 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { WordPart } from '@chem-shared/models/word.part';
-import { ElementCheckable } from '../elements/element.checkable';
+import { ElementCheckable } from '../element-selector/element.checkable';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { Word } from '@chem-shared/models/word';
 import { WordService } from '@chem-shared/services/word.service';
 import { WordHelper } from '@chem-shared/helpers/word.helper';
-import { ElementsComponent } from '../elements/elements.component';
+import { ElementSelectorComponent } from '../element-selector/element-selector.component';
 import { StringHelper } from '@shared/helpers/string.helper';
 import { MatSnackBar } from '@angular/material';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-gameword',
-  templateUrl: './game-word.component.html',
-  styleUrls: ['./game-word.component.css']
+  selector: 'app-spellgameword',
+  templateUrl: './spell-game-word.component.html',
+  styleUrls: ['./spell-game-word.component.css']
 })
-export class GameWordComponent implements OnInit {
+export class SpellGameWordComponent implements OnInit {
 
   word : string;
   private cleanWord : string;
@@ -33,7 +33,7 @@ export class GameWordComponent implements OnInit {
 
   @Output() pointsChanged = new EventEmitter<number>();
 
-  @ViewChild(ElementsComponent, { static: false }) elementsComponent: ElementsComponent;
+  @ViewChild(ElementSelectorComponent, { static: false }) elementsComponent: ElementSelectorComponent;
 
   constructor(
     private wordService : WordService,

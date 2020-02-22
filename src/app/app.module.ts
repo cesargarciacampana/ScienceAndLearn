@@ -8,14 +8,14 @@ import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GameComponent } from '@chem/game/game.component';
+import { SpellGameComponent } from '@chem/spell-game/spell-game.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ResolutorComponent } from '@chem/resolutor/resolutor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from '@main/menu/menu.component';
 import { WordComponent } from '@chem/word/word.component';
-import { ElementsComponent } from '@chem/elements/elements.component';
-import { GameWordComponent } from '@chem/game.word/game-word.component';
+import { ElementSelectorComponent } from '@chem/element-selector/element-selector.component';
+import { SpellGameWordComponent } from '@chem/spell-game-word/spell-game-word.component';
 import { IndexComponent } from './main/components/index/index.component';
 import { CalculationComponent } from './mathematics/components/calculation/calculation.component';
 import { CalculationGameComponent } from './mathematics/components/calculation-game/calculation-game.component';
@@ -24,12 +24,12 @@ import { FormatTimePipe } from '@shared/pipes/format-time.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent,
+    SpellGameComponent,
     ResolutorComponent,
     MenuComponent,
     WordComponent,
-    ElementsComponent,
-    GameWordComponent,
+    ElementSelectorComponent,
+    SpellGameWordComponent,
     IndexComponent,
     CalculationComponent,
     CalculationGameComponent,
