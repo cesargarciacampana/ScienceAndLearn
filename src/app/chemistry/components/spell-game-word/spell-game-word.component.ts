@@ -23,11 +23,12 @@ export class SpellGameWordComponent implements OnInit {
   userWord : Word;
   wordCompleted: boolean;
   wordPoints : number;
-  private posibleElements : string[];
+  private possibleElements : string[];
 
   private readonly emptyPart = new WordPart(null, '_');
   private readonly missingPoints = -5;
   private readonly matchingPoints = 20;
+  private readonly minPossibleElements = 3;
 
   started = false;
 
@@ -65,9 +66,9 @@ export class SpellGameWordComponent implements OnInit {
 
   clue(){
     let elements = this.elementsComponent.sortedElements;
-    for(let i = 0; i < this.posibleElements.length; i++){
+    for(let i = 0; i < this.possibleElements.length; i++){
       for (let j = 0; j < elements.length; j++){
-        if (elements[j].element.symbol.toLowerCase() == this.posibleElements[i]){
+        if (elements[j].element.symbol.toLowerCase() == this.possibleElements[i]){
           if (!elements[j].checked && this.elementSelected(elements[j], true))
             return;
           else
@@ -83,9 +84,15 @@ export class SpellGameWordComponent implements OnInit {
           this.wordCompleted = false;
           this.word = word;
           this.cleanWord = StringHelper.removeAccents(word);
+          let possibleElements = this.calculatePossibleElements(this.cleanWord);
+
+          if (possibleElements.length < this.minPossibleElements){
+            return this.generateWord();
+          }
+
           this.userWord = new Word();
           this.wordPoints = 0;
-          this.calculatePosibleElements();
+          this.possibleElements = possibleElements;
           this.calculateEmptyParts();
           if (this.elementsComponent)
             this.elementsComponent.reset();
@@ -124,7 +131,7 @@ export class SpellGameWordComponent implements OnInit {
     }
     else{
       let lowerSymbol = element.symbol.toLowerCase();
-      if (this.posibleElements.includes(lowerSymbol)){
+      if (this.possibleElements.includes(lowerSymbol)){
         let parts = this.userWord.parts;
         for (let i=0; i < parts.length; i++){
           if (!this.isDoubleLetter(element)){
@@ -177,23 +184,24 @@ export class SpellGameWordComponent implements OnInit {
       let canBeDouble = i < this.word.length - 1 && !this.isElementPart(this.userWord.parts[i+1]);
       let double = canBeDouble ? this.cleanWord[i] + this.cleanWord[i+1] : null;
 
-      if (this.posibleElements.includes(single) || (canBeDouble && this.posibleElements.includes(double)))
+      if (this.possibleElements.includes(single) || (canBeDouble && this.possibleElements.includes(double)))
         this.userWord.parts[i] = this.emptyPart;
       else if (!ignoreSingleLetter.includes(i))
         this.userWord.parts[i] = new WordPart(null, this.word[i]);
 
-      if (canBeDouble && this.posibleElements.includes(double)){
+      if (canBeDouble && this.possibleElements.includes(double)){
         this.userWord.parts[i+1] = this.emptyPart;
         ignoreSingleLetter.push(i+1);
       }
     }
   }
 
-  private calculatePosibleElements(){
-    let list = this.wordHelper.getPosibleElements(this.word);
-    this.posibleElements = [];
+  private calculatePossibleElements(word: string){
+    let list = this.wordHelper.getPossibleElements(word);
+    let possibleElements = [];
     for (let i = 0; i < list.length; i++)
-      this.posibleElements.push(list[i].symbol.toLowerCase());
+      possibleElements.push(list[i].symbol.toLowerCase());
+    return possibleElements;
   }
 
   private changePoints(event: ElementCheckable, points: number, valid: boolean){

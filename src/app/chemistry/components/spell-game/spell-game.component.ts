@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SpellGameWordComponent } from '../spell-game-word/spell-game-word.component';
 import { SpellGameInfo } from '../../shared/models/spell-game-info';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-spellgame',
@@ -33,17 +34,26 @@ export class SpellGameComponent implements OnInit {
       if (this.info.finished)
         this.info = new SpellGameInfo();
 
-      const started = this.info.started;
-      this.gameWordComponent.newWord().subscribe(dummy => {
-      if (dummy && !started)
-        this.checkTime();
-      });
-      if (!started){
-        this.info.started = true;
-        this.current = 0;
-      }
-      this.current++;
+      if (!this.info.started)
+        this.newGame();
+      else{
+        this.newWord(false);
+        this.current++;
+      }   
     }
+  }
+
+  private newGame(){
+    this.newWord(true);
+    this.info.started = true;
+    this.current = 1;
+  }
+
+  private newWord(newGame: boolean){
+    return this.gameWordComponent.newWord().subscribe(dummy => {
+      if (dummy && newGame)
+        this.checkTime();
+    });
   }
 
   private checkTime(){

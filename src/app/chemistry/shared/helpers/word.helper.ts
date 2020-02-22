@@ -64,7 +64,7 @@ export class WordHelper {
         return null;
       }
 
-      getPosibleElements(word: string) : ElementDTO[]{
+      getPossibleElements(word: string) : ElementDTO[]{
         let list : ElementDTO[] = [];
         for(let i = 0; i < word.length; i++) {
           let symbol = '';
