@@ -13,8 +13,9 @@ export class SpellGameInfo{
     statistics(clue: boolean) : number{
         let result = 0;
         for(let i = 0; i < this.words.length; i++){
-            for(let j = 0; j < this.words.length; j++){
-                let part = this.words[i].parts[j];
+            let word = this.words[i];
+            for(let j = 0; j < word.parts.length; j++){
+                let part = word.parts[j];
                 if (part.element && part.isFromClue == clue)
                     result++;
             }
