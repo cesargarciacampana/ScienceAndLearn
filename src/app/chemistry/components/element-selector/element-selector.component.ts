@@ -13,8 +13,10 @@ import { StringHelper } from '@shared/helpers/string.helper';
 export class ElementSelectorComponent implements OnInit {
 
   private _sortedElements : ElementCheckable[];
+  private elementsCachedFor = null;
 
   @Input() readonly = false;
+  @Input() availableElements : string[];
 
   @Output() valueChanged = new EventEmitter<ElementCheckable>();
 
@@ -38,13 +40,18 @@ export class ElementSelectorComponent implements OnInit {
   }
 
   get sortedElements() {
-    if (!this._sortedElements && this.elementService.elements)
+    if ((!this._sortedElements || this.elementsCachedFor != this.availableElements)
+      && this.elementService.elements)
     {
         let temp = Array.from(this.elementService.elements);
         temp.sort(this.compare);
         this._sortedElements = [];
-        for(let i = 0; i < temp.length; i++)
-          this._sortedElements.push(new ElementCheckable(temp[i]));
+        for(let i = 0; i < temp.length; i++){
+          if (!this.availableElements || this.availableElements.includes(temp[i].symbol))
+            this._sortedElements.push(new ElementCheckable(temp[i]));
+        }
+
+        this.elementsCachedFor = this.availableElements;
     }
       
     return this._sortedElements;

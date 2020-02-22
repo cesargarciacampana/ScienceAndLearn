@@ -24,6 +24,7 @@ export class SpellGameWordComponent implements OnInit {
   wordCompleted: boolean;
   wordPoints : number;
   private possibleElements : string[];
+  availableElements: string[];
 
   private readonly emptyPart = new WordPart(null, '_');
   private readonly missingPoints = -5;
@@ -46,7 +47,8 @@ export class SpellGameWordComponent implements OnInit {
   ngOnInit() {
   }
 
-  newWord() : Observable<boolean> {
+  newWord(availableElements: string[]) : Observable<boolean> {
+    this.availableElements = availableElements;
     this.userWord = null;
     this.started = true;
     if (this.word && !this.wordCompleted)
@@ -199,8 +201,10 @@ export class SpellGameWordComponent implements OnInit {
   private calculatePossibleElements(word: string){
     let list = this.wordHelper.getPossibleElements(word);
     let possibleElements = [];
-    for (let i = 0; i < list.length; i++)
-      possibleElements.push(list[i].symbol.toLowerCase());
+    for (let i = 0; i < list.length; i++){
+      if (this.availableElements == null || this.availableElements.includes(list[i].symbol))
+        possibleElements.push(list[i].symbol.toLowerCase());
+    }
     return possibleElements;
   }
 

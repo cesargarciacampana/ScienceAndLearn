@@ -18,6 +18,11 @@ export class SpellGameComponent implements OnInit {
 
   Difficulty: any = Difficulty;
 
+  private availableElementsByLevel = [
+    [ 'O', 'C', 'N', 'I', 'H', 'S', 'Al', 'Au', 'Ag'], //Easy
+    null //Normal (all elements)
+  ]
+
   constructor (
     private bottomSheet: MatBottomSheet
   ) { }
@@ -62,7 +67,9 @@ export class SpellGameComponent implements OnInit {
   }
 
   private newWord(newGame: boolean){
-    return this.gameWordComponent.newWord().subscribe(dummy => {
+    return this.gameWordComponent.newWord(
+        this.availableElementsByLevel[this.info.difficulty]
+      ).subscribe(dummy => {
       if (dummy && newGame)
         this.checkTime();
     });
