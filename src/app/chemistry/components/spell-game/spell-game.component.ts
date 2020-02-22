@@ -10,11 +10,13 @@ import { SpellGameInfo } from '../../shared/models/spell-game-info';
 export class SpellGameComponent implements OnInit {
 
   info: SpellGameInfo;
+  current = 0;
+  maxWords = 5;
 
   constructor (
   ) { }
 
-  @ViewChild(SpellGameWordComponent, { static: false }) gameWordComponent: SpellGameWordComponent;
+  @ViewChild(SpellGameWordComponent, { static: true }) gameWordComponent: SpellGameWordComponent;
 
   ngOnInit() {
     this.info = new SpellGameInfo()
@@ -23,22 +25,31 @@ export class SpellGameComponent implements OnInit {
   ngAfterViewInit() {
   }
 
-  btnClick(gameWord: SpellGameWordComponent){
-    const started = this.info.started;
-    if (started && !gameWord.wordCompleted){
-      gameWord.clue();
+  btnClick(){
+    if (this.info.started && !this.gameWordComponent.wordCompleted){
+      this.gameWordComponent.clue();
     }
     else{
-      this.info = new SpellGameInfo();
-      gameWord.newWord().subscribe(dummy => {
-        if (dummy && !started)
-          this.checkTime();
+      if (this.info.finished)
+        this.info = new SpellGameInfo();
+
+      const started = this.info.started;
+      this.gameWordComponent.newWord().subscribe(dummy => {
+      if (dummy && !started)
+        this.checkTime();
       });
-      this.info.started = true;
+      if (!started){
+        this.info.started = true;
+        this.current = 0;
+      }
+      this.current++;
     }
   }
 
   private checkTime(){
+    if (this.info.finished)
+      return;
+
     const that = this;
     setTimeout(function(){
       {
@@ -50,5 +61,12 @@ export class SpellGameComponent implements OnInit {
 
   changePoints(points: number){
     this.info.points += points;
+  }
+
+  wordCompleted(){
+    this.info.words.push(this.gameWordComponent.userWord);
+
+    if (this.current >= this.maxWords)
+      this.info.finished = true;
   }
 }

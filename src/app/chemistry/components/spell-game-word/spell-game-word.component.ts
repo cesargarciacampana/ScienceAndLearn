@@ -32,6 +32,7 @@ export class SpellGameWordComponent implements OnInit {
   started = false;
 
   @Output() pointsChanged = new EventEmitter<number>();
+  @Output() completed = new EventEmitter<any>();
 
   @ViewChild(ElementSelectorComponent, { static: false }) elementsComponent: ElementSelectorComponent;
 
@@ -45,6 +46,7 @@ export class SpellGameWordComponent implements OnInit {
   }
 
   newWord() : Observable<boolean> {
+    this.userWord = null;
     this.started = true;
     if (this.word && !this.wordCompleted)
     {
@@ -127,7 +129,7 @@ export class SpellGameWordComponent implements OnInit {
         for (let i=0; i < parts.length; i++){
           if (!this.isDoubleLetter(element)){
             if (!this.isElementPart(parts[i]) && this.cleanWord[i] == lowerSymbol){      
-              parts[i] = new WordPart(element);
+              parts[i] = new WordPart(element, null, isClue);
               this.changePoints(event, isClue ? this.missingPoints : this.matchingPoints, true);
               if (isClue){
                   event.checked = true;
@@ -140,7 +142,7 @@ export class SpellGameWordComponent implements OnInit {
               && this.cleanWord[i] == lowerSymbol[0]
               && this.cleanWord[i + 1] == lowerSymbol[1]){
                 parts[i+1] = new WordPart(null, '');
-                parts[i] = new WordPart(element);
+                parts[i] = new WordPart(element, null, isClue);
                 this.changePoints(event, isClue ? this.missingPoints : this.matchingPoints, true);
                 if (isClue){
                   event.checked = true;
@@ -161,7 +163,7 @@ export class SpellGameWordComponent implements OnInit {
     if (event.valid)
       this.checkIfCompleted();
 
-      return event.valid;
+    return event.valid;
   }
 
   private calculateEmptyParts(){
@@ -216,5 +218,6 @@ export class SpellGameWordComponent implements OnInit {
       return;
 
     this.wordCompleted = true;
+    this.completed.emit();
   }
 }
