@@ -16,7 +16,7 @@
         Pistas utilizadas: <b>{{ info.statistics(true) }}</b><br/>
         Tiempo invertido: <b>{{ info.seconds | formatTime }}</b><br/>
     </div>
-    <button class="button" *ngIf="!info.started || gameWord.userWord" mat-raised-button (click)="btnClick(gameWord)">
+    <button class="button" *ngIf="!info.started || gameWord.userWord" mat-raised-button (click)="btnClick()">
         {{ info.started && !info.finished 
             ? (!gameWord.wordCompleted 
                 ? 'Dame una pista (-5 puntos)' 
