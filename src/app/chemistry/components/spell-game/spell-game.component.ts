@@ -19,7 +19,7 @@ export class SpellGameComponent implements OnInit {
   Difficulty: any = Difficulty;
 
   private availableElementsByLevel = [
-    [ 'O', 'C', 'N', 'I', 'H', 'S', 'Al', 'Au', 'Ag'], //Easy
+    [ 'O', 'C', 'H', 'N', 'Ca', 'P', 'K', 'S', 'Na', 'Cl', 'Fe', 'Al', 'Au', 'Ag' ], //Easy
     null //Normal (all elements)
   ]
 
@@ -41,10 +41,7 @@ export class SpellGameComponent implements OnInit {
       this.gameWordComponent.clue();
     }
     else{
-      if (this.info.finished)
-        this.info = new SpellGameInfo();
-
-      if (!this.info.started)
+      if (!this.info.started || this.info.finished)
         this.newGame();
       else{
         this.newWord(false);
@@ -58,6 +55,9 @@ export class SpellGameComponent implements OnInit {
     this.bottomSheet.open(SpellGameOptionsComponent, { data: data} )
     .afterDismissed().subscribe(() => {
       if (data.level != null){
+        if (this.info.finished)
+          this.info = new SpellGameInfo();
+
         this.info.difficulty = data.level;
         this.newWord(true);
         this.info.started = true;

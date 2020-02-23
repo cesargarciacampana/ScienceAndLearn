@@ -28,7 +28,8 @@ export class SpellGameWordComponent implements OnInit {
 
   private readonly emptyPart = new WordPart(null, '_');
   private readonly missingPoints = -5;
-  private readonly matchingPoints = 20;
+  private readonly matchingPointsSingle = 20;
+  private readonly matchingPointsDouble = 50;
   private readonly minPossibleElements = 3;
 
   started = false;
@@ -124,9 +125,10 @@ export class SpellGameWordComponent implements OnInit {
         for (let i=0; i < parts.length; i++){
           if (parts[i].isElement && parts[i].element.symbol == element.symbol){
             parts[i] = this.emptyPart;
-            if (this.isDoubleLetter(element))
+            let isDouble = this.isDoubleLetter(element);
+            if (isDouble)
               parts[i+1] = this.emptyPart;
-            this.changePoints(event, -1 * this.matchingPoints, false);
+            this.changePoints(event, -1 * (isDouble ? this.matchingPointsDouble : this.matchingPointsSingle), false);
           }
         }
       }
@@ -139,7 +141,7 @@ export class SpellGameWordComponent implements OnInit {
           if (!this.isDoubleLetter(element)){
             if (!this.isElementPart(parts[i]) && this.cleanWord[i] == lowerSymbol){      
               parts[i] = new WordPart(element, null, isClue);
-              this.changePoints(event, isClue ? this.missingPoints : this.matchingPoints, true);
+              this.changePoints(event, isClue ? this.missingPoints : this.matchingPointsSingle, true);
               if (isClue){
                   event.checked = true;
                   event.isClue = true;
@@ -152,7 +154,7 @@ export class SpellGameWordComponent implements OnInit {
               && this.cleanWord[i + 1] == lowerSymbol[1]){
                 parts[i+1] = new WordPart(null, '');
                 parts[i] = new WordPart(element, null, isClue);
-                this.changePoints(event, isClue ? this.missingPoints : this.matchingPoints, true);
+                this.changePoints(event, isClue ? this.missingPoints : this.matchingPointsDouble, true);
                 if (isClue){
                   event.checked = true;
                   event.isClue = true;

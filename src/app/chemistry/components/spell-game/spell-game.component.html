@@ -1,16 +1,18 @@
 <div class="game">
     <div>
         <h3>Crea palabras usando la tabla periódica</h3>
+        <p>Completa la palabra usando los símbolos de los elementos de la tabla periódica. ¡Los símbolos de 2 letras dan más puntos!</p>
         <div *ngIf="info.started && !info.finished" class="points">
             <div>Puntos: <b>{{ info.points }}</b></div>
             <div>Tiempo: <b>{{ info.seconds | formatTime }}</b></div>
             <div>Palabra <b>{{ current }}</b> de <b>{{ maxWords}}</b></div>
-            <div>Nivel <b>{{ info.difficulty == Difficulty.Normal ? 'Normal' : 'Fácil'}}</b></div>
+            <div>Dificultad: <b>{{ info.difficulty == Difficulty.Normal ? 'Normal' : 'Fácil'}}</b></div>
         </div>
     </div>
     <app-spellgameword #gameWord (pointsChanged)="changePoints($event)" (completed)="wordCompleted()"></app-spellgameword>
     <div *ngIf="info.finished">
         <h1>Juego finalizado</h1>
+        Dificultad: <b>{{ info.difficulty == Difficulty.Normal ? 'Normal' : 'Fácil'}}</b><br/>
         Total palabras: <b>{{ info.words.length }}</b><br/>
         Total puntos: <b>{{ info.points }}</b><br/>
         Elementos acertados: <b>{{ info.statistics(false) }}</b><br/>

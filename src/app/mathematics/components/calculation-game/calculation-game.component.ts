@@ -22,12 +22,30 @@ export class CalculationGameComponent implements OnInit {
 
   private defaultOperations = FormulaHelper.operations;
   private levelOptions = [
-    new FormulaOptions(2, 1, 9, this.defaultOperations),
-    new FormulaOptions(3, 1, 9, this.defaultOperations),
-    new FormulaOptions(4, 1, 9, this.defaultOperations),
-    new FormulaOptions(2, 5, 15, this.defaultOperations),
-    new FormulaOptions(3, 5, 15, this.defaultOperations),
-    new FormulaOptions(4, 5, 15, this.defaultOperations),
+    new FormulaOptions(2, 1, 9, [ '+', '-' ]),
+    new FormulaOptions(2, 1, 6, this.defaultOperations),
+    new FormulaOptions(2, 2, 9, this.defaultOperations),
+    new FormulaOptions(3, 1, 6, this.defaultOperations),
+    new FormulaOptions(3, 2, 9, this.defaultOperations),
+    new FormulaOptions(4, 1, 6, this.defaultOperations),
+    new FormulaOptions(3, 4, 11, this.defaultOperations),
+    new FormulaOptions(3, 6, 13, this.defaultOperations),
+    new FormulaOptions(3, 8, 15, this.defaultOperations),
+    new FormulaOptions(3, 11, 19, this.defaultOperations),
+    new FormulaOptions(4, 8, 15, this.defaultOperations),
+    new FormulaOptions(4, 11, 19, this.defaultOperations),
+    new FormulaOptions(5, 8, 15, this.defaultOperations),
+    new FormulaOptions(5, 11, 19, this.defaultOperations),
+    new FormulaOptions(6, 8, 15, this.defaultOperations),
+    new FormulaOptions(6, 11, 19, this.defaultOperations),
+    new FormulaOptions(7, 8, 15, this.defaultOperations),
+    new FormulaOptions(7, 11, 19, this.defaultOperations),
+    new FormulaOptions(8, 8, 15, this.defaultOperations),
+    new FormulaOptions(8, 11, 19, this.defaultOperations),
+    new FormulaOptions(9, 8, 15, this.defaultOperations),
+    new FormulaOptions(9, 11, 19, this.defaultOperations),
+    new FormulaOptions(10, 8, 15, this.defaultOperations),
+    new FormulaOptions(10, 11, 19, this.defaultOperations)
   ];
 
   @ViewChild(CalculationComponent, {static:false}) calculation : CalculationComponent;
@@ -92,7 +110,7 @@ export class CalculationGameComponent implements OnInit {
     const that = this;
     setTimeout(function(){
       that.newFormula();
-    }, 1000);
+    }, 500);
   }
 
   private endGame(){
