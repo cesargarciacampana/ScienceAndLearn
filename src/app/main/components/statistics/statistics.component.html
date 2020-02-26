@@ -1,8 +1,9 @@
 <form>
-    <mat-form-field>
+    <mat-form-field class="selector">
     <mat-label>Selecciona el juego</mat-label>
     <mat-select (selectionChange)="loadStatistics()">
-        <mat-option value="spell">Crea palabras usando la tabla periódica</mat-option>
+        <mat-option value="spell0">Crea palabras usando la tabla periódica (Fácil)</mat-option>
+        <mat-option value="spell1">Crea palabras usando la tabla periódica (Normal)</mat-option>
         <mat-option value="calculation">Cálculo mental</mat-option>
     </mat-select>
     </mat-form-field>
