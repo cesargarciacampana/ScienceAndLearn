@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
   MatAutocompleteModule, MatChipsModule, MatSnackBarModule, MatProgressSpinnerModule,
-  MatBottomSheetModule
+  MatBottomSheetModule, MatSelectModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +26,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './main/components/login/login.component';
+import { StatisticsComponent } from './main/components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LoginComponent } from './main/components/login/login.component';
     CalculationGameComponent,
     FormatTimePipe,
     SpellGameOptionsComponent,
-    LoginComponent
+    LoginComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { LoginComponent } from './main/components/login/login.component';
     MatChipsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatSelectModule
   ],
   entryComponents: [
     SpellGameOptionsComponent

@@ -12,7 +12,8 @@ export class LoginComponent implements OnInit {
 
   saved = false;
 
-  @Input() gameInfo: any;
+  @Input() gamePoints: number;
+  @Input() gameName: string;
   @ViewChild(MatInput, { static: false}) name: MatInput;
 
   constructor(private firestore: AngularFirestore) { }
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
     if (!this.name.value)
       return;
 
-    let stats = {user:this.name.value, game: 'spell', info: this.gameInfo.points};
-    this.firestore.collection('statistics').add(stats)
+    let stats = {user: this.name.value, info: this.gamePoints};
+    this.firestore.collection(this.gameName + '-statistics').add(stats)
     .then(()=>
       {
         this.saved = true;

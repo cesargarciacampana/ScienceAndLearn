@@ -1,0 +1,12 @@
+<form>
+    <mat-form-field>
+    <mat-label>Selecciona el juego</mat-label>
+    <mat-select (selectionChange)="loadStatistics()">
+        <mat-option value="spell">Crea palabras usando la tabla periódica</mat-option>
+        <mat-option value="calculation">Cálculo mental</mat-option>
+    </mat-select>
+    </mat-form-field>
+    <div *ngFor="let stat of stats | async">
+        {{stat.user}} ({{ stat.info }})
+    </div>
+</form>
