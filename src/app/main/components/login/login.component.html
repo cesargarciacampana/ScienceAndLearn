@@ -1,0 +1,10 @@
+<form *ngIf="!saved; else success">
+    <div><b>¿Quieres guardar tu puntuación?</b></div>
+    <mat-form-field>
+        <input matInput required #name placeholder="Nombre" />
+    </mat-form-field>
+    <button type="button" mat-raised-button (click)="login()">Guardar</button>
+</form>
+<ng-template #success>
+    <b>Tu puntuación se ha guardado correctamente</b>
+</ng-template>

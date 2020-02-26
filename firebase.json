@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "PlayAndLearn",
+      "public": "dist/PlayAndLearn",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

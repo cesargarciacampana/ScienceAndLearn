@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "scienceandlearnapi": {
+      "hosting": {
+        "PlayAndLearn": [
+          "scienceandlearnapi"
+        ]
+      }
+    }
+  }
+}
