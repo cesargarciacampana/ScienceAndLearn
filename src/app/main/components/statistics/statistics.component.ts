@@ -21,6 +21,8 @@ export class StatisticsComponent implements OnInit {
   }
 
   loadStatistics(){
-    this.stats = this.firestore.collection(this.gameName.value + '-statistics').valueChanges();
+    this.stats = this.firestore
+      .collection(this.gameName.value + '-statistics', ref => ref.orderBy('points', 'desc'))
+      .valueChanges();
   }
 }

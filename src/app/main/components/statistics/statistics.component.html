@@ -6,7 +6,7 @@
         <mat-option value="calculation">Cálculo mental</mat-option>
     </mat-select>
     </mat-form-field>
-    <div *ngFor="let stat of stats | async">
-        {{stat.user}} ({{ stat.info }})
+    <div *ngFor="let stat of stats | async; let i = index">
+        <b>{{ i + 1 }}.-</b> {{stat.user}} ({{ stat.points }})
     </div>
 </form>
