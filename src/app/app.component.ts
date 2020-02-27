@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Juega y aprende';
+  title = 'Ciencia y aprende';
   
   public constructor(
     private titleService: Title
