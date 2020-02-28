@@ -1,50 +1,34 @@
 <form>
-    <mat-form-field class="selector">
-    <mat-label>Selecciona el juego</mat-label>
-    <mat-select (selectionChange)="loadStatistics()">
-        <mat-option value="spell0">Crea palabras usando la tabla periódica (Fácil)</mat-option>
-        <mat-option value="spell1">Crea palabras usando la tabla periódica (Normal)</mat-option>
-        <mat-option value="calculation">Cálculo mental</mat-option>
-    </mat-select>
-    </mat-form-field>
-
-    <div *ngIf="stats | async;">
-        <table mat-table [dataSource]="stats">
-            <ng-container matColumnDef="index">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let i = index;"> {{ i + 1 }} </td>
-            </ng-container>
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let stat"> {{stat.user}} </td>
-            </ng-container>
-            <ng-container matColumnDef="points">
-                <th mat-header-cell *matHeaderCellDef> Puntos </th>
-                <td mat-cell *matCellDef="let stat"> {{stat.points}} </td>
-            </ng-container>
-            <ng-container matColumnDef="time">
-                <th mat-header-cell *matHeaderCellDef> Tiempo </th>
-                <td mat-cell *matCellDef="let stat"> {{stat.info.seconds | formatTime}} </td>
-            </ng-container>
-            <ng-container matColumnDef="clues">
-                <th mat-header-cell *matHeaderCellDef> Pistas usadas </th>
-                <td mat-cell *matCellDef="let stat"> {{ countClues(stat.info.words)}} </td>
-            </ng-container>
-            <ng-container matColumnDef="level">
-                <th mat-header-cell *matHeaderCellDef> Nivel </th>
-                <td mat-cell *matCellDef="let stat"> {{stat.info.level}} </td>
-            </ng-container>
-            <ng-container matColumnDef="success">
-                <th mat-header-cell *matHeaderCellDef> Aciertos </th>
-                <td mat-cell *matCellDef="let stat"> {{stat.info.numSuccess}} </td>
-            </ng-container>
-            <ng-container matColumnDef="fails">
-                <th mat-header-cell *matHeaderCellDef> Fallos </th>
-                <td mat-cell *matCellDef="let stat"> {{stat.info.numFails}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
-        </table>
-    </div>
+    <mat-accordion>
+        <mat-expansion-panel (opened)="loadStatistics('spell0')">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Crea palabras usando la tabla periódica (Fácil)
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            <app-statistics-table [stats]="stats['spell0']" [columns]="spellColumns"></app-statistics-table>
+          </ng-template>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="loadStatistics('spell1')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Crea palabras usando la tabla periódica (Normal)
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <app-statistics-table [stats]="stats['spell1']" [columns]="spellColumns"></app-statistics-table>
+            </ng-template>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="loadStatistics('calculation')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Cálculo mental
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <app-statistics-table [stats]="stats['calculation']" [columns]="calculationColumns"></app-statistics-table>
+            </ng-template>
+        </mat-expansion-panel>
+    </mat-accordion>
 </form>

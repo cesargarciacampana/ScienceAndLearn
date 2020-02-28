@@ -12,19 +12,21 @@ import { map } from 'rxjs/operators';
 })
 export class StatisticsComponent implements OnInit {
 
-  stats: Observable<any>;
-  columnsToDisplay = [];
-
-  @ViewChild(MatSelect, {static:false}) gameName: MatSelect;
+  stats = {};
+  spellColumns = ['index', 'name', 'points', 'time', 'clues'];
+  calculationColumns = ['index', 'name', 'points', 'level', 'success', 'fails'];
 
   constructor(private firestore: AngularFirestore) { }
 
   ngOnInit() {
   }
 
-  loadStatistics(){
-    this.stats = this.firestore
-      .collection(this.gameName.value + '-statistics', ref => ref.orderBy('points', 'desc'))
+  loadStatistics(name: string){
+    if (this.stats[name])
+      return;
+
+    this.stats[name] = this.firestore
+      .collection(name + '-statistics', ref => ref.orderBy('points', 'desc'))
       .valueChanges().pipe(
         map((data) => {
           for(let i = 0; i < data.length; i++)
@@ -32,27 +34,5 @@ export class StatisticsComponent implements OnInit {
           return data;
         }
       ));
-
-    switch(this.gameName.value){
-      case 'spell0':
-      case 'spell1':
-        this.columnsToDisplay = ['index', 'name', 'points', 'time', 'clues'];
-        break;
-      case 'calculation':
-        this.columnsToDisplay = ['index', 'name', 'points', 'level', 'success', 'fails'];
-        break;
-    }
-  }
-
-  countClues(words: any[]){
-    let count = 0;
-    for (let i = 0; i < words.length; i++){
-      for (let j = 0; j < words[i]['parts'].length; j++){
-        let part = words[i]['parts'][j];
-        if(part['c'] == 1)
-          count++;
-      }
-    }
-    return count;
   }
 }
