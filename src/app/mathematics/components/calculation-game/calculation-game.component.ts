@@ -100,7 +100,7 @@ export class CalculationGameComponent implements OnInit {
     }
     this.info.formula.push(`${this.calculation.formula}=${result.value}(${result.correct ? 1 : 0})`);
 
-    if (this.info.numSuccess % 5 == 0 && this.info.level < this.levelOptions.length)
+    if ((this.info.numSuccess + this.info.numFails) % 5 == 0 && this.info.level < this.levelOptions.length)
       this.info.level++;
 
     const that = this;
