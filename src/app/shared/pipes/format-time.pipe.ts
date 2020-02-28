@@ -3,6 +3,9 @@ import { Pipe } from '@angular/core';
 @Pipe({name: 'formatTime'})
 export class FormatTimePipe {  
     transform(seconds: number){
+        if (!seconds)
+            return "00:00";
+        
         let s = seconds % 60;
         let ss = s.toString();
         if (s < 10) { ss = "0" + ss; }

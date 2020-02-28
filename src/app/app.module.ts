@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
   MatAutocompleteModule, MatChipsModule, MatSnackBarModule, MatProgressSpinnerModule,
-  MatBottomSheetModule, MatSelectModule
+  MatBottomSheetModule, MatSelectModule, MatTableModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -67,7 +67,8 @@ import { StatisticsComponent } from './main/components/statistics/statistics.com
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatBottomSheetModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   entryComponents: [
     SpellGameOptionsComponent
