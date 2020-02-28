@@ -27,10 +27,10 @@ export class WordHelper {
           if (i < word.length - 1)
             next = word[i + 1];
     
-          let element = this.findElement(current);
+          let element = this.elementService.findElement(current);
           let element2 = null;
           if (next)
-            element2 = this.findElement(current + next);
+            element2 = this.elementService.findElement(current + next);
     
           if (element2){
             let temp = prefix.clone();
@@ -39,8 +39,8 @@ export class WordHelper {
           }
 
           if (!element){
-            if (element2 && !this.findElement(next)){
-              if (i >= word.length - 2 || !this.findElement(next + word[i + 2]))
+            if (element2 && !this.elementService.findElement(next)){
+              if (i >= word.length - 2 || !this.elementService.findElement(next + word[i + 2]))
                 return;
             }
             prefix.parts.push(new WordPart(null, current));
@@ -51,18 +51,6 @@ export class WordHelper {
         }
         list.push(prefix);
       }
-    
-      private findElement(symbol : string){
-        let elements = this.elementService.elements;
-        let lower = symbol.toLowerCase();
-        let normalized = StringHelper.removeAccents(lower);
-        for(let i = 0; i < elements.length; i++){
-          let current = elements[i];
-          if (current.symbol.toLowerCase() == normalized)
-            return current;
-        }
-        return null;
-      }
 
       getPossibleElements(word: string) : ElementDTO[]{
         let list : ElementDTO[] = [];
@@ -70,7 +58,7 @@ export class WordHelper {
           let symbol = '';
           for (let j = 0; j <= WordHelper.MAX_SYMBOL_LENGTH; j++){
             symbol += word[i+j];
-            let element = this.findElement(symbol);
+            let element = this.elementService.findElement(symbol);
             if (element && !list.includes(element))
               list.push(element);
           }

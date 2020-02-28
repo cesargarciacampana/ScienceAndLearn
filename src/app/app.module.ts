@@ -28,6 +28,7 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './main/components/login/login.component';
 import { StatisticsComponent } from './main/components/statistics/statistics.component';
 import { StatisticsTableComponent } from './main/components/statistics-table/statistics-table.component';
+import { PairGameComponent } from './chemistry/components/pair-game/pair-game.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { StatisticsTableComponent } from './main/components/statistics-table/sta
     SpellGameOptionsComponent,
     LoginComponent,
     StatisticsComponent,
-    StatisticsTableComponent
+    StatisticsTableComponent,
+    PairGameComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<h3>Encuentra la pareja</h3>
+
+<div *ngFor="let cardRow of rows" class="clear" [style.width]="nCols*87 + 'px'">
+    <div *ngFor="let card of cardRow"
+        class="card" [class.solved]="card.solved" [class.selected]="card.selected"
+         (click)="select(card)">
+        {{card.selected || card.solved ? card.text : ''}}
+    </div>
+</div>
