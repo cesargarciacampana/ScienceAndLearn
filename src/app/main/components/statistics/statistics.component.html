@@ -1,34 +1,33 @@
-<form>
-    <mat-accordion>
-        <mat-expansion-panel (opened)="loadStatistics('spell0')">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-                Crea palabras usando la tabla periódica (Fácil)
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <ng-template matExpansionPanelContent>
-            <app-statistics-table [stats]="stats['spell0']" [columns]="spellColumns"></app-statistics-table>
-          </ng-template>
-        </mat-expansion-panel>
-        <mat-expansion-panel (opened)="loadStatistics('spell1')">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                  Crea palabras usando la tabla periódica (Normal)
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ng-template matExpansionPanelContent>
-                <app-statistics-table [stats]="stats['spell1']" [columns]="spellColumns"></app-statistics-table>
-            </ng-template>
-        </mat-expansion-panel>
-        <mat-expansion-panel (opened)="loadStatistics('calculation')">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Cálculo mental
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ng-template matExpansionPanelContent>
-                <app-statistics-table [stats]="stats['calculation']" [columns]="calculationColumns"></app-statistics-table>
-            </ng-template>
-        </mat-expansion-panel>
-    </mat-accordion>
-</form>
+<h3>Clasificación por juego y nivel</h3>
+<mat-accordion>
+    <mat-expansion-panel (opened)="loadStatistics('spell0')">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Crea palabras usando la tabla periódica (Fácil)
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <app-statistics-table [stats]="stats['spell0']" [columns]="spellColumns"></app-statistics-table>
+      </ng-template>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="loadStatistics('spell1')">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              Crea palabras usando la tabla periódica (Normal)
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+            <app-statistics-table [stats]="stats['spell1']" [columns]="spellColumns"></app-statistics-table>
+        </ng-template>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="loadStatistics('calculation')">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cálculo mental
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+            <app-statistics-table [stats]="stats['calculation']" [columns]="calculationColumns"></app-statistics-table>
+        </ng-template>
+    </mat-expansion-panel>
+</mat-accordion>
