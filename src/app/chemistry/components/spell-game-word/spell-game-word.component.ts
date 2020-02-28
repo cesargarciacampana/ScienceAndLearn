@@ -93,7 +93,7 @@ export class SpellGameWordComponent implements OnInit {
             return this.generateWord();
           }
 
-          this.userWord = new Word();
+          this.userWord = new Word(word);
           this.wordPoints = 0;
           this.possibleElements = possibleElements;
           this.calculateEmptyParts();

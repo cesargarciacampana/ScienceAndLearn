@@ -22,7 +22,7 @@ export class ResolutorComponent implements OnInit {
     this.elements = this.elementService.elementsObservable;
   }
 
-  calculate(word: String){
+  calculate(word: string){
     if (word)
       this.solvedWords = this.wordHelper.calculateElements(word);
   }

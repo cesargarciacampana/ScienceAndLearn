@@ -83,6 +83,9 @@ export class SpellGameComponent implements OnInit {
     setTimeout(function(){
       {
         that.info.seconds += 1;
+        let substractPointsAfterSeconds = that.info.difficulty == Difficulty.Easy ? 5 : 2;
+        if (that.info.seconds > 0 && that.info.seconds % substractPointsAfterSeconds == 0)
+          that.info.points -= 1;
         that.checkTime();
       }
     }, 1000);

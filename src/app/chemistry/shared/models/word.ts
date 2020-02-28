@@ -1,9 +1,11 @@
 import { WordPart } from './word-part';
 
 export class Word{
+    original: string;
     parts : WordPart[] = [];
 
-    constructor(){
+    constructor(original: string){
+        this.original = original;
     }
 
     get isCompleteSolution(){
@@ -18,7 +20,7 @@ export class Word{
     }
 
     clone() : Word {
-        let copy = new Word();
+        let copy = new Word(this.original);
         copy.parts = Array.from(this.parts);
         return copy;
     }

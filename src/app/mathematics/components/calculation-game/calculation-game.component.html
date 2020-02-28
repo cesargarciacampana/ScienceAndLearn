@@ -2,19 +2,19 @@
     <h3>Calcula mentalmente el resultado de las operaciones</h3>
     <div>Consigue 5 segundos por cada acierto, ¡no te quedes sin tiempo!</div>
 </div>
-<div *ngIf="started">
-    <h3>Nivel {{ level }}</h3>
-    <span class="points">Tiempo restante: <b class="big">{{ seconds | formatTime }}</b></span>
-    <span class="points">Puntos: <b class="big">{{ points }}</b></span>
+<div *ngIf="info.started">
+    <h3>Nivel {{ info.level }}</h3>
+    <span class="points">Tiempo restante: <b class="big">{{ info.seconds | formatTime }}</b></span>
+    <span class="points">Puntos: <b class="big">{{ info.points }}</b></span>
 </div>
-<button *ngIf="!started" mat-raised-button (click)="start()">
+<button *ngIf="!info.started" mat-raised-button (click)="start()">
     Jugar
 </button>
-<app-calculation *ngIf="started" (Selected)="selected($event)"></app-calculation>
-<div *ngIf="finished">
+<app-calculation *ngIf="info.started" (Selected)="selected($event)"></app-calculation>
+<div *ngIf="info.finished">
     <h2>¡Fin del juego!</h2>
-    <div>Total Puntos: <b class="big">{{ points }}</b></div>
-    <div>Aciertos: {{ numSuccess }}</div>
-    <div>Fallos: {{ numFails }}</div>
-    <div class="login"><app-login gameName="calculation" [gamePoints]="points"></app-login></div>
+    <div>Total Puntos: <b class="big">{{ info.points }}</b></div>
+    <div>Aciertos: {{ info.numSuccess }}</div>
+    <div>Fallos: {{ info.numFails }}</div>
+    <div class="login"><app-login gameName="calculation" [gameInfo]="info"></app-login></div>
 </div>

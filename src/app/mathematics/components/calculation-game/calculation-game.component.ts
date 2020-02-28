@@ -3,6 +3,7 @@ import { Result } from '@math-shared/models/result';
 import { CalculationComponent } from '@math/calculation/calculation.component';
 import { FormulaHelper } from '@math-shared/helpers/formula.helper';
 import { FormulaOptions } from '@math-shared/models/formula-options';
+import { CalculationGameInfo } from '@math-shared/models/calculation-game-info';
 
 @Component({
   selector: 'app-calculation-game',
@@ -11,14 +12,7 @@ import { FormulaOptions } from '@math-shared/models/formula-options';
 })
 export class CalculationGameComponent implements OnInit {
 
-  level: number;
-  seconds: number;
-  points: number;
-  started: boolean;
-  finished: boolean;
-
-  numSuccess: number;
-  numFails: number;
+  info : CalculationGameInfo;
 
   private defaultOperations = FormulaHelper.operations;
   private levelOptions = [
@@ -53,16 +47,17 @@ export class CalculationGameComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.info = new CalculationGameInfo()
   }
 
   start(){
-    this.level = 1;
-    this.seconds = 30;
-    this.points = 0;
-    this.numSuccess = 0;
-    this.numFails = 0;
-    this.started = true;
-    this.finished = false;
+    this.info.level = 1;
+    this.info.seconds = 30;
+    this.info.points = 0;
+    this.info.numSuccess = 0;
+    this.info.numFails = 0;
+    this.info.started = true;
+    this.info.finished = false;
 
     //TODO
     const that = this;
@@ -75,13 +70,13 @@ export class CalculationGameComponent implements OnInit {
 
   private checkTime(){
     const that = this;
-    if (that.seconds <= 0){
+    if (that.info.seconds <= 0){
       this.endGame();
     }
     else{
       setTimeout(function(){
         {
-          that.seconds -= 1;
+          that.info.seconds -= 1;
           that.checkTime();
         }
       }, 1000);
@@ -89,23 +84,24 @@ export class CalculationGameComponent implements OnInit {
   }
 
   newFormula(){
-    let options = this.levelOptions[this.level - 1];
+    let options = this.levelOptions[this.info.level - 1];
     this.calculation.newFormula(options);
   }
 
   selected(result: Result){
     if (result.correct){
-      this.seconds += 5;
-      this.points += 10;
-      this.numSuccess++;
+      this.info.seconds += 5;
+      this.info.points += 10;
+      this.info.numSuccess++;
     }
     else{
-      this.points -= 5;
-      this.numFails++;
+      this.info.points -= 5;
+      this.info.numFails++;
     }
+    this.info.formula.push(`${this.calculation.formula}=${result.value}(${result.correct ? 1 : 0})`);
 
-    if (this.numSuccess % 5 == 0 && this.level < this.levelOptions.length)
-      this.level++;
+    if (this.info.numSuccess % 5 == 0 && this.info.level < this.levelOptions.length)
+      this.info.level++;
 
     const that = this;
     setTimeout(function(){
@@ -114,7 +110,7 @@ export class CalculationGameComponent implements OnInit {
   }
 
   private endGame(){
-    this.started = false;
-    this.finished = true;
+    this.info.started = false;
+    this.info.finished = true;
   }
 }

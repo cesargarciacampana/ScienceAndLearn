@@ -14,13 +14,13 @@ export class WordHelper {
         private elementService : ElementService,
     ) { }
     
-    calculateElements(word: String) : Word[]{
+    calculateElements(word: string) : Word[]{
         let list = [];
-        this.auxCalculateElements(list, StringHelper.removeAccents(word), new Word());
+        this.auxCalculateElements(list, StringHelper.removeAccents(word), new Word(word));
         return list;
     }
 
-    private auxCalculateElements(list : Word[], word : String, prefix : Word){
+    private auxCalculateElements(list : Word[], word : string, prefix : Word){
         for(let i = 0; i < word.length; i++) {
           let current = word[i];
           let next = null;
@@ -52,7 +52,7 @@ export class WordHelper {
         list.push(prefix);
       }
     
-      private findElement(symbol : String){
+      private findElement(symbol : string){
         let elements = this.elementService.elements;
         let lower = symbol.toLowerCase();
         let normalized = StringHelper.removeAccents(lower);
