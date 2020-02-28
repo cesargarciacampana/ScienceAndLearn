@@ -91,6 +91,5 @@ export class ElementSelectorComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): void {
     this.updateElement(event.option.value, true);
     this.elementInput.nativeElement.value = '';
-    this.elementInput.nativeElement.blur();
   }
 }
