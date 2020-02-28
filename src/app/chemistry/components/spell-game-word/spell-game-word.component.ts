@@ -86,7 +86,7 @@ export class SpellGameWordComponent implements OnInit {
       mergeMap(word => {
           this.wordCompleted = false;
           this.word = word;
-          this.cleanWord = StringHelper.removeAccents(word);
+          this.cleanWord = StringHelper.removeAccents(word).toLowerCase();
           let possibleElements = this.calculatePossibleElements(this.cleanWord);
 
           if (possibleElements.length < this.minPossibleElements){
