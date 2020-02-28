@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'spell', component: SpellGameComponent },
   { path: 'solve', component: ResolutorComponent },
   { path: 'calculation', component: CalculationGameComponent },
-  { path: 'statistics', component: StatisticsComponent },
+  { path: 'stats', component: StatisticsComponent },
 
   { path: '**', redirectTo: '' }
 ];
