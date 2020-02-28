@@ -10,8 +10,8 @@ import { Card } from '@chem-shared/models/card';
 })
 export class PairGameComponent implements OnInit {
 
-  private nRows = 3;
-  private nCols = 4;
+  nRows = 3;
+  nCols = 4;
   rows: Card[][];
   pending: Card = null;
   locked = false;
@@ -35,8 +35,8 @@ export class PairGameComponent implements OnInit {
           random = RandomHelper.randomIntFromInterval(0, elements.length);
         
         included.push(random);
-        list.push(elements[i].symbol);
-        list.push(elements[i].name);
+        list.push(elements[random].symbol);
+        list.push(elements[random].name);
       }
 
       this.rows = [];
