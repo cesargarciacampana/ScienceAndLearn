@@ -20,6 +20,16 @@
             <app-statistics-table [stats]="stats['spell1']" [columns]="spellColumns"></app-statistics-table>
         </ng-template>
     </mat-expansion-panel>
+    <mat-expansion-panel (opened)="loadStatistics('pairs')">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Encuentra la pareja
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+          <app-statistics-table [stats]="stats['pairs']" [columns]="pairsColumns"></app-statistics-table>
+      </ng-template>
+  </mat-expansion-panel>
     <mat-expansion-panel (opened)="loadStatistics('calculation')">
         <mat-expansion-panel-header>
           <mat-panel-title>

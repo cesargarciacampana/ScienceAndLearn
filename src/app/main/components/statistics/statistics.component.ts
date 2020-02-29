@@ -15,6 +15,7 @@ export class StatisticsComponent implements OnInit {
   stats = {};
   spellColumns = ['index', 'name', 'points', 'time', 'clues'];
   calculationColumns = ['index', 'name', 'points', 'level', 'success', 'fails'];
+  pairsColumns = ['index', 'name', 'moves', 'time'];
 
   constructor(private firestore: AngularFirestore) { }
 

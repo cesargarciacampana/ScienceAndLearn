@@ -8,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class TimerComponent implements OnInit {
 
   seconds: number;
-  private started = false;
+  started = false;
   private backwards: boolean;
 
   @Output() tick = new EventEmitter<number>();

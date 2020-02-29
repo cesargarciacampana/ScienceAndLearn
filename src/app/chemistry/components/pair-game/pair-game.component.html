@@ -1,9 +1,28 @@
 <h3>Encuentra la pareja</h3>
 
-<div *ngFor="let cardRow of rows" class="clear" [style.width]="nCols*87 + 'px'">
-    <div *ngFor="let card of cardRow"
-        class="card" [class.solved]="card.solved" [class.selected]="card.selected"
-         (click)="select(card)">
-        {{card.selected || card.solved ? card.text : ''}}
+<p>Pon a prueba tu memoria localizando cada pareja de elemento de la tabla periódica con su símbolo</p>
+
+<div *ngIf="info.started">
+    <div *ngIf="!info.finished">
+        <div>Tiempo: <b><app-timer (tick)="tick($event)"></app-timer></b></div>
+        <div>Movimientos: <b>{{info.moves}}</b></div>
+    </div>
+    <div *ngFor="let cardRow of info.rows" class="clear" [style.width]="info.nCols * 87 + 'px'">
+        <div *ngFor="let card of cardRow"
+            class="card" [class.solved]="card.solved" [class.selected]="card.selected"
+            (click)="select(card)">
+            {{card.selected || card.solved ? card.text : ''}}
+        </div>
     </div>
 </div>
+
+<div class="success" *ngIf="info.finished">
+    <h1 class="green">¡Bien hecho!</h1>
+    Tiempo invertido: <b>{{ info.seconds | formatTime }}</b><br/>
+    Movimientos: <b>{{ info.moves }}</b>
+    <div class="login"><app-login [gameName]="'pairs'" [gameInfo]="info"></app-login></div>
+</div>
+
+<button class="button" *ngIf="!info.started || info.finished" mat-raised-button (click)="btnClick()">
+    {{ 'Jugar' + (info.finished ? ' de nuevo' : '') }}
+</button>
