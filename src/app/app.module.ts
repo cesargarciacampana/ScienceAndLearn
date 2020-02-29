@@ -30,6 +30,7 @@ import { StatisticsComponent } from './main/components/statistics/statistics.com
 import { StatisticsTableComponent } from './main/components/statistics-table/statistics-table.component';
 import { PairGameComponent } from './chemistry/components/pair-game/pair-game.component';
 import { TimerComponent } from './main/components/timer/timer.component';
+import { PairGameOptionsComponent } from './chemistry/components/pair-game-options/pair-game-options.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TimerComponent } from './main/components/timer/timer.component';
     StatisticsComponent,
     StatisticsTableComponent,
     PairGameComponent,
-    TimerComponent
+    TimerComponent,
+    PairGameOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { TimerComponent } from './main/components/timer/timer.component';
     MatExpansionModule
   ],
   entryComponents: [
-    SpellGameOptionsComponent
+    SpellGameOptionsComponent,
+    PairGameOptionsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

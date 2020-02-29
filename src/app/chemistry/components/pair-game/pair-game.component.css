@@ -3,7 +3,7 @@
 }
 .card, .solved, .selected{
     float: left;
-    background-color: blue;
+    background-color: rgb(9, 124, 9);
     border: 1px solid lightgray;
     margin-right: 5px;
     margin-bottom: 5px;

@@ -20,7 +20,7 @@
     <h1 class="green">¡Bien hecho!</h1>
     Tiempo invertido: <b>{{ info.seconds | formatTime }}</b><br/>
     Movimientos: <b>{{ info.moves }}</b>
-    <div class="login"><app-login [gameName]="'pairs'" [gameInfo]="info"></app-login></div>
+    <div class="login"><app-login [gameName]="'pairs' + info.level" [gameInfo]="info"></app-login></div>
 </div>
 
 <button class="button" *ngIf="!info.started || info.finished" mat-raised-button (click)="btnClick()">

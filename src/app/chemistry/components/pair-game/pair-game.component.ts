@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ElementService } from '@chem-shared/services/element.service';
 import { RandomHelper } from '@shared/helpers/random.helper';
 import { Card } from '@chem-shared/models/card';
-import { PairGameInfo } from '@chem-shared/models/pair-game-info';
+import { PairGameInfo, Difficulty } from '@chem-shared/models/pair-game-info';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { TimerComponent } from '@main/timer/timer.component';
+import { PairGameOptionsComponent } from '@chem/pair-game-options/pair-game-options.component';
+import { MatBottomSheet } from '@angular/material';
 
 @Component({
   selector: 'app-pair-game',
@@ -18,8 +20,11 @@ export class PairGameComponent implements OnInit {
 
   @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
 
+  private easyElements = [ 'O', 'C', 'H', 'N', 'Ca', 'P', 'K', 'S', 'Na', 'Cl', 'Fe', 'Al', 'Au', 'Ag' ];
+
   constructor(
-    private elementService: ElementService
+    private elementService: ElementService,
+    private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit() {
@@ -31,16 +36,48 @@ export class PairGameComponent implements OnInit {
   }
 
   newGame(){
-    this.info = new PairGameInfo(3, 4);
-    this.elementService.elementsObservable.subscribe((elementsDTO) =>{
-      this.randomizeCards(elementsDTO.elements);
-      this.info.started = true;
-    });
+    let data = { level: null };
+    this.bottomSheet.open(PairGameOptionsComponent, { data: data} )
+      .afterDismissed().subscribe(() => {
+        if (data.level != null){
+          let nRows, nCols, elements = null;
+          switch(data.level){
+            case Difficulty.Easy:
+              nRows = 3;
+              nCols = 4;
+              elements = this.easyElements;
+              break;
+            case Difficulty.Normal:
+              nRows = 3;
+              nCols = 8;
+              break;
+            case Difficulty.Hard:
+              nRows = 4;
+              nCols = 10;
+              break;
+          }
+          this.info = new PairGameInfo(nRows, nCols);
+          this.info.level = data.level;
+          this.elementService.elementsObservable.subscribe((elementsDTO) =>{
+            this.randomizeCards(elementsDTO.elements, elements);
+            this.info.started = true;
+          });
+        }
+      });
   }
 
-  randomizeCards(elements: ElementDTO[]){
+  randomizeCards(elements: ElementDTO[], allowedSymbols: string[]){
     let list = [];
     let included = [];
+
+    if (allowedSymbols){
+      let temp = [];
+      for(let i = 0; i < allowedSymbols.length; i++){
+        temp.push(this.elementService.findElement(allowedSymbols[i]));
+      }
+      elements = temp;
+    }
+
     for (let i = 0; i < this.info.nRows * this.info.nCols / 2; i++){
       let random = RandomHelper.randomIntFromInterval(0, elements.length);
       while (included.includes(random))

@@ -1,7 +1,15 @@
 import { GameInfo } from '@shared/models/game-info';
 import { Card } from './card';
 
+export enum Difficulty{
+    Easy = 0,
+    Normal = 1,
+    Hard = 2
+}
+
 export class PairGameInfo extends GameInfo{
+
+    level: Difficulty;
     nRows: number;
     nCols: number;
     moves = 0;
