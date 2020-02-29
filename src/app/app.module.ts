@@ -29,6 +29,7 @@ import { LoginComponent } from './main/components/login/login.component';
 import { StatisticsComponent } from './main/components/statistics/statistics.component';
 import { StatisticsTableComponent } from './main/components/statistics-table/statistics-table.component';
 import { PairGameComponent } from './chemistry/components/pair-game/pair-game.component';
+import { TimerComponent } from './main/components/timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PairGameComponent } from './chemistry/components/pair-game/pair-game.co
     LoginComponent,
     StatisticsComponent,
     StatisticsTableComponent,
-    PairGameComponent
+    PairGameComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { SpellGameInfo, Difficulty } from '../../shared/models/spell-game-info';
 import { Observable } from 'rxjs';
 import { MatBottomSheet } from '@angular/material';
 import { SpellGameOptionsComponent } from '@chem/spell-game-options/spell-game-options.component';
+import { TimerComponent } from '@main/timer/timer.component';
 
 @Component({
   selector: 'app-spellgame',
@@ -28,6 +29,7 @@ export class SpellGameComponent implements OnInit {
   ) { }
 
   @ViewChild(SpellGameWordComponent, { static: true }) gameWordComponent: SpellGameWordComponent;
+  @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
 
   ngOnInit() {
     this.info = new SpellGameInfo()
@@ -70,25 +72,21 @@ export class SpellGameComponent implements OnInit {
     return this.gameWordComponent.newWord(
         this.availableElementsByLevel[this.info.difficulty]
       ).subscribe(dummy => {
-      if (dummy && newGame)
-        this.checkTime();
+      if (dummy && newGame){
+        this.timer.reset();
+        this.timer.start();
+      }
     });
   }
 
-  private checkTime(){
+  private tick(seconds: number){
     if (this.info.finished)
       return;
 
-    const that = this;
-    setTimeout(function(){
-      {
-        that.info.seconds += 1;
-        let substractPointsAfterSeconds = that.info.difficulty == Difficulty.Easy ? 5 : 2;
-        if (that.info.seconds > 0 && that.info.seconds % substractPointsAfterSeconds == 0)
-          that.info.points -= 1;
-        that.checkTime();
-      }
-    }, 1000);
+    this.info.seconds = seconds;
+    let substractPointsAfterSeconds = this.info.difficulty == Difficulty.Easy ? 5 : 2;
+    if (seconds > 0 && seconds % substractPointsAfterSeconds == 0)
+      this.info.points -= 1;
   }
 
   changePoints(points: number){
@@ -98,7 +96,9 @@ export class SpellGameComponent implements OnInit {
   wordCompleted(){
     this.info.words.push(this.gameWordComponent.userWord);
 
-    if (this.current >= this.maxWords)
+    if (this.current >= this.maxWords){
       this.info.finished = true;
+      this.timer.stop();
+    }
   }
 }

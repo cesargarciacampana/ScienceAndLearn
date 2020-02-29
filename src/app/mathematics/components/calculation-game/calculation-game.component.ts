@@ -4,6 +4,7 @@ import { CalculationComponent } from '@math/calculation/calculation.component';
 import { FormulaHelper } from '@math-shared/helpers/formula.helper';
 import { FormulaOptions } from '@math-shared/models/formula-options';
 import { CalculationGameInfo } from '@math-shared/models/calculation-game-info';
+import { TimerComponent } from '@main/timer/timer.component';
 
 @Component({
   selector: 'app-calculation-game',
@@ -43,7 +44,8 @@ export class CalculationGameComponent implements OnInit {
   ];
 
   @ViewChild(CalculationComponent, {static:false}) calculation : CalculationComponent;
-
+  @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
+  
   constructor() { }
 
   ngOnInit() {
@@ -64,22 +66,15 @@ export class CalculationGameComponent implements OnInit {
     setTimeout(function()
     {
       that.newFormula();
-      that.checkTime();
+      that.timer.reset(30);
+      that.timer.start(true);
     }, 100);
   }
 
-  private checkTime(){
-    const that = this;
-    if (that.info.seconds <= 0){
+  private tick(seconds: number){
+    this.info.seconds = seconds;
+    if (seconds <= 0){
       this.endGame();
-    }
-    else{
-      setTimeout(function(){
-        {
-          that.info.seconds -= 1;
-          that.checkTime();
-        }
-      }, 1000);
     }
   }
 
@@ -90,7 +85,7 @@ export class CalculationGameComponent implements OnInit {
 
   selected(result: Result){
     if (result.correct){
-      this.info.seconds += 5;
+      this.timer.addTime(5);
       this.info.points += 10;
       this.info.numSuccess++;
     }
@@ -110,6 +105,7 @@ export class CalculationGameComponent implements OnInit {
   }
 
   private endGame(){
+    this.timer.stop();
     this.info.started = false;
     this.info.finished = true;
   }

@@ -4,7 +4,7 @@
         <p>Completa la palabra usando los símbolos de los elementos de la tabla periódica. ¡Los símbolos de 2 letras dan más puntos!</p>
         <div *ngIf="info.started && !info.finished" class="points">
             <div>Puntos: <b>{{ info.points }}</b></div>
-            <div>Tiempo: <b>{{ info.seconds | formatTime }}</b></div>
+            <div>Tiempo: <b><app-timer (tick)="tick($event)"></app-timer></b></div>
             <div>Palabra <b>{{ current }}</b> de <b>{{ maxWords}}</b></div>
             <div>Dificultad: <b>{{ info.difficulty == Difficulty.Normal ? 'Normal' : 'Fácil'}}</b></div>
         </div>

@@ -4,7 +4,7 @@
 </div>
 <div *ngIf="info.started">
     <h3>Nivel {{ info.level }}</h3>
-    <span class="points">Tiempo restante: <b class="big">{{ info.seconds | formatTime }}</b></span>
+    <span class="points">Tiempo restante: <b class="big"><app-timer (tick)="tick($event)"></app-timer></b></span>
     <span class="points">Puntos: <b class="big">{{ info.points }}</b></span>
 </div>
 <button *ngIf="!info.started" mat-raised-button (click)="start()">
