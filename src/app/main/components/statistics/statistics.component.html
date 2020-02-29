@@ -1,54 +1,78 @@
 <h3>Clasificación por juego y nivel</h3>
 <mat-accordion>
-    <mat-expansion-panel (opened)="loadStatistics('spell0')">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-            Crea palabras usando la tabla periódica (Fácil)
+            Crea palabras usando la tabla periódica
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ng-template matExpansionPanelContent>
-        <app-statistics-table [stats]="stats['spell0']" [columns]="spellColumns"></app-statistics-table>
-      </ng-template>
+      <ng-template matExpansionPanelContent></ng-template>
+      <div>
+        <mat-accordion>
+          <mat-expansion-panel (opened)="loadStatistics('spell0')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Fácil
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-statistics-table [stats]="stats['spell0']" [columns]="spellColumns"></app-statistics-table>
+            </ng-template>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="loadStatistics('spell1')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Normal
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-statistics-table [stats]="stats['spell1']" [columns]="spellColumns"></app-statistics-table>
+            </ng-template>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
     </mat-expansion-panel>
-    <mat-expansion-panel (opened)="loadStatistics('spell1')">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-              Crea palabras usando la tabla periódica (Normal)
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <ng-template matExpansionPanelContent>
-            <app-statistics-table [stats]="stats['spell1']" [columns]="spellColumns"></app-statistics-table>
-        </ng-template>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="loadStatistics('pairs0')">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-            Encuentra la pareja (Fácil)
+            Encuentra la pareja
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <ng-template matExpansionPanelContent>
-          <app-statistics-table [stats]="stats['pairs0']" [columns]="pairsColumns"></app-statistics-table>
-      </ng-template>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="loadStatistics('pairs1')">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-            Encuentra la pareja (Normal)
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ng-template matExpansionPanelContent>
-          <app-statistics-table [stats]="stats['pairs1']" [columns]="pairsColumns"></app-statistics-table>
-      </ng-template>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="loadStatistics('pairs2')">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-            Encuentra la pareja (Difícil)
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ng-template matExpansionPanelContent>
-          <app-statistics-table [stats]="stats['pairs2']" [columns]="pairsColumns"></app-statistics-table>
-      </ng-template>
+      <ng-template matExpansionPanelContent></ng-template>
+      <div>
+        <mat-accordion>
+          <mat-expansion-panel (opened)="loadStatistics('pairs0')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Fácil
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-statistics-table [stats]="stats['pairs0']" [columns]="pairsColumns"></app-statistics-table>
+            </ng-template>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="loadStatistics('pairs1')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Normal
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-statistics-table [stats]="stats['pairs1']" [columns]="pairsColumns"></app-statistics-table>
+            </ng-template>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="loadStatistics('pairs2')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Difícil
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-statistics-table [stats]="stats['pairs2']" [columns]="pairsColumns"></app-statistics-table>
+            </ng-template>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
     </mat-expansion-panel>
     <mat-expansion-panel (opened)="loadStatistics('calculation')">
         <mat-expansion-panel-header>
