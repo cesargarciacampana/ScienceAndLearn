@@ -79,7 +79,7 @@ export class SpellGameComponent implements OnInit {
     });
   }
 
-  private tick(seconds: number){
+  tick(seconds: number){
     if (this.info.finished)
       return;
 

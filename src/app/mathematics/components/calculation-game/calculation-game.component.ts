@@ -71,7 +71,7 @@ export class CalculationGameComponent implements OnInit {
     }, 100);
   }
 
-  private tick(seconds: number){
+  tick(seconds: number){
     this.info.seconds = seconds;
     if (seconds <= 0){
       this.endGame();
