@@ -26,7 +26,10 @@ export class LoginComponent implements OnInit {
     if (!this.name.value)
       return;
 
-    let stats = {user: this.name.value, points: this.gameInfo.points, info: this.gameInfo.toJson()};
+    let stats = {
+      user: this.name.value, points: this.gameInfo.points,
+      seconds: this.gameInfo.seconds, info: this.gameInfo.toJson()
+    };
     this.firestore.collection(this.gameName + '-statistics').add(stats)
     .then(()=>
       {

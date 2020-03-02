@@ -24,7 +24,7 @@ export class PairGameInfo extends GameInfo{
     }
 
     toJson(){
-        let temp = {nRows: this.nRows, nCols: this.nCols, seconds: this.seconds, moves: this.moves};
+        let temp = {nRows: this.nRows, nCols: this.nCols, moves: this.moves};
 
         return JSON.stringify(temp);
     }

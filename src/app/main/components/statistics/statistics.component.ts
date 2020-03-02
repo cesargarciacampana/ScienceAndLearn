@@ -27,7 +27,8 @@ export class StatisticsComponent implements OnInit {
       return;
 
     this.stats[name] = this.firestore
-      .collection(name + '-statistics', ref => ref.orderBy('points', 'desc'))
+      .collection(name + '-statistics', 
+        ref => ref.orderBy('points', 'desc').orderBy('seconds', 'asc').limit(10))
       .valueChanges().pipe(
         map((data) => {
           for(let i = 0; i < data.length; i++)

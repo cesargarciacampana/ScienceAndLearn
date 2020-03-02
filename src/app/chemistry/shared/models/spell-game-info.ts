@@ -29,7 +29,7 @@ export class SpellGameInfo extends GameInfo{
     }
 
     toJson(){
-        let temp = {points: this.points, seconds: this.seconds, difficulty: this.difficulty, words: []};
+        let temp = {points: this.points, difficulty: this.difficulty, words: []};
 
         for (let i = 0; i < this.words.length; i++){
             let temp2 = [];

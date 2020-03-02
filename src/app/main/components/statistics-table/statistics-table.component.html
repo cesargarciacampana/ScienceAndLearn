@@ -14,7 +14,7 @@
         </ng-container>
         <ng-container matColumnDef="time">
             <th mat-header-cell *matHeaderCellDef> Tiempo </th>
-            <td mat-cell *matCellDef="let stat"> {{stat.info.seconds | formatTime}} </td>
+            <td mat-cell *matCellDef="let stat"> {{stat.seconds | formatTime}} </td>
         </ng-container>
         <ng-container matColumnDef="clues">
             <th mat-header-cell *matHeaderCellDef> Pistas usadas </th>

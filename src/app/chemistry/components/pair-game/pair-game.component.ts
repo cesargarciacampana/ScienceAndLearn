@@ -21,6 +21,7 @@ export class PairGameComponent implements OnInit {
   @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
 
   private easyElements = [ 'O', 'C', 'H', 'N', 'Ca', 'P', 'K', 'S', 'Na', 'Cl', 'Fe', 'Al', 'Au', 'Ag' ];
+  private normalElements = this.easyElements.concat(['He', 'Li', 'F', 'Cu', 'Ar', 'I', 'Si', 'Hg', 'Zn', 'Cr']);
 
   constructor(
     private elementService: ElementService,
@@ -50,6 +51,7 @@ export class PairGameComponent implements OnInit {
             case Difficulty.Normal:
               nRows = 3;
               nCols = 8;
+              elements = this.normalElements;
               break;
             case Difficulty.Hard:
               nRows = 4;
