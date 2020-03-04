@@ -1,27 +1,6 @@
 .clear{
     clear: both;
 }
-.card, .solved, .selected{
-    float: left;
-    background-color: rgb(9, 124, 9);
-    border: 1px solid lightgray;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    width:80px;
-    height: 130px;
-    line-height: 130px;
-    text-align: center;
-    font-size: 14px;
-    cursor: pointer;
-}
-.solved{
-    background-color: #EEEEEE;
-    cursor: auto;
-}
-.selected{
-    background-color: #EEEEEE;
-    border-color: orange;
-}
 .green{
     color: green;
 }
@@ -29,4 +8,67 @@
     margin-top: 20px;
     margin-bottom: 20px;
     clear: both;
+}
+
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    float: left;
+    background-color: transparent;
+    width:80px;
+    height: 130px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+
+    line-height: 130px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+
+    border: 1px solid lightgray;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.selected, .solved{
+    transform: rotateY(180deg);
+}
+.selected{
+    border-color: orange;
+}
+.solved{
+    border-color: green;
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+    .flip-card-front {
+    background-color: rgb(9, 124, 9);
+    color: white;
+}
+
+/* Style the back side */
+.flip-card-back {
+    background-color: #EEEEEE;
+    cursor: auto;
+    color: black;
+    transform: rotateY(180deg);
 }

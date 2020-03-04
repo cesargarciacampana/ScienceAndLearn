@@ -7,11 +7,16 @@
         <div>Tiempo: <b><app-timer (tick)="tick($event)"></app-timer></b></div>
         <div>Movimientos: <b>{{info.moves}}</b></div>
     </div>
-    <div *ngFor="let cardRow of info.rows" class="clear" [style.width]="info.nCols * 87 + 'px'">
-        <div *ngFor="let card of cardRow"
-            class="card" [class.solved]="card.solved" [class.selected]="card.selected"
-            (click)="select(card)">
-            {{card.selected || card.solved ? card.text : ''}}
+    <div *ngFor="let cardRow of info.rows" class="clear" [style.width]="info.nCols * 89 + 'px'">
+        <div *ngFor="let card of cardRow" class="flip-card">
+            <div class="flip-card-inner" [class.solved]="card.solved" [class.selected]="card.selected">
+                <div class="flip-card-back">
+                        {{card.text}}
+                </div>
+                <div class="flip-card-front" (click)="select(card)">
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>
