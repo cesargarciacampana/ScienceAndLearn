@@ -14,7 +14,7 @@ export class PairGameInfo extends GameInfo{
     nCols: number;
     moves = 0;
 
-    rows: Card[][];
+    cards: Card[]
     pending: Card = null;
 
     constructor(nRows: number, nCols: number){

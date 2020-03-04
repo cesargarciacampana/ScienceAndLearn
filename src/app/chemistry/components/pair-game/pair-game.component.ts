@@ -90,9 +90,8 @@ export class PairGameComponent implements OnInit {
       list.push(elements[random].name);
     }
 
-    this.info.rows = [];
+    this.info.cards = [];
     for (let i = 0; i < this.info.nRows; i++){
-      this.info.rows.push([]);
       for (let j = 0; j < this.info.nCols; j++){
         let random =  RandomHelper.randomIntFromInterval(0, list.length);
         while(!list[random]){
@@ -100,7 +99,7 @@ export class PairGameComponent implements OnInit {
           if (random >= list.length)
             random = 0;
         }
-        this.info.rows[i].push(new Card(list[random]));
+        this.info.cards.push(new Card(list[random]));
         list[random] = null;
       }
     }
@@ -164,11 +163,9 @@ export class PairGameComponent implements OnInit {
   }
 
   isFinished(){
-    for (let i = 0; i < this.info.nRows; i++){
-      for (let j = 0; j < this.info.nCols; j++){
-        if (!this.info.rows[i][j].solved)
-          return false;
-      }
+    for (let i = 0; i < this.info.cards.length ; i++){
+      if (!this.info.cards[i].solved)
+        return false;
     }
     return true;
   }

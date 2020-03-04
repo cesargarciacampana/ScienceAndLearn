@@ -7,8 +7,8 @@
         <div>Tiempo: <b><app-timer (tick)="tick($event)"></app-timer></b></div>
         <div>Movimientos: <b>{{info.moves}}</b></div>
     </div>
-    <div *ngFor="let cardRow of info.rows" class="clear" [style.width]="info.nCols * 89 + 'px'">
-        <div *ngFor="let card of cardRow" class="flip-card">
+    <div class="clear" [style.max-width]="info.nCols * 87 + 'px'">
+        <div *ngFor="let card of info.cards" class="flip-card">
             <div class="flip-card-inner" [class.solved]="card.solved" [class.selected]="card.selected">
                 <div class="flip-card-back">
                         {{card.text}}
