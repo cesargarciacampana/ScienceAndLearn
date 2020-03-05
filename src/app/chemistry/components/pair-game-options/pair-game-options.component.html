@@ -1,5 +1,32 @@
-<mat-nav-list>
-    <a mat-list-item (click)="choose(Difficulty.Easy)">Fácil</a>
-    <a mat-list-item (click)="choose(Difficulty.Normal)">Normal</a>
-    <a mat-list-item (click)="choose(Difficulty.Hard)">Difícil</a>
-</mat-nav-list>
+<form>
+    <div>Elige la información que quieres ver en cada pareja</div>
+    <div class="mtop mleft">
+        <mat-form-field>
+            <mat-label>Carta 1</mat-label>
+            <mat-select [(value)]="card1" (selectionChange)="updateExamples()">
+                <mat-option *ngFor="let info of infoList" [value]="info.value">
+                {{info.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <span class="example">Ejemplo: {{ example1 }}</span>
+    </div>
+    <div class="mleft">
+        <mat-form-field>
+            <mat-label>Carta 2</mat-label>
+            <mat-select  [(value)]="card2" (selectionChange)="updateExamples()">
+                <mat-option *ngFor="let info of infoList" [value]="info.value">
+                {{info.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <span class="example">Ejemplo: {{ example2 }}</span>
+    </div>
+
+    <div>Para comenzar el juego elige el nivel de dificultad</div>
+    <mat-nav-list>
+        <a mat-list-item (click)="choose(Difficulty.Easy)">Fácil</a>
+        <a mat-list-item (click)="choose(Difficulty.Normal)">Normal</a>
+        <a mat-list-item (click)="choose(Difficulty.Hard)">Difícil</a>
+    </mat-nav-list>
+</form>

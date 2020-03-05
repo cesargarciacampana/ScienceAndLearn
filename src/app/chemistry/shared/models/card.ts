@@ -1,11 +1,19 @@
+import { ElementDTO } from '@chem-shared/dtos/element.dto';
+
 export class Card{
-    text: string;
+    element: ElementDTO;
+    textProperty: string;
     selected: boolean;
     solved: boolean;
 
-    constructor(text: string){
-        this.text = text;
+    constructor(element: ElementDTO, textProperty: string){
+        this.element = element;
+        this.textProperty = textProperty;
         this.selected = false;
         this.solved = false;
+    }
+
+    get text(){
+        return this.element[this.textProperty];
     }
 }

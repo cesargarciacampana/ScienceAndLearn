@@ -4,6 +4,7 @@ export class ElementDTO {
         public symbol : string,
         public name : string,
         public source : string,
+        public number : number,
     ) {
     }
 }

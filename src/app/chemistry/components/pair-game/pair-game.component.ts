@@ -37,7 +37,7 @@ export class PairGameComponent implements OnInit {
   }
 
   newGame(){
-    let data = { level: null };
+    let data = { level: null, card1: null, card2: null };
     this.bottomSheet.open(PairGameOptionsComponent, { data: data} )
       .afterDismissed().subscribe(() => {
         if (data.level != null){
@@ -61,14 +61,14 @@ export class PairGameComponent implements OnInit {
           this.info = new PairGameInfo(nRows, nCols);
           this.info.level = data.level;
           this.elementService.elementsObservable.subscribe((elementsDTO) =>{
-            this.randomizeCards(elementsDTO.elements, elements);
+            this.randomizeCards(elementsDTO.elements, elements, data.card1, data.card2);
             this.info.started = true;
           });
         }
       });
   }
 
-  randomizeCards(elements: ElementDTO[], allowedSymbols: string[]){
+  randomizeCards(elements: ElementDTO[], allowedSymbols: string[], card1: string, card2: string){
     let list = [];
     let included = [];
 
@@ -86,8 +86,8 @@ export class PairGameComponent implements OnInit {
         random = RandomHelper.randomIntFromInterval(0, elements.length);
       
       included.push(random);
-      list.push(elements[random].symbol);
-      list.push(elements[random].name);
+      list.push(new Card(elements[random], card1));
+      list.push(new Card(elements[random], card2));
     }
 
     this.info.cards = [];
@@ -99,22 +99,14 @@ export class PairGameComponent implements OnInit {
           if (random >= list.length)
             random = 0;
         }
-        this.info.cards.push(new Card(list[random]));
+        this.info.cards.push(list[random]);
         list[random] = null;
       }
     }
   }
 
   isMatch(card1: Card, card2: Card){
-    if ((card1.text.length > 2 && card2.text.length > 2)
-      || (card1.text.length <= 2 && card2.text.length <= 2)){
-      return false;
-    }
-
-    let symbol = card1.text.length <= 2 ? card1.text : card2.text;
-    let element = this.elementService.findElement(symbol);
-    return (card1.text == element.symbol || card1.text == element.name)
-      && (card2.text == element.symbol || card2.text == element.name);
+    return card1.element.symbol == card2.element.symbol;
   }
 
   select(card: Card){

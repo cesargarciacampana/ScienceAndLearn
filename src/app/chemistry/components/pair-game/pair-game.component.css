@@ -17,10 +17,10 @@
     float: left;
     background-color: transparent;
     width:80px;
-    height: 130px;
+    height: 100px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
 
-    line-height: 130px;
+    line-height: 100px;
     text-align: center;
     font-size: 14px;
     cursor: pointer;
@@ -38,6 +38,7 @@
     transform-style: preserve-3d;
 
     border: 1px solid lightgray;
+    border-radius: 5px;
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -61,13 +62,15 @@
 }
 
 /* Style the front side (fallback if image is missing) */
-    .flip-card-front {
+.flip-card-front {
+    border-radius: 5px;
     background-color: rgb(9, 124, 9);
     color: white;
 }
 
 /* Style the back side */
 .flip-card-back {
+    border-radius: 5px;
     background-color: #EEEEEE;
     cursor: auto;
     color: black;
