@@ -17,6 +17,9 @@ export class PairGameInfo extends GameInfo{
     cards: Card[]
     pending: Card = null;
 
+    card1: string;
+    card2: string;
+
     constructor(nRows: number, nCols: number){
         super();
         this.nRows = nRows;
@@ -24,7 +27,7 @@ export class PairGameInfo extends GameInfo{
     }
 
     toJson(){
-        let temp = {nRows: this.nRows, nCols: this.nCols, moves: this.moves};
+        let temp = {nRows: this.nRows, nCols: this.nCols, moves: this.moves, card1: this.card1, card2: this.card2};
 
         return JSON.stringify(temp);
     }

@@ -60,6 +60,8 @@ export class PairGameComponent implements OnInit {
           }
           this.info = new PairGameInfo(nRows, nCols);
           this.info.level = data.level;
+          this.info.card1 = data.card1;
+          this.info.card2 = data.card2;
           this.elementService.elementsObservable.subscribe((elementsDTO) =>{
             this.randomizeCards(elementsDTO.elements, elements, data.card1, data.card2);
             this.info.started = true;
@@ -94,13 +96,8 @@ export class PairGameComponent implements OnInit {
     for (let i = 0; i < this.info.nRows; i++){
       for (let j = 0; j < this.info.nCols; j++){
         let random =  RandomHelper.randomIntFromInterval(0, list.length);
-        while(!list[random]){
-          random++;
-          if (random >= list.length)
-            random = 0;
-        }
         this.info.cards.push(list[random]);
-        list[random] = null;
+        list.splice(random, 1);
       }
     }
   }
