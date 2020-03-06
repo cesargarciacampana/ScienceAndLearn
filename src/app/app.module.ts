@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
   MatAutocompleteModule, MatChipsModule, MatSnackBarModule, MatProgressSpinnerModule,
-  MatBottomSheetModule, MatSelectModule, MatTableModule, MatExpansionModule
+  MatBottomSheetModule, MatSelectModule, MatTableModule, MatExpansionModule,
+  MatRadioModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +32,7 @@ import { StatisticsTableComponent } from './main/components/statistics-table/sta
 import { PairGameComponent } from './chemistry/components/pair-game/pair-game.component';
 import { TimerComponent } from './main/components/timer/timer.component';
 import { PairGameOptionsComponent } from './chemistry/components/pair-game-options/pair-game-options.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { PairGameOptionsComponent } from './chemistry/components/pair-game-optio
     PairGameOptionsComponent
   ],
   imports: [
+	FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -77,7 +80,8 @@ import { PairGameOptionsComponent } from './chemistry/components/pair-game-optio
     MatBottomSheetModule,
     MatSelectModule,
     MatTableModule,
-    MatExpansionModule
+	MatExpansionModule,
+	MatRadioModule
   ],
   entryComponents: [
     SpellGameOptionsComponent,

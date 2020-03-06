@@ -23,10 +23,19 @@
         <span class="example">Ejemplo: {{ example2 }}</span>
     </div>
 
-    <div>Para comenzar el juego elige el nivel de dificultad</div>
-    <mat-nav-list>
-        <a mat-list-item (click)="choose(Difficulty.Easy)">Fácil</a>
-        <a mat-list-item (click)="choose(Difficulty.Normal)">Normal</a>
-        <a mat-list-item (click)="choose(Difficulty.Hard)">Difícil</a>
-    </mat-nav-list>
+	<div>Elige el nivel de dificultad</div>
+	<mat-radio-group name="radLevel" [(ngModel)]="level">
+		<div class="mtop"><mat-radio-button [value]="Difficulty.Easy">Fácil</mat-radio-button></div>
+		<div class="mtop"><mat-radio-button [value]="Difficulty.Normal">Normal</mat-radio-button></div>
+		<div class="mtop"><mat-radio-button [value]="Difficulty.Hard">Difícil</mat-radio-button></div>
+	</mat-radio-group>
+	
+	<div class="mtop">
+		<button type="button" class="button" color="primary" mat-raised-button (click)="ok()">
+			Aceptar
+		</button>
+		<button type="button" class="button mleft" mat-raised-button (click)="cancel()">
+			Cancelar
+		</button>
+	</div>
 </form>

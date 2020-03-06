@@ -16,6 +16,7 @@ import { MatBottomSheet } from '@angular/material';
 export class PairGameComponent implements OnInit {
 
   info = new PairGameInfo(0, 0);
+  data = { level: 0, card1: 'name', card2: 'symbol' };
   locked = false;
 
   @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
@@ -37,37 +38,35 @@ export class PairGameComponent implements OnInit {
   }
 
   newGame(){
-    let data = { level: null, card1: null, card2: null };
-    this.bottomSheet.open(PairGameOptionsComponent, { data: data} )
-      .afterDismissed().subscribe(() => {
-        if (data.level != null){
-          let nRows, nCols, elements = null;
-          switch(data.level){
-            case Difficulty.Easy:
-              nRows = 3;
-              nCols = 4;
-              elements = this.easyElements;
-              break;
-            case Difficulty.Normal:
-              nRows = 3;
-              nCols = 8;
-              elements = this.normalElements;
-              break;
-            case Difficulty.Hard:
-              nRows = 4;
-              nCols = 10;
-              break;
-          }
-          this.info = new PairGameInfo(nRows, nCols);
-          this.info.level = data.level;
-          this.info.card1 = data.card1;
-          this.info.card2 = data.card2;
-          this.elementService.elementsObservable.subscribe((elementsDTO) =>{
-            this.randomizeCards(elementsDTO.elements, elements, data.card1, data.card2);
-            this.info.started = true;
-          });
-        }
-      });
+	let nRows, nCols, elements = null;
+	switch(this.data.level){
+	  case Difficulty.Easy:
+		nRows = 3;
+		nCols = 4;
+		elements = this.easyElements;
+		break;
+	  case Difficulty.Normal:
+		nRows = 3;
+		nCols = 8;
+		elements = this.normalElements;
+		break;
+	  case Difficulty.Hard:
+		nRows = 4;
+		nCols = 10;
+		break;
+	}
+	this.info = new PairGameInfo(nRows, nCols);
+	this.info.level = this.data.level;
+	this.info.card1 = this.data.card1;
+	this.info.card2 = this.data.card2;
+	this.elementService.elementsObservable.subscribe((elementsDTO) =>{
+	  this.randomizeCards(elementsDTO.elements, elements, this.data.card1, this.data.card2);
+	  this.info.started = true;
+	});  
+  }
+
+  config(){
+	this.bottomSheet.open(PairGameOptionsComponent, { data: this.data} );
   }
 
   randomizeCards(elements: ElementDTO[], allowedSymbols: string[], card1: string, card2: string){
@@ -163,5 +162,13 @@ export class PairGameComponent implements OnInit {
     this.info.finished = true;
     this.info.points = 1000 - this.info.moves; //Fix order in stats page
     this.timer.stop();
+  }
+
+  levelText(level: Difficulty) {
+	  switch(level){
+		  case Difficulty.Easy: return 'Fácil';
+		  case Difficulty.Normal: return 'Normal';
+		  case Difficulty.Hard: return 'Difícil';
+	  }
   }
 }

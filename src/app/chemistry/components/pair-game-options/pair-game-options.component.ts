@@ -20,8 +20,9 @@ export class PairGameOptionsComponent implements OnInit {
     {text: 'Número atómico', value: 'number'},
   ];
 
-  card1 = this.infoList[0].value;
-  card2 = this.infoList[1].value;
+  card1: string;
+  card2: string;
+  level: number;
 
   exampleElement: ElementDTO;
   example1: string;
@@ -34,6 +35,10 @@ export class PairGameOptionsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+	this.level = this.data.level;
+	this.card1 = this.data.card1;
+	this.card2 = this.data.card2;
+
     let elements = this.elementService.elements;
     let random = RandomHelper.randomIntFromInterval(0, elements.length);
     this.exampleElement = elements[random];
@@ -45,10 +50,14 @@ export class PairGameOptionsComponent implements OnInit {
     this.example2 = this.exampleElement[this.card2];
   }
 
-  choose(level: Difficulty){
-    this.data.level = level;
+  ok(){
+	this.data.level = this.level;
     this.data.card1 = this.card1;
     this.data.card2 = this.card2;
-    this.bottomSheetRef.dismiss();
+	this.bottomSheetRef.dismiss();
+  }
+
+  cancel(){
+	this.bottomSheetRef.dismiss();
   }
 }

@@ -28,6 +28,12 @@
     <div class="login"><app-login [gameName]="'pairs' + info.level" [gameInfo]="info"></app-login></div>
 </div>
 
-<button class="button" *ngIf="!info.started || info.finished" mat-raised-button (click)="btnClick()">
-    {{ 'Jugar' + (info.finished ? ' de nuevo' : '') }}
-</button>
+<div *ngIf="!info.started || info.finished">
+	<button class="button" mat-raised-button (click)="btnClick()">
+		{{ 'Jugar' + (info.finished ? ' de nuevo' : '') }}
+	</button>
+	<span class="mleft">Nivel: <b>{{ levelText(data.level) }}</b></span>
+	<button mat-icon-button aria-label="Opciones" matTooltip="Opciones" (click)="config()">
+		<mat-icon>settings</mat-icon>
+	</button>
+</div>
