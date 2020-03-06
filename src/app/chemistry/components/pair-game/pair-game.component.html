@@ -1,17 +1,27 @@
 <h3>Encuentra la pareja</h3>
 
-<p>Pon a prueba tu memoria localizando cada pareja de elemento de la tabla periódica con su símbolo</p>
+<p>Pon a prueba tu memoria localizando cada pareja formada por elementos de la tabla periódica y sus símbolos</p>
+
+<div *ngIf="!info.started || info.finished">
+	<button class="button" mat-raised-button (click)="btnClick()">
+		{{ 'Jugar' + (info.finished ? ' de nuevo' : '') }}
+	</button>
+	<span class="mleft">Nivel: <b>{{ levelText(data.level) }}</b></span>
+	<button mat-icon-button aria-label="Opciones" matTooltip="Opciones" (click)="config()">
+		<mat-icon>settings</mat-icon>
+	</button>
+</div>
 
 <div *ngIf="info.started">
     <div *ngIf="!info.finished">
         <div>Tiempo: <b><app-timer (tick)="tick($event)"></app-timer></b></div>
         <div>Movimientos: <b>{{info.moves}}</b></div>
     </div>
-    <div class="clear" [style.max-width]="info.nCols * 87 + 'px'">
+    <div class="clear mtop" [style.max-width]="info.nCols * 87 + 'px'">
         <div *ngFor="let card of info.cards" class="flip-card">
             <div class="flip-card-inner" [class.solved]="card.solved" [class.selected]="card.selected">
                 <div class="flip-card-back">
-                        {{card.text}}
+                    <app-element-cell [element]="card.element" [textProperty]="card.solved ? '' : card.textProperty"></app-element-cell>
                 </div>
                 <div class="flip-card-front" (click)="select(card)">
                     
@@ -26,14 +36,4 @@
     Tiempo invertido: <b>{{ info.seconds | formatTime }}</b><br/>
     Movimientos: <b>{{ info.moves }}</b>
     <div class="login"><app-login [gameName]="'pairs' + info.level" [gameInfo]="info"></app-login></div>
-</div>
-
-<div *ngIf="!info.started || info.finished">
-	<button class="button" mat-raised-button (click)="btnClick()">
-		{{ 'Jugar' + (info.finished ? ' de nuevo' : '') }}
-	</button>
-	<span class="mleft">Nivel: <b>{{ levelText(data.level) }}</b></span>
-	<button mat-icon-button aria-label="Opciones" matTooltip="Opciones" (click)="config()">
-		<mat-icon>settings</mat-icon>
-	</button>
 </div>

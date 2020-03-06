@@ -12,8 +12,4 @@ export class Card{
         this.selected = false;
         this.solved = false;
     }
-
-    get text(){
-        return this.element[this.textProperty];
-    }
 }

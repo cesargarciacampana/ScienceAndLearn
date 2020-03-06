@@ -33,6 +33,7 @@ import { PairGameComponent } from './chemistry/components/pair-game/pair-game.co
 import { TimerComponent } from './main/components/timer/timer.component';
 import { PairGameOptionsComponent } from './chemistry/components/pair-game-options/pair-game-options.component';
 import { FormsModule } from '@angular/forms';
+import { ElementCellComponent } from './chemistry/components/element-cell/element-cell.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FormsModule } from '@angular/forms';
     StatisticsTableComponent,
     PairGameComponent,
     TimerComponent,
-    PairGameOptionsComponent
+    PairGameOptionsComponent,
+    ElementCellComponent
   ],
   imports: [
 	FormsModule,
