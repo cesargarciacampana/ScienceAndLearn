@@ -1,7 +1,7 @@
 <form>
     <div>Elige la información que quieres ver en cada pareja</div>
-    <div class="mtop mleft">
-        <mat-form-field>
+    <div class="mtop mleft h60">
+        <mat-form-field class="select">
             <mat-label>Carta 1</mat-label>
             <mat-select [(value)]="card1" (selectionChange)="updateExamples()">
                 <mat-option *ngFor="let info of infoList" [value]="info.value">
@@ -9,18 +9,18 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <span class="example">Ejemplo: {{ example1 }}</span>
+        <app-element-cell class="example" [element]="exampleElement" [textProperty]="card1"></app-element-cell>
     </div>
-    <div class="mleft">
-        <mat-form-field>
+    <div class="mleft h60">
+        <mat-form-field class="select">
             <mat-label>Carta 2</mat-label>
-            <mat-select  [(value)]="card2" (selectionChange)="updateExamples()">
+            <mat-select [(value)]="card2" (selectionChange)="updateExamples()">
                 <mat-option *ngFor="let info of infoList" [value]="info.value">
                 {{info.text}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <span class="example">Ejemplo: {{ example2 }}</span>
+        <app-element-cell class="example" [element]="exampleElement" [textProperty]="card2"></app-element-cell>
     </div>
 
 	<div>Elige el nivel de dificultad</div>

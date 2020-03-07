@@ -11,8 +11,8 @@ export class ElementCellComponent implements OnInit {
   @Input() element: ElementDTO;
   @Input() textProperty = '';
 
-  @Input() width = 85;
-  @Input() height = 100;
+  @Input() width = 50;
+  @Input() height = 50;
 
   fontNormal: number;
   fontBig: number;
@@ -23,7 +23,7 @@ export class ElementCellComponent implements OnInit {
   ngOnInit() {
 	  this.margin = 0.05 * this.height;
 	  this.fontNormal = (13 * this.width / 85) + 1;
-	  this.fontBig = (23 * this.height / 100) + 1;
+	  this.fontBig = (37 * this.height / 100) + 1;
   }
 
   show(name: string){

@@ -1,11 +1,12 @@
 
+<h3>Tabla periódica de los elementos</h3>
 <div class="table" *ngIf="elementsObservable | async as elements"
 	[style.width]="((cellWidth+1) * tableColumns) + 'px'">
 	<div class="cell" [class.emptyCell]="index == 0" [class.emptyCell2]="index == -1"
 		*ngFor="let index of table" [ngSwitch]="index"
 		[style.width]="cellWidth + 'px'" [style.height]="cellHeight + 'px'">
-		<div *ngSwitchCase="900" class="specialCell"><br/><br/>57-71<br/>Lantánidos</div>
-		<div *ngSwitchCase="901" class="specialCell"><br/><br/>89-103<br/>Actínidos</div>
+		<div *ngSwitchCase="900" class="specialCell"><br/>57-71<br/>Lantánidos</div>
+		<div *ngSwitchCase="901" class="specialCell"><br/>89-103<br/>Actínidos</div>
 		<app-element-cell *ngSwitchDefault [element]="getElement(elements, index)"
 			[width]="cellWidth" [height]="cellHeight"></app-element-cell>
 	</div>

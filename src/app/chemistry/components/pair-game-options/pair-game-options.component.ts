@@ -17,7 +17,8 @@ export class PairGameOptionsComponent implements OnInit {
   infoList = [
     {text: 'Nombre', value: 'name'},
     {text: 'Símbolo', value: 'symbol'},
-    {text: 'Número atómico', value: 'number'},
+	{text: 'Número atómico', value: 'number'},
+	{text: 'Todo', value: ''}
   ];
 
   card1: string;
@@ -25,8 +26,6 @@ export class PairGameOptionsComponent implements OnInit {
   level: number;
 
   exampleElement: ElementDTO;
-  example1: string;
-  example2: string;
 
   constructor(
     private bottomSheetRef: MatBottomSheetRef<PairGameOptionsComponent>,
@@ -42,12 +41,6 @@ export class PairGameOptionsComponent implements OnInit {
     let elements = this.elementService.elements;
     let random = RandomHelper.randomIntFromInterval(0, elements.length);
     this.exampleElement = elements[random];
-    this.updateExamples();
-  }
-
-  updateExamples(){
-    this.example1 = this.exampleElement[this.card1];
-    this.example2 = this.exampleElement[this.card2];
   }
 
   ok(){

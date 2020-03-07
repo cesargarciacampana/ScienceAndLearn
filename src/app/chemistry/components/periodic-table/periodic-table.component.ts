@@ -12,7 +12,7 @@ import { ElementDTO } from '@chem-shared/dtos/element.dto';
 export class PeriodicTableComponent implements OnInit {
 
   cellWidth = 50;
-  cellHeight = 70;
+  cellHeight = 50;
   tableColumns = 18;
   elementsObservable: Observable<ElementsDTO>;
   table = [
