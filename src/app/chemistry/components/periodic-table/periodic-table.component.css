@@ -7,9 +7,22 @@
 	border-top: 0;
 	border-left: 0;
 }
-.cell{
+.mtop{
+	margin-top: 20px;
+}
+.cell,.emptyCell{
 	float:left;
 	border: 1px solid gray;
 	border-bottom: 0;
 	border-right: 0;
+}
+.emptyCell{
+	border-color: transparent;
+}
+.emptyCell2{
+	border-top-color: transparent;
+}
+.specialCell{
+	text-align: center;
+	font-size: 9px;
 }
