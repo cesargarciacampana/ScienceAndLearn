@@ -1,5 +1,13 @@
 <div class="cell">
-	<div class="number">{{ show('number') }}</div>
-	<div class="symbol">{{ show('symbol') }}</div>
-	<div class="name">{{ show('name') }}</div>
+	<div class="number" [style.font-size]="fontNormal + 'px'" [style.height]="fontNormal + 'px'">
+		{{ show('number') }}
+	</div>
+	<div class="symbol" 
+		[style.font-size]="fontBig + 'px'" [style.height]="fontBig + 'px'"
+		[style.margin-top]="(height - fontNormal*2 - fontBig - margin*3) + 'px'">
+		{{ show('symbol') }}
+	</div>
+	<div class="name" [style.font-size]="fontNormal + 'px'" [style.height]="fontNormal + 'px'">
+		{{ show('name') }}
+	</div>
 </div>

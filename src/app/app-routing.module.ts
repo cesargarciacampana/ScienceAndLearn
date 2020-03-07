@@ -6,6 +6,7 @@ import { IndexComponent } from '@main/index/index.component';
 import { CalculationGameComponent } from '@math/calculation-game/calculation-game.component';
 import { StatisticsComponent } from '@main/statistics/statistics.component';
 import { PairGameComponent } from '@chem/pair-game/pair-game.component';
+import { PeriodicTableComponent } from '@chem/periodic-table/periodic-table.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'solve', component: ResolutorComponent },
   { path: 'calculation', component: CalculationGameComponent },
   { path: 'stats', component: StatisticsComponent },
+  { path: 'table', component: PeriodicTableComponent },
 
   { path: '**', redirectTo: '' }
 ];

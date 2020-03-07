@@ -1,0 +1,9 @@
+
+<div class="table" *ngIf="elementsObservable | async as elements"
+	[style.width]="((cellWidth+1) * tableColumns) + 'px'">
+	<div class="cell" *ngFor="let index of table"
+		[style.width]="cellWidth + 'px'" [style.height]="cellHeight + 'px'">
+		<app-element-cell [element]="index > 0 ? elements.elements[index-1] : null"
+			[width]="cellWidth" [height]="cellHeight"></app-element-cell>
+	</div>
+</div>

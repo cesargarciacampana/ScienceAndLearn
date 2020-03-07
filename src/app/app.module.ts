@@ -34,6 +34,7 @@ import { TimerComponent } from './main/components/timer/timer.component';
 import { PairGameOptionsComponent } from './chemistry/components/pair-game-options/pair-game-options.component';
 import { FormsModule } from '@angular/forms';
 import { ElementCellComponent } from './chemistry/components/element-cell/element-cell.component';
+import { PeriodicTableComponent } from './chemistry/components/periodic-table/periodic-table.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ElementCellComponent } from './chemistry/components/element-cell/elemen
     PairGameComponent,
     TimerComponent,
     PairGameOptionsComponent,
-    ElementCellComponent
+    ElementCellComponent,
+    PeriodicTableComponent
   ],
   imports: [
 	FormsModule,

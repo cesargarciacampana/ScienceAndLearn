@@ -1,0 +1,15 @@
+.table{
+	margin-left: -10px;
+	margin-top: 10px;
+	float: left;
+	clear: both;
+	border: 1px solid gray;
+	border-top: 0;
+	border-left: 0;
+}
+.cell{
+	float:left;
+	border: 1px solid gray;
+	border-bottom: 0;
+	border-right: 0;
+}
