@@ -1,22 +1,25 @@
 
 <h3>Tabla periódica de los elementos</h3>
-<div class="table" *ngIf="elementsObservable | async as elements"
-	[style.width]="((cellWidth+1) * tableColumns) + 'px'">
-	<div class="cell" [class.emptyCell]="index == 0" [class.emptyCell2]="index == -1"
-		*ngFor="let index of table" [ngSwitch]="index"
-		[style.width]="cellWidth + 'px'" [style.height]="cellHeight + 'px'">
-		<div *ngSwitchCase="900" class="specialCell"><br/>57-71<br/>Lantánidos</div>
-		<div *ngSwitchCase="901" class="specialCell"><br/>89-103<br/>Actínidos</div>
-		<app-element-cell *ngSwitchDefault [element]="getElement(elements, index)"
-			[width]="cellWidth" [height]="cellHeight"></app-element-cell>
+<div *ngIf="elementsObservable | async as elements">
+	<div class="table" 
+		[style.width]="((cellWidth+1) * tableColumns) + 'px'">
+		<div class="cell" [class.emptyCell]="index == 0" [class.emptyCell2]="index == -1"
+			*ngFor="let index of table" [ngSwitch]="index"
+			[style.width]="cellWidth + 'px'" [style.height]="cellHeight + 'px'">
+			<div *ngSwitchCase="900" class="specialCell"><br/>57-71<br/>Lantánidos</div>
+			<div *ngSwitchCase="901" class="specialCell"><br/>89-103<br/>Actínidos</div>
+			<app-element-cell *ngSwitchDefault [element]="getElement(elements, index)"
+				[width]="cellWidth" [height]="cellHeight"></app-element-cell>
+		</div>
 	</div>
-</div>
 
-<div class="table mtop" *ngIf="elementsObservable | async as elements"
-	[style.width]="((cellWidth+1) * tableColumns) + 'px'">
-	<div class="cell" [class.emptyCell]="index == 0" *ngFor="let index of table2"
-		[style.width]="cellWidth + 'px'" [style.height]="cellHeight + 'px'"> 
-		<app-element-cell [element]="getElement(elements, index)"
-			[width]="cellWidth" [height]="cellHeight"></app-element-cell>
+	<div class="table mtop" 
+		[style.width]="((cellWidth+1) * (tableColumns - 3)) + 'px'"
+		[style.margin-left]="((cellWidth+1) * 3) + 'px'">
+		<div class="cell" [class.emptyCell]="index == 0" *ngFor="let index of table2"
+			[style.width]="cellWidth + 'px'" [style.height]="cellHeight + 'px'"> 
+			<app-element-cell [element]="getElement(elements, index)"
+				[width]="cellWidth" [height]="cellHeight"></app-element-cell>
+		</div>
 	</div>
 </div>
