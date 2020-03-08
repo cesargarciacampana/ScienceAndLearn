@@ -35,6 +35,7 @@ import { PairGameOptionsComponent } from './chemistry/components/pair-game-optio
 import { FormsModule } from '@angular/forms';
 import { ElementCellComponent } from './chemistry/components/element-cell/element-cell.component';
 import { PeriodicTableComponent } from './chemistry/components/periodic-table/periodic-table.component';
+import { ElementInfoComponent } from './chemistry/components/element-info/element-info.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { PeriodicTableComponent } from './chemistry/components/periodic-table/pe
     TimerComponent,
     PairGameOptionsComponent,
     ElementCellComponent,
-    PeriodicTableComponent
+    PeriodicTableComponent,
+    ElementInfoComponent
   ],
   imports: [
 	FormsModule,
@@ -89,7 +91,8 @@ import { PeriodicTableComponent } from './chemistry/components/periodic-table/pe
   ],
   entryComponents: [
     SpellGameOptionsComponent,
-    PairGameOptionsComponent
+	PairGameOptionsComponent,
+	ElementInfoComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

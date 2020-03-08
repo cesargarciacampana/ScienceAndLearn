@@ -24,3 +24,10 @@
 	text-align: center;
 	font-size: 9px;
 }
+.element{
+	cursor: pointer;
+}
+.wh100{
+	width:100%;
+	height:100%;
+}

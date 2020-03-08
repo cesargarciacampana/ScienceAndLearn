@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ElementsDTO } from '@chem-shared/dtos/elements.dto';
 import { ElementService } from '@chem-shared/services/element.service';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
+import { OverlayRef, Overlay, ConnectedPosition } from '@angular/cdk/overlay';
+import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ElementInfoComponent, ELEMENT_INFO_DATA } from '@chem/element-info/element-info.component';
+import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 
 @Component({
   selector: 'app-periodic-table',
@@ -30,8 +34,13 @@ export class PeriodicTableComponent implements OnInit {
 	89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103
   ];
 
+  private overlayRef: OverlayRef;
+  private timer : any;
+
   constructor(
-	  private elementService: ElementService
+	  private elementService: ElementService,
+	  private overlay: Overlay,
+	  private injector: Injector
 	) { }
 
   ngOnInit() {
@@ -40,5 +49,80 @@ export class PeriodicTableComponent implements OnInit {
 
   getElement(elements: ElementsDTO, index: number){
 	return index > 0 ? elements.elements[index-1] : null
+  }
+
+  
+  getOverlayPositions(): ConnectedPosition[]{
+	return [{
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'top',
+      }, {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'bottom',
+      }, {
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'top',
+      }, {
+        originX: 'end',
+        originY: 'top',
+        overlayX: 'end',
+        overlayY: 'bottom',
+      }];
+  }
+
+  show(element: ElementDTO, elementRef: ElementRef){
+	this.hide();
+
+	if (!element)
+		return;
+
+	const positions = this.getOverlayPositions();
+	const positionStrategy = this.overlay.position()
+		.flexibleConnectedTo(elementRef)
+		.withPositions(positions).withPush(true);
+
+	this.overlayRef = this.overlay.create({
+		positionStrategy: positionStrategy
+	});
+
+	const data = { 
+		element:element, 
+		closeDelegate: () => this.hide(),
+		enterDelegate: () => this.clearTimer() };
+	const elementPortal = new ComponentPortal(ElementInfoComponent, null, 
+		this.createInjector(data));
+	this.overlayRef.attach(elementPortal);
+  }
+
+  hide(){
+	if (!this.overlayRef)
+		return;
+	
+	this.clearTimer();
+	this.overlayRef.dispose();
+	this.overlayRef = null;
+
+  }
+
+  hideTimer(){
+	  const that = this;
+	  this.timer = setTimeout(() => that.hide(), 100);
+  }
+
+  clearTimer(){
+	if (this.timer)
+		clearTimeout(this.timer)
+  }
+
+  createInjector(dataToPass): PortalInjector {
+    const injectorTokens = new WeakMap();
+    injectorTokens.set(ELEMENT_INFO_DATA, dataToPass);
+    return new PortalInjector(this.injector, injectorTokens);
   }
 }

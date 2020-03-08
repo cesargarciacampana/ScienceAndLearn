@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Injector } from '@angular/core';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
+import { Overlay, OverlayRef, FlexibleConnectedPositionStrategyOrigin, ConnectedPosition } from '@angular/cdk/overlay';
+import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ElementInfoComponent, ELEMENT_INFO_DATA } from '@chem/element-info/element-info.component';
 
 @Component({
   selector: 'app-element-cell',
