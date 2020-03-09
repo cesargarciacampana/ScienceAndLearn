@@ -7,10 +7,15 @@
     left: 0;
     right: 0;
 }
+.toolbar{
+    position: fixed;
+    z-index: 2;
+}
 .sidenav-container{
   /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
        `<body>` to be our scrolling element for mobile layouts. */
      flex: 1 0 auto;
+     margin-top: 56px;
 }
 .menu{
     width: 250px;
