@@ -20,14 +20,14 @@
     <div class="clear mtop" [style.max-width]="info.nCols * 77 + 'px'">
         <div *ngFor="let card of info.cards" class="flip-card">
             <div class="flip-card-inner" [class.solved]="card.solved" [class.selected]="card.selected">
+				<div class="flip-card-front" (click)="select(card)">
+                    
+                </div>
                 <div class="flip-card-back">
 					<app-element-cell [element]="card.element" 
 						[textProperty]="card.solved ? '' : card.textProperty"
 						width="70" height="70">
 					</app-element-cell>
-                </div>
-                <div class="flip-card-front" (click)="select(card)">
-                    
                 </div>
             </div>
         </div>
