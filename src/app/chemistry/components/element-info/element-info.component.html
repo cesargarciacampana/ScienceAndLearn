@@ -5,10 +5,10 @@
 	<table>
 		<tr><td>Categoría</td><td>{{data.element.category}}</td></tr>
 		<tr><td>Masa atómica</td><td>{{data.element.atomic_mass}} u</td></tr>
-		<tr><td>Densidad</td><td>{{data.element.density * 1000}} kg/m3</td></tr>
+		<tr><td>Densidad</td><td>{{data.element.density * 1000 | number:'1.0-3'}} kg/m3</td></tr>
 		<tr><td>Conf. electrónica</td><td>{{data.element.electron_configuration}}</td></tr>
-		<tr *ngIf="data.element.melt"><td>Punto fusión</td><td>{{data.element.melt}} Kelvin ({{data.element.melt - 273}} ºC)</td></tr>
-		<tr *ngIf="data.element.boil"><td>Punto ebullición</td><td>{{data.element.boil}} Kelvin ({{data.element.boil - 273}} ºC)</td></tr>
+		<tr *ngIf="data.element.melt"><td>Punto fusión</td><td>{{data.element.melt | number:'1.0-3'}} Kelvin ({{data.element.melt - 273.15 | number:'1.0-3'}} ºC)</td></tr>
+		<tr *ngIf="data.element.boil"><td>Punto ebullición</td><td>{{data.element.boil | number:'1.0-3'}} Kelvin ({{data.element.boil - 273.15 | number:'1.0-3'}} ºC)</td></tr>
 		<tr><td>Estado ordinario</td><td>{{data.element.phase}}</td></tr>
 	</table>
 </div>
