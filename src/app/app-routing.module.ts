@@ -7,11 +7,13 @@ import { CalculationGameComponent } from '@math/calculation-game/calculation-gam
 import { StatisticsComponent } from '@main/statistics/statistics.component';
 import { PairGameComponent } from '@chem/pair-game/pair-game.component';
 import { PeriodicTableComponent } from '@chem/periodic-table/periodic-table.component';
+import { BalancingGameComponent } from '@chem/balancing-game/balancing-game.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'spell', component: SpellGameComponent },
   { path: 'pairs', component: PairGameComponent },
+  { path: 'balancing', component: BalancingGameComponent },
   { path: 'solve', component: ResolutorComponent },
   { path: 'calculation', component: CalculationGameComponent },
   { path: 'stats', component: StatisticsComponent },

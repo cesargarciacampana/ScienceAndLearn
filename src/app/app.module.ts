@@ -36,6 +36,9 @@ import { FormsModule } from '@angular/forms';
 import { ElementCellComponent } from './chemistry/components/element-cell/element-cell.component';
 import { PeriodicTableComponent } from './chemistry/components/periodic-table/periodic-table.component';
 import { ElementInfoComponent } from './chemistry/components/element-info/element-info.component';
+import { BalancingGameComponent } from './chemistry/components/balancing-game/balancing-game.component';
+import { EcuationComponent } from './chemistry/components/ecuation/ecuation.component';
+import { CompoundComponent } from './chemistry/components/compound/compound.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { ElementInfoComponent } from './chemistry/components/element-info/elemen
     PairGameOptionsComponent,
     ElementCellComponent,
     PeriodicTableComponent,
-    ElementInfoComponent
+    ElementInfoComponent,
+    BalancingGameComponent,
+    EcuationComponent,
+    CompoundComponent
   ],
   imports: [
 	FormsModule,
