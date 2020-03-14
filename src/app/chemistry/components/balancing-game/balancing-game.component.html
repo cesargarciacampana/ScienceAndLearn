@@ -3,5 +3,6 @@
 <p>Ajusta la siguiente ecuación química arrastrando los componentes a la balanza hasta que esté equilibrada</p>
 
 <div *ngIf="ecuations">
-<app-ecuation *ngFor="let ecuation of ecuations" [ecuation]="ecuation"></app-ecuation>
+    <!--<app-ecuation *ngFor="let ecuation of ecuations" [ecuation]="ecuation"></app-ecuation>-->
+    <app-balancing-game-balancer [ecuation]="ecuations[index]" (next)="next()"></app-balancing-game-balancer>
 </div>

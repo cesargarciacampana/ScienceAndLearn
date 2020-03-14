@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Ecuation } from '@chem-shared/models/ecuation';
 
 @Component({
@@ -9,10 +9,10 @@ import { Ecuation } from '@chem-shared/models/ecuation';
 export class EcuationComponent implements OnInit {
 
   @Input() ecuation: Ecuation;
+  @Input() allowBalancing = false;
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

@@ -3,6 +3,7 @@ import { ElementService } from '@chem-shared/services/element.service';
 import { Ecuation } from '@chem-shared/models/ecuation';
 import { EcuationCompound } from '@chem-shared/models/ecuation-compound';
 import { EcuationElement } from '@chem-shared/models/ecuation-element';
+import { ArrayHelper } from '@shared/helpers/array.helper';
 
 @Injectable({providedIn: 'root'})
 export class EcuationHelper {
@@ -79,6 +80,8 @@ export class EcuationHelper {
                     let element = this.elementService.findElement(symbol);
                     if (!element)
                         throw new Error('Syntax error: Invalid element ' + symbol);
+                    if (number == '')
+                        number = '1';
                     compound.elements.push(new EcuationElement(element, parseInt(number)));
                 }
                 number = '';
@@ -90,5 +93,27 @@ export class EcuationHelper {
         if (compound.elements.length == 0)
             throw new Error('Syntax error: A compound needs to have elements');
         return compound;
+    }
+
+    isBalanced(ecuation: Ecuation) : boolean{
+        let left = this.getElementCount(ecuation.left);
+        let right = this.getElementCount(ecuation.right);
+
+        return ArrayHelper.isEqual(left, right);
+    }
+
+    private getElementCount(compounds: EcuationCompound[]): number[]{
+        let counts = [];
+        for(let i = 0; i < compounds.length; i++){
+            let compound = compounds[i];
+            for(let j = 0; j < compound.elements.length; j++){
+                let element = compound.elements[j];
+                let index = element.element.number;
+                if (!counts[index])
+                    counts[index] = 0;
+                counts[index] += compound.times * element.index;
+            }
+        }
+        return counts;
     }
 }

@@ -38,6 +38,7 @@ export class BalancingGameComponent implements OnInit {
     'Al + HCl = AlCl3 + H2'
   ];
   ecuations: Ecuation[];
+  index = 0;
 
   constructor(
     private elementService : ElementService,
@@ -59,5 +60,9 @@ export class BalancingGameComponent implements OnInit {
 
   private create(symbol: string, index = 1){
     return new EcuationElement(this.elementService.findElement(symbol), index)
+  }
+
+  next(){
+    this.index++;
   }
 }

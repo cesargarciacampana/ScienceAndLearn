@@ -39,6 +39,7 @@ import { ElementInfoComponent } from './chemistry/components/element-info/elemen
 import { BalancingGameComponent } from './chemistry/components/balancing-game/balancing-game.component';
 import { EcuationComponent } from './chemistry/components/ecuation/ecuation.component';
 import { CompoundComponent } from './chemistry/components/compound/compound.component';
+import { BalancingGameBalancerComponent } from './chemistry/components/balancing-game-balancer/balancing-game-balancer.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { CompoundComponent } from './chemistry/components/compound/compound.comp
     ElementInfoComponent,
     BalancingGameComponent,
     EcuationComponent,
-    CompoundComponent
+    CompoundComponent,
+    BalancingGameBalancerComponent
   ],
   imports: [
 	FormsModule,
