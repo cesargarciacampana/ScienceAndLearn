@@ -1,7 +1,13 @@
 <div *ngIf="ecuation">
-    <app-ecuation [ecuation]="ecuation" [allowBalancing]="!isBalanced()"></app-ecuation>
+    <div *ngIf="graphical; else notGraphical">
+
+    </div>
+    <ng-template #notGraphical>
+        <app-ecuation [ecuation]="ecuation" [allowBalancing]="!isBalanced()"></app-ecuation>
+    </ng-template>
+
     <div *ngIf="isBalanced(); else notBalanced">
-        <h3 class="success" >¡Bien hecho!</h3>
+        <h3 class="success">¡Bien hecho!</h3>
         <button class="button" mat-raised-button (click)="nextClick()">
             Siguiente ecuación
         </button>

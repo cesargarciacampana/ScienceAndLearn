@@ -10,6 +10,7 @@ import { EcuationHelper } from '@chem-shared/helpers/ecuation.helper';
 export class BalancingGameBalancerComponent implements OnInit {
 
   @Input() ecuation: Ecuation;
+  @Input() graphical = false;
   balanced = false;
 
   @Output() next = new EventEmitter<any>()

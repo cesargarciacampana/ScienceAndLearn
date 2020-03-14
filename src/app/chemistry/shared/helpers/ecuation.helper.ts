@@ -12,7 +12,7 @@ export class EcuationHelper {
         private elementService : ElementService,
     ) { }
 
-    parseEcuation(formula: string){
+    parseEcuation(formula: string, fillWithZeros = false){
         const endChar = '|';
         let ecuation = new Ecuation();
         let currentPart = ecuation.left;
@@ -26,14 +26,14 @@ export class EcuationHelper {
                     throw new Error('Syntax error: Two equal symbols not allowed');
                 if (acumulated == '')
                     throw new Error('Syntax error: An equal symbol has to be after a compound');
-                currentPart.push(this.parseCompound(acumulated));
+                currentPart.push(this.parseCompound(acumulated, fillWithZeros));
                 acumulated = '';
                 currentPart = ecuation.right;
             }
             else if(char == '+' ||char == endChar){
                 if (acumulated == '')
                     throw new Error('Syntax error: A plus symbol has to be after a compound');
-                currentPart.push(this.parseCompound(acumulated));
+                currentPart.push(this.parseCompound(acumulated, fillWithZeros));
                 acumulated = '';
             }
             else if (char != ' ')
@@ -55,7 +55,7 @@ export class EcuationHelper {
         return c >= 'a' && c <= 'z';
     }
 
-    parseCompound(text: string) : EcuationCompound{
+    parseCompound(text: string, fillWithZeros = false) : EcuationCompound{
         const endChar = '|';
         let compound = new EcuationCompound();
         let symbol = '';
@@ -92,6 +92,10 @@ export class EcuationHelper {
         }
         if (compound.elements.length == 0)
             throw new Error('Syntax error: A compound needs to have elements');
+
+        if (fillWithZeros)
+            compound.times = 0;
+
         return compound;
     }
 
@@ -99,7 +103,7 @@ export class EcuationHelper {
         let left = this.getElementCount(ecuation.left);
         let right = this.getElementCount(ecuation.right);
 
-        return ArrayHelper.isEqual(left, right);
+        return left.length > 0 && ArrayHelper.isEqual(left, right);
     }
 
     private getElementCount(compounds: EcuationCompound[]): number[]{
@@ -109,9 +113,11 @@ export class EcuationHelper {
             for(let j = 0; j < compound.elements.length; j++){
                 let element = compound.elements[j];
                 let index = element.element.number;
-                if (!counts[index])
-                    counts[index] = 0;
-                counts[index] += compound.times * element.index;
+                if (compound.times > 0){
+                    if (!counts[index])
+                        counts[index] = 0;
+                    counts[index] += compound.times * element.index;
+                }
             }
         }
         return counts;

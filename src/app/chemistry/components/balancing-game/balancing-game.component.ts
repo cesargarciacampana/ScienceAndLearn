@@ -13,9 +13,23 @@ import { EcuationHelper } from '@chem-shared/helpers/ecuation.helper';
 export class BalancingGameComponent implements OnInit {
 
   private ecuationStrings = [
+    'CH4 + O2 = CO2 + H2O',
+    'NaOH + HCl = NaCl + H2O',
+    'Fe + Cl2 = FeCl3',
+    'S + O2 = SO2',
+    'Mg + HCl = MgCl2 + H2',
+    //'Fe2O3 + H2O = Fe(OH)3',
+    //'HCl + Ca(OH)2 = CaCl2 + H2O',
+    //'Al2O3 + H2SO4 = Al2(SO4)3 + H2O',
+    'Cu + H2SO4 = CuSO4 + SO2 + H2O',
+    'N2 + O2 = N2O3',
+    'ZnS + O2 = ZnO + SO2',
+    'Hg + H2SO4 = HgSO4 + H2O + SO2',
+    'P + Cl2 = PCl5',
+    //'Cu + HNO3 = Cu(NO3)2 + H2O + NO',
+
     'H2 + O2 = H2O',
     'N2 + H2 = NH3',
-    'CH4 + O2 = CO2 + H2O',
     'H2O + Na = NaOH + H2',
     'KClO3 = KCl + O2',
     'BaO2 + HCl = BaCl2 + H2O2',
@@ -35,10 +49,16 @@ export class BalancingGameComponent implements OnInit {
     'C2H6 + O2 = CO2 + H2O',
     'FeS2 + O2 = Fe2O3 + SO2',
     'Zn + HCl = ZnCl2 + H2',
-    'Al + HCl = AlCl3 + H2'
+    'Al + HCl = AlCl3 + H2',
+    //'CaC2 + H2O = C2H2 + Ca(OH)2',
+    //'HCl + Al(OH)3 = AlCl3 + H2O',
+    'Fe + O2 = Fe2O3',
+    'HBr + NaOH = NaBr + H2O',
+    'C6H12O6 + O2 = CO2 + H2O',
   ];
-  ecuations: Ecuation[];
-  index = 0;
+  ecuation: Ecuation;
+  emptyEcuation: Ecuation;
+  index = -1;
 
   constructor(
     private elementService : ElementService,
@@ -51,18 +71,13 @@ export class BalancingGameComponent implements OnInit {
 
   private init(){
     this.elementService.elementsObservable.subscribe(() => {
-      let ecuations = [];
-      for (let i = 0; i < this.ecuationStrings.length; i++)
-        ecuations.push(this.ecuationHelper.parseEcuation(this.ecuationStrings[i]));
-      this.ecuations = ecuations;
+      this.next();
     });
-  }
-
-  private create(symbol: string, index = 1){
-    return new EcuationElement(this.elementService.findElement(symbol), index)
   }
 
   next(){
     this.index++;
+    this.ecuation = this.ecuationHelper.parseEcuation(this.ecuationStrings[this.index]);
+    this.emptyEcuation = this.ecuationHelper.parseEcuation(this.ecuationStrings[this.index], true);
   }
 }

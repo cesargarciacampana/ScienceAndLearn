@@ -15,4 +15,11 @@ export class EcuationComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  emptyIfZero(value: number){
+    if (value <= 0)
+      return '';
+    else
+      return value;
+  }
 }
