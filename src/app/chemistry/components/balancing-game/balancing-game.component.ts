@@ -15,7 +15,7 @@ export class BalancingGameComponent implements OnInit {
   private ecuationStrings = [
     'H2 + O2 = H2O',
     'N2 + H2 = NH3',
-    'CH4 + O = CO2 + H2O',
+    'CH4 + O2 = CO2 + H2O',
     'H2O + Na = NaOH + H2',
     'KClO3 = KCl + O2',
     'BaO2 + HCl = BaCl2 + H2O2',
