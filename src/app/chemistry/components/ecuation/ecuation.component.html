@@ -4,10 +4,10 @@
         <app-compound [compound]="compound"></app-compound>
         <span class="operator" *ngIf="i + 1 < ecuation.left.length">+</span>
     </span>
-    <span class="operator">=</span>
+    <span class="operator">→</span>
     <span *ngFor="let compound of ecuation.right; let i = index">
         <span *ngIf="compound.times > 1">{{ compound.times }}</span>
         <app-compound [compound]="compound"></app-compound>
-        <span class="operator" *ngIf="i + 1 < ecuation.left.length">+</span>
+        <span class="operator" *ngIf="i + 1 < ecuation.right.length">+</span>
     </span>
 </div>
