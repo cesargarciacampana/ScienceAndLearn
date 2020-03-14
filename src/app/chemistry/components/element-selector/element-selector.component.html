@@ -9,16 +9,25 @@
         <mat-icon *ngIf="!readonly && !elementChk.isClue" matChipRemove matTooltip="Quitar">cancel</mat-icon>
     </mat-chip>
 </mat-chip-list>
-<div *ngIf="!readonly">
-  <mat-form-field>
-      <input matInput
-          placeholder="Selecciona un elemento"
-          #elementInput
-          [matAutocomplete]="auto" />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let elementChk of filteredElements" [value]="elementChk">
-          {{elementChk.element.name}}
-        </mat-option>
-      </mat-autocomplete>
-  </mat-form-field>
+<div *ngIf="!readonly" class="mtop">
+  <div>Selecciona los elementos que permitan completar la palabra</div>
+  <div *ngIf="showAsButtons; else asTextField"> 
+    <button mat-stroked-button *ngFor="let elementChk of filteredElements" 
+      class="elementBtn" (click)="selected(elementChk)">
+      {{elementChk.element.name}}
+    </button>
+  </div>
+  <ng-template #asTextField>
+    <mat-form-field>
+        <input matInput
+            placeholder="Buscar elemento"
+            #elementInput
+            [matAutocomplete]="auto" />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selected($event.option.value)">
+          <mat-option *ngFor="let elementChk of filteredElements" [value]="elementChk">
+            {{elementChk.element.name}}
+          </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+  </ng-template>
 </div>

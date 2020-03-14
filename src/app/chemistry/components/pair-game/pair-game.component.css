@@ -6,9 +6,9 @@
     color: green;
 }
 .success{
-    margin-top: 20px;
     margin-bottom: 20px;
     clear: both;
+    float: left;
 }
 .mleft{
 	margin-left: 15px;

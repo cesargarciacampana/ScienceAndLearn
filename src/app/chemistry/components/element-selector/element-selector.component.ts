@@ -15,6 +15,7 @@ export class ElementSelectorComponent implements OnInit {
   private _sortedElements : ElementCheckable[];
   private elementsCachedFor = null;
 
+  @Input() showAsButtons = false;
   @Input() readonly = false;
   @Input() availableElements : string[];
 
@@ -88,8 +89,9 @@ export class ElementSelectorComponent implements OnInit {
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.updateElement(event.option.value, true);
-    this.elementInput.nativeElement.value = '';
+  selected(elementChk: ElementCheckable): void {
+    this.updateElement(elementChk, true);
+    if (this.elementInput)
+      this.elementInput.nativeElement.value = '';
   }
 }

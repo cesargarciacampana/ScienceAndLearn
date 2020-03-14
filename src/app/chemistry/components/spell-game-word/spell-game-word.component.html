@@ -4,6 +4,7 @@
         <app-word [word]="userWord"></app-word>
     </div>
     <app-elementselector [readonly]="wordCompleted" [availableElements]="availableElements"
+        [showAsButtons]="availableElements && availableElements.length < 15"
         (valueChanged)="elementSelected($event)">
     </app-elementselector>
     <div *ngIf="wordCompleted">
