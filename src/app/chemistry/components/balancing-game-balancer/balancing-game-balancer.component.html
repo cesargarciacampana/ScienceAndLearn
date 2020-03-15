@@ -10,13 +10,13 @@
     </ng-template>
     <div *ngIf="graphical; else notGraphical">
         <div><app-ecuation [ecuation]="ecuation"></app-ecuation></div>
-        <div class="balance">
+        <div class="balance" [class.unbalancedLeft]="unbalancedLeft" [class.unbalancedRight]="unbalancedRight">
             <div cdkDropList #leftBasket="cdkDropList" class="dropAreaLeft" [class.dragging]="leftDragging"
                 (cdkDropListDropped)="drop($event, true)">
                 <div class="basket-left">
                     <div class="basket-column" *ngFor="let compound of ecuation.left">
                         <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
-                            [style.cursor]="compound.times > 1 ? 'pointer' : 'auto'">
+                            [style.cursor]="!balanced && compound.times > 1 ? 'pointer' : 'auto'">
                             <app-compound [compound]="compound" (click)="removeCompound(compound)"></app-compound>
                         </span>
                     </div>
@@ -27,7 +27,7 @@
                 <div class="basket-right">
                     <div class="basket-column" *ngFor="let compound of ecuation.right">
                         <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
-                            [style.cursor]="compound.times > 1 ? 'pointer' : 'auto'">
+                            [style.cursor]="!balanced && compound.times > 1 ? 'pointer' : 'auto'">
                             <app-compound [compound]="compound" (click)="removeCompound(compound)"></app-compound>
                         </span>
                     </div>
@@ -55,6 +55,6 @@
         </div>
     </div>
     <ng-template #notGraphical>
-        <app-ecuation [ecuation]="ecuation" [allowBalancing]="!isBalanced()"></app-ecuation>
+        <app-ecuation [ecuation]="ecuation" [allowBalancing]="!balanced"></app-ecuation>
     </ng-template>
 </div>

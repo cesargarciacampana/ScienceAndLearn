@@ -10,6 +10,13 @@
     width: 500px;
     height: 150px;
     border-bottom: 2px solid black;
+    transition: transform 0.5s;
+}
+.unbalancedLeft{
+    transform: rotate(-8deg);
+}
+.unbalancedRight{
+    transform: rotate(+8deg);
 }
 .base{
     margin-left: 210px;

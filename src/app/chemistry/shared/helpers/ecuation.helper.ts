@@ -96,27 +96,24 @@ export class EcuationHelper {
         return compound;
     }
 
-    isBalanced(ecuation: Ecuation) : boolean{
-        let left = this.getElementCount(ecuation.left);
-        let right = this.getElementCount(ecuation.right);
+    isBalanced(ecuation: Ecuation) : number{
+        let left = this.getElementWeight(ecuation.left);
+        let right = this.getElementWeight(ecuation.right);
 
-        return left.length > 0 && ArrayHelper.isEqual(left, right);
+        if (left < right) return 1;
+        else if (left > right) return -1;
+        else return 0;
     }
 
-    private getElementCount(compounds: EcuationCompound[]): number[]{
-        let counts = [];
+    private getElementWeight(compounds: EcuationCompound[]): number{
+        let weight = 0;
         for(let i = 0; i < compounds.length; i++){
             let compound = compounds[i];
             for(let j = 0; j < compound.elements.length; j++){
                 let element = compound.elements[j];
-                let index = element.element.number;
-                if (compound.times > 0){
-                    if (!counts[index])
-                        counts[index] = 0;
-                    counts[index] += compound.times * element.index;
-                }
+                weight += compound.times * element.index * element.element.atomic_mass;
             }
         }
-        return counts;
+        return Math.floor(weight * 1000) / 1000;
     }
 }

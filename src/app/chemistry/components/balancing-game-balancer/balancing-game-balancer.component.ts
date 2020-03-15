@@ -14,6 +14,8 @@ export class BalancingGameBalancerComponent implements OnInit {
   @Input() ecuation: Ecuation;
   @Input() graphical = false;
   balanced = false;
+  unbalancedLeft = false;
+  unbalancedRight = false;
 
   leftDragging = false;
   rightDragging = false;
@@ -25,11 +27,14 @@ export class BalancingGameBalancerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.ecuation)
+      this.checkBalanced();
   }
 
   nextClick(){
-    this.balanced = false;
     this.next.emit();
+    const that = this;
+    setTimeout(() => that.checkBalanced(), 50);
   }
 
   drop(event: CdkDragDrop<any>, left: boolean){
@@ -46,14 +51,17 @@ export class BalancingGameBalancerComponent implements OnInit {
   }
 
   removeCompound(compound: EcuationCompound){
-    if (compound.times > 1){
+    if (!this.balanced && compound.times > 1){
       compound.times--;
       this.checkBalanced();
     }
   }
 
-  private checkBalanced(){
-    this.balanced = this.ecuationHelper.isBalanced(this.ecuation);
+  checkBalanced(){
+    let balance =  this.ecuationHelper.isBalanced(this.ecuation);
+    this.balanced = balance == 0;
+    this.unbalancedLeft = balance < 0;
+    this.unbalancedRight = balance > 0;
   }
 
   startLeftDrag(active: boolean){

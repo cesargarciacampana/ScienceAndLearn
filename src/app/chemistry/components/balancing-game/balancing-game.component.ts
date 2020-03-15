@@ -12,18 +12,21 @@ import { EcuationHelper } from '@chem-shared/helpers/ecuation.helper';
 })
 export class BalancingGameComponent implements OnInit {
 
+/*     
+    'NaOH + HCl = NaCl + H2O',
+    'S + O2 = SO2',
+    'ZnS + O2 = ZnO + SO2',
+*/
+
   private ecuationStrings = [
     'CH4 + O2 = CO2 + H2O',
-    'NaOH + HCl = NaCl + H2O',
     'Fe + Cl2 = FeCl3',
-    'S + O2 = SO2',
     'Mg + HCl = MgCl2 + H2',
     //'Fe2O3 + H2O = Fe(OH)3',
     //'HCl + Ca(OH)2 = CaCl2 + H2O',
     //'Al2O3 + H2SO4 = Al2(SO4)3 + H2O',
     'Cu + H2SO4 = CuSO4 + SO2 + H2O',
     'N2 + O2 = N2O3',
-    'ZnS + O2 = ZnO + SO2',
     'Hg + H2SO4 = HgSO4 + H2O + SO2',
     'P + Cl2 = PCl5',
     //'Cu + HNO3 = Cu(NO3)2 + H2O + NO',
