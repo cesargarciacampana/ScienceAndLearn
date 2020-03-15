@@ -1,18 +1,60 @@
 <div *ngIf="ecuation">
-    <div *ngIf="graphical; else notGraphical">
-
-    </div>
-    <ng-template #notGraphical>
-        <app-ecuation [ecuation]="ecuation" [allowBalancing]="!isBalanced()"></app-ecuation>
-    </ng-template>
-
-    <div *ngIf="isBalanced(); else notBalanced">
-        <h3 class="success">¡Bien hecho!</h3>
+    <div class="success" *ngIf="balanced; else notBalanced">
+        <h2>¡Bien hecho!</h2>
         <button class="button" mat-raised-button (click)="nextClick()">
             Siguiente ecuación
         </button>
-    </div>
+    </div> 
     <ng-template #notBalanced>
-        <h3 class="fail">No ajustada</h3>
+        <h3 class="fail">Estado: No ajustada</h3>
+    </ng-template>
+    <div *ngIf="graphical; else notGraphical">
+        <div><app-ecuation [ecuation]="ecuation"></app-ecuation></div>
+        <div class="balance">
+            <div cdkDropList #leftBasket="cdkDropList" class="dropAreaLeft" [class.dragging]="leftDragging"
+                (cdkDropListDropped)="drop($event, true)">
+                <div class="basket-left">
+                    <div class="basket-column" *ngFor="let compound of ecuation.left">
+                        <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
+                            [style.cursor]="compound.times > 1 ? 'pointer' : 'auto'">
+                            <app-compound [compound]="compound" (click)="removeCompound(compound)"></app-compound>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div cdkDropList #rightBasket="cdkDropList" class="dropAreaRight" [class.dragging]="rightDragging"
+                (cdkDropListDropped)="drop($event, false)">
+                <div class="basket-right">
+                    <div class="basket-column" *ngFor="let compound of ecuation.right">
+                        <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
+                            [style.cursor]="compound.times > 1 ? 'pointer' : 'auto'">
+                            <app-compound [compound]="compound" (click)="removeCompound(compound)"></app-compound>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="base"></div>
+
+        <div class="compounds" *ngIf="!balanced">
+            <p>Arrastra los compuestos a la balanza:</p>
+            <div cdkDropList [cdkDropListConnectedTo]="[leftBasket]" class="compounds-left">
+                <span class="compound draggable" *ngFor="let compound of ecuation.left" cdkDrag 
+                    [cdkDragData]="compound"
+                    (cdkDragStarted)="startLeftDrag(true)" (cdkDragEnded)="startLeftDrag(false)">
+                    <app-compound [compound]="compound"></app-compound>
+                </span>
+            </div>
+            <div cdkDropList [cdkDropListConnectedTo]="[rightBasket]" class="compounds-right">
+                <span class="compound draggable" *ngFor="let compound of ecuation.right" cdkDrag
+                    [cdkDragData]="compound"
+                    (cdkDragStarted)="startRightDrag(true)" (cdkDragEnded)="startRightDrag(false)">
+                    <app-compound [compound]="compound"></app-compound>
+                </span>
+            </div>
+        </div>
+    </div>
+    <ng-template #notGraphical>
+        <app-ecuation [ecuation]="ecuation" [allowBalancing]="!isBalanced()"></app-ecuation>
     </ng-template>
 </div>

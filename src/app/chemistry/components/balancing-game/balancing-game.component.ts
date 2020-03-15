@@ -78,6 +78,5 @@ export class BalancingGameComponent implements OnInit {
   next(){
     this.index++;
     this.ecuation = this.ecuationHelper.parseEcuation(this.ecuationStrings[this.index]);
-    this.emptyEcuation = this.ecuationHelper.parseEcuation(this.ecuationStrings[this.index], true);
   }
 }

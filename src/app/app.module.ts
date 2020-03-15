@@ -7,6 +7,7 @@ import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatBottomSheetModule, MatSelectModule, MatTableModule, MatExpansionModule,
   MatRadioModule
 } from '@angular/material';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -79,6 +80,8 @@ import { BalancingGameBalancerComponent } from './chemistry/components/balancing
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
 
+    DragDropModule,
+
     MatInputModule,
     MatSidenavModule,
     MatButtonModule,
@@ -94,8 +97,8 @@ import { BalancingGameBalancerComponent } from './chemistry/components/balancing
     MatBottomSheetModule,
     MatSelectModule,
     MatTableModule,
-	MatExpansionModule,
-	MatRadioModule
+    MatExpansionModule,
+    MatRadioModule
   ],
   entryComponents: [
     SpellGameOptionsComponent,

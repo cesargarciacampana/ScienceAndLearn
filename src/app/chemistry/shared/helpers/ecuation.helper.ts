@@ -12,7 +12,7 @@ export class EcuationHelper {
         private elementService : ElementService,
     ) { }
 
-    parseEcuation(formula: string, fillWithZeros = false){
+    parseEcuation(formula: string){
         const endChar = '|';
         let ecuation = new Ecuation();
         let currentPart = ecuation.left;
@@ -26,14 +26,14 @@ export class EcuationHelper {
                     throw new Error('Syntax error: Two equal symbols not allowed');
                 if (acumulated == '')
                     throw new Error('Syntax error: An equal symbol has to be after a compound');
-                currentPart.push(this.parseCompound(acumulated, fillWithZeros));
+                currentPart.push(this.parseCompound(acumulated));
                 acumulated = '';
                 currentPart = ecuation.right;
             }
             else if(char == '+' ||char == endChar){
                 if (acumulated == '')
                     throw new Error('Syntax error: A plus symbol has to be after a compound');
-                currentPart.push(this.parseCompound(acumulated, fillWithZeros));
+                currentPart.push(this.parseCompound(acumulated));
                 acumulated = '';
             }
             else if (char != ' ')
@@ -55,7 +55,7 @@ export class EcuationHelper {
         return c >= 'a' && c <= 'z';
     }
 
-    parseCompound(text: string, fillWithZeros = false) : EcuationCompound{
+    parseCompound(text: string) : EcuationCompound{
         const endChar = '|';
         let compound = new EcuationCompound();
         let symbol = '';
@@ -92,9 +92,6 @@ export class EcuationHelper {
         }
         if (compound.elements.length == 0)
             throw new Error('Syntax error: A compound needs to have elements');
-
-        if (fillWithZeros)
-            compound.times = 0;
 
         return compound;
     }

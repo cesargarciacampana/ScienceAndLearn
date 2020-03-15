@@ -4,7 +4,7 @@
 
 <div *ngIf="ecuation">
     <!--<app-ecuation *ngFor="let ecuation of ecuations" [ecuation]="ecuation"></app-ecuation>-->
-    <app-ecuation [ecuation]="ecuation"></app-ecuation>
-    <div class="mtop">Escribe los números para ajustar:</div>
-    <app-balancing-game-balancer [ecuation]="emptyEcuation" (next)="next()"></app-balancing-game-balancer>
+
+    <app-balancing-game-balancer [ecuation]="ecuation" (next)="next()" [graphical]="true">
+    </app-balancing-game-balancer>
 </div>
