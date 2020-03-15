@@ -62,7 +62,8 @@ export class BalancingGameComponent implements OnInit {
   ecuation: Ecuation;
   emptyEcuation: Ecuation;
   index = -1;
-
+  textOnly = false;
+  
   constructor(
     private elementService : ElementService,
     private ecuationHelper: EcuationHelper

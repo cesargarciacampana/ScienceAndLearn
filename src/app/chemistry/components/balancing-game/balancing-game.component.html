@@ -2,9 +2,11 @@
 
 <p>Ajusta la siguiente ecuación química arrastrando los componentes a la balanza hasta que esté equilibrada</p>
 
+<mat-checkbox [(ngModel)]="textOnly">Usar versión en solo texto</mat-checkbox>
+
 <div *ngIf="ecuation">
     <!--<app-ecuation *ngFor="let ecuation of ecuations" [ecuation]="ecuation"></app-ecuation>-->
 
-    <app-balancing-game-balancer [ecuation]="ecuation" (next)="next()" [graphical]="true">
+    <app-balancing-game-balancer [ecuation]="ecuation" (next)="next()" [graphical]="!textOnly">
     </app-balancing-game-balancer>
 </div>

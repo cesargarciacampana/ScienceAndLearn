@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Ecuation } from '@chem-shared/models/ecuation';
 
 @Component({
@@ -11,15 +11,16 @@ export class EcuationComponent implements OnInit {
   @Input() ecuation: Ecuation;
   @Input() allowBalancing = false;
 
+  @Output() changed = new EventEmitter<any>()
+
+  options = [1, 2, 3, 4, 5, 6];
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  emptyIfZero(value: number){
-    if (value <= 0)
-      return '';
-    else
-      return value;
+  onChanged(){
+    this.changed.emit();
   }
 }

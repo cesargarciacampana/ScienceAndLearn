@@ -1,8 +1,10 @@
 <div *ngIf="ecuation">
     <span *ngFor="let compound of ecuation.left; let i = index">
-        <mat-form-field *ngIf="allowBalancing" class="balancerField">
-            <input matInput (ngModelChange)="compound.times = $event" [ngModel]="emptyIfZero(compound.times)" />
-        </mat-form-field>
+        <mat-form-field  *ngIf="allowBalancing" class="balancerField">
+            <mat-select [(value)]="compound.times" (selectionChange)="onChanged()">
+              <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         <span *ngIf="!allowBalancing && compound.times > 1">{{ compound.times }}</span>
         <app-compound [compound]="compound"></app-compound>
         <span class="operator" *ngIf="i + 1 < ecuation.left.length">+</span>
@@ -10,7 +12,9 @@
     <span class="operator">→</span>
     <span *ngFor="let compound of ecuation.right; let i = index">
         <mat-form-field *ngIf="allowBalancing" class="balancerField">
-            <input matInput (ngModelChange)="compound.times = $event" [ngModel]="emptyIfZero(compound.times)" />
+            <mat-select [(value)]="compound.times" (selectionChange)="onChanged()">
+                <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+              </mat-select>
         </mat-form-field>
         <span *ngIf="!allowBalancing && compound.times > 1">{{ compound.times }}</span>
         <app-compound [compound]="compound"></app-compound>

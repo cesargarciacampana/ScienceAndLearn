@@ -55,6 +55,6 @@
         </div>
     </div>
     <ng-template #notGraphical>
-        <app-ecuation [ecuation]="ecuation" [allowBalancing]="!balanced"></app-ecuation>
+        <app-ecuation [ecuation]="ecuation" [allowBalancing]="!balanced" (changed)="checkBalanced()"></app-ecuation>
     </ng-template>
 </div>
