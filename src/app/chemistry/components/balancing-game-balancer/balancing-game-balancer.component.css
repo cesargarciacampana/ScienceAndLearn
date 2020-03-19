@@ -1,3 +1,8 @@
+.container{
+    width: calc(100% - 10px);
+    max-width: 700px;
+    min-width: 300px;
+}
 .success{
     color: green;
     margin-bottom:20px;
@@ -8,11 +13,11 @@
 .ecuation{
     font-weight: bold;
     text-align: center;
-    width: 500px;
+    width: 100%;
 }
 .balance{
     position: relative;
-    width: 500px;
+    width: 100%;
     height: 150px;
     border-bottom: 2px solid black;
     transition: transform 0.5s;
@@ -24,7 +29,7 @@
     transform: rotate(+8deg);
 }
 .base{
-    margin-left: 210px;
+    margin-left: calc(50% - 40px);
     width: 0; 
     height: 0; 
     border-left: 40px solid transparent;
@@ -35,7 +40,7 @@
 .dropAreaLeft,.dropAreaRight{
     position: absolute;
     height: 150px;
-    width: 220px;
+    width: calc(50% - 15px);
     border: 3px solid transparent;
     border-bottom: 0;
     box-sizing: border-box;
@@ -46,9 +51,8 @@
     flex-direction: row;
     justify-content: center;
     height: 25px;
-    width: 200px;
+    width: calc(100% - 4px);
     bottom: 0;
-    left: 5px;
     border-left: 2px solid gray;
     border-right: 2px solid gray;
     border-bottom: 1px solid gray;
@@ -56,12 +60,13 @@
     border-bottom-right-radius: 25px;
 }
 .dropAreaLeft{
-    left: 10px;
+    left: 0;
 }
 .dropAreaRight{
-    right: 10px;
+    right: 0;
 }
 .basket-column{
+    position: relative;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
@@ -72,12 +77,12 @@
 }
 .compounds{
     position: relative;
-    width: 500px;
+    width: 100%;
     margin-top: 30px;
 }
 .compounds-left, .compounds-right{
     position: absolute;
-    width: 220px;
+    width: calc(50% - 30px);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -89,13 +94,14 @@
     right: 0;
 }
 .compound{
-    min-width: 50px;
-    margin-right: 5px;
-    padding: 8px;
+    min-width: 35px;
+    margin-right: 3px;
+    padding: 5px;
     border: 1px solid gray;
     display: flex;
     box-sizing: border-box;
     background-color: white;
+    border-radius: 5px;
 }
 .draggable{
     cursor: move;

@@ -1,4 +1,4 @@
-<div *ngIf="ecuation">
+<div *ngIf="ecuation" class="container">
     <div class="success" *ngIf="balanced; else notBalanced">
         <h2>¡Bien hecho!</h2>
         <button class="button" mat-raised-button (click)="nextClick()">
@@ -14,12 +14,13 @@
             <div cdkDropList #leftBasket="cdkDropList" class="dropAreaLeft" [class.dragging]="leftDragging"
                 (cdkDropListDropped)="drop($event, true)">
                 <div class="basket-left">
-                    <div class="basket-column" *ngFor="let compound of ecuation.left">
+                    <div class="basket-column" *ngFor="let compound of ecuation.left; let j = index">
                         <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
-                            [style.cursor]="!balanced && compound.times > 1 ? 'pointer' : 'auto'">
+                            [style.margin-right]="j == ecuation.left.length - 1 ? 0 : '3px'">
                             <app-compound [compound]="compound"></app-compound>
                         </span>
-                        <button *ngIf="!balanced && compound.times > 1" mat-icon-button color="primary" aria-label="Quitar" matTooltip="Quitar" (click)="removeCompound(compound)">
+                        <button *ngIf="!balanced && compound.times > 1" mat-icon-button color="primary" aria-label="Quitar"
+                            matTooltip="Quitar" (click)="removeCompound(compound)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
@@ -28,12 +29,13 @@
             <div cdkDropList #rightBasket="cdkDropList" class="dropAreaRight" [class.dragging]="rightDragging"
                 (cdkDropListDropped)="drop($event, false)">
                 <div class="basket-right">
-                    <div class="basket-column" *ngFor="let compound of ecuation.right">
+                    <div class="basket-column" *ngFor="let compound of ecuation.right; let j = index">
                         <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
-                            [style.cursor]="!balanced && compound.times > 1 ? 'pointer' : 'auto'">
-                            <app-compound [compound]="compound" (click)="removeCompound(compound)"></app-compound>
+                            [style.margin-right]="j == ecuation.right.length - 1 ? 0 : '3px'">
+                            <app-compound [compound]="compound" ></app-compound>
                         </span>
-                        <button *ngIf="!balanced && compound.times > 1" mat-icon-button color="primary" aria-label="Quitar" matTooltip="Quitar" (click)="removeCompound(compound)">
+                        <button *ngIf="!balanced && compound.times > 1" mat-icon-button color="primary" aria-label="Quitar"
+                            matTooltip="Quitar" (click)="removeCompound(compound)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
