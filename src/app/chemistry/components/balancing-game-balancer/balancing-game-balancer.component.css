@@ -14,6 +14,7 @@
     font-weight: bold;
     text-align: center;
     width: 100%;
+    font-size: 18px;
 }
 .balance{
     position: relative;
@@ -83,6 +84,7 @@
 .compounds-left, .compounds-right{
     position: absolute;
     width: calc(50% - 30px);
+    padding-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -94,7 +96,8 @@
     right: 0;
 }
 .compound{
-    min-width: 35px;
+    font-size: calc(min(3vw, 16px));
+    min-width: 25px;
     margin-right: 3px;
     padding: 5px;
     border: 1px solid gray;
@@ -102,6 +105,8 @@
     box-sizing: border-box;
     background-color: white;
     border-radius: 5px;
+    white-space: nowrap;
+    justify-content: center;
 }
 .draggable{
     cursor: move;

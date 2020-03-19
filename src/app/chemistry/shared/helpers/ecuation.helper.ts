@@ -125,6 +125,8 @@ export class EcuationHelper {
     'NaOH + HCl = NaCl + H2O',
     'S + O2 = SO2',
     'ZnS + O2 = ZnO + SO2',
+    'HBr + NaOH = NaBr + H2O',
+    'NaNO3 + KCl = NaCl + KNO3',
 */
 
   private ecuationStrings = [
@@ -152,7 +154,6 @@ export class EcuationHelper {
     'HCl + MnO2 = MnCl2 + H2O + Cl2',
     'K2CO3 + C = CO + K',
     'Ag2SO4 + NaCl = Na2SO4 + AgCl',
-    'NaNO3 + KCl = NaCl + KNO3',
     'Fe2O3 + CO = CO2 + Fe',
     'Na2CO3 + H2O + CO2 = NaHCO3',
     'Cr2O3 + Al = Al2O3 + Cr',
@@ -165,7 +166,6 @@ export class EcuationHelper {
     //'CaC2 + H2O = C2H2 + Ca(OH)2',
     //'HCl + Al(OH)3 = AlCl3 + H2O',
     'Fe + O2 = Fe2O3',
-    'HBr + NaOH = NaBr + H2O',
     'C6H12O6 + O2 = CO2 + H2O',
   ];
 }

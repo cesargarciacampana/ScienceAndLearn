@@ -1,5 +1,4 @@
 <span *ngIf="compound">
-    <span *ngFor="let element of compound.elements">
-        {{element.element.symbol}}<sub *ngIf="element.index > 1">{{element.index}}</sub>
+    <span *ngFor="let element of compound.elements">{{element.element.symbol}}<sub *ngIf="element.index > 1">{{element.index}}</sub>
     </span>
 </span>
