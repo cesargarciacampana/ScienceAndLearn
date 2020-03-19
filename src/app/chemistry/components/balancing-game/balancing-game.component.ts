@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { EcuationElement } from '@chem-shared/models/ecuation-element';
-import { ElementService } from '@chem-shared/services/element.service';
-import { Ecuation } from '@chem-shared/models/ecuation';
-import { EcuationCompound } from '@chem-shared/models/ecuation-compound';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EcuationHelper } from '@chem-shared/helpers/ecuation.helper';
+import { BalancingGameInfo } from '@chem-shared/models/balancing-game-info';
+import { TimerComponent } from '@main/timer/timer.component';
 
 @Component({
   selector: 'app-balancing-game',
@@ -59,28 +57,40 @@ export class BalancingGameComponent implements OnInit {
     'HBr + NaOH = NaBr + H2O',
     'C6H12O6 + O2 = CO2 + H2O',
   ];
-  ecuation: Ecuation;
-  emptyEcuation: Ecuation;
+
+  info = new BalancingGameInfo();
+
   index = -1;
-  textOnly = false;
   
+  @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
+
   constructor(
-    private elementService : ElementService,
     private ecuationHelper: EcuationHelper
   ) { }
 
   ngOnInit() {
-    this.init();
   }
 
-  private init(){
-    this.elementService.elementsObservable.subscribe(() => {
-      this.next();
-    });
-  }
 
   next(){
+    let starting = !this.info.started || this.info.finished;
+    
     this.index++;
-    this.ecuation = this.ecuationHelper.parseEcuation(this.ecuationStrings[this.index]);
+    this.info.ecuationList.push(this.ecuationStrings[this.index]);
+    this.info.calculateLastEcuation(this.ecuationHelper);
+    this.info.started = true;
+
+    if (starting){
+      const that = this;
+      setTimeout(function()
+      {
+        that.timer.reset(0);
+        that.timer.start();
+      }, 100);
+    }
+  }
+
+  tick(seconds:number){
+    this.info.seconds = seconds;
   }
 }

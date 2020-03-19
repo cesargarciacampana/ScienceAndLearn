@@ -9,7 +9,7 @@
         <h3 class="fail">Estado: No ajustada</h3>
     </ng-template>
     <div *ngIf="graphical; else notGraphical">
-        <div><app-ecuation [ecuation]="ecuation"></app-ecuation></div>
+        <div class="ecuation"><app-ecuation [ecuation]="ecuation"></app-ecuation></div>
         <div class="balance" [class.unbalancedLeft]="unbalancedLeft" [class.unbalancedRight]="unbalancedRight">
             <div cdkDropList #leftBasket="cdkDropList" class="dropAreaLeft" [class.dragging]="leftDragging"
                 (cdkDropListDropped)="drop($event, true)">
@@ -17,8 +17,11 @@
                     <div class="basket-column" *ngFor="let compound of ecuation.left">
                         <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
                             [style.cursor]="!balanced && compound.times > 1 ? 'pointer' : 'auto'">
-                            <app-compound [compound]="compound" (click)="removeCompound(compound)"></app-compound>
+                            <app-compound [compound]="compound"></app-compound>
                         </span>
+                        <button *ngIf="!balanced && compound.times > 1" mat-icon-button color="primary" aria-label="Quitar" matTooltip="Quitar" (click)="removeCompound(compound)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -30,6 +33,9 @@
                             [style.cursor]="!balanced && compound.times > 1 ? 'pointer' : 'auto'">
                             <app-compound [compound]="compound" (click)="removeCompound(compound)"></app-compound>
                         </span>
+                        <button *ngIf="!balanced && compound.times > 1" mat-icon-button color="primary" aria-label="Quitar" matTooltip="Quitar" (click)="removeCompound(compound)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </div>
                 </div>
             </div>

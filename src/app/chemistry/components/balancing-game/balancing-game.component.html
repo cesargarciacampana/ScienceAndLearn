@@ -2,11 +2,21 @@
 
 <p>Ajusta la siguiente ecuación química arrastrando los componentes a la balanza hasta que esté equilibrada</p>
 
-<mat-checkbox [(ngModel)]="textOnly">Usar versión en solo texto</mat-checkbox>
+<div *ngIf="!info.started || info.finished">
+	<button class="button" mat-raised-button (click)="next()">
+		{{ 'Jugar' + (info.finished ? ' de nuevo' : '') }}
+	</button>
+	<span class="option"><mat-checkbox [(ngModel)]="info.textOnly">Usar versión en solo texto</mat-checkbox></span>
+</div>
 
-<div *ngIf="ecuation">
+<div *ngIf="info.started">
     <!--<app-ecuation *ngFor="let ecuation of ecuations" [ecuation]="ecuation"></app-ecuation>-->
 
-    <app-balancing-game-balancer [ecuation]="ecuation" (next)="next()" [graphical]="!textOnly">
+    <div *ngIf="!info.finished">
+        <div>Tiempo: <b><app-timer (tick)="tick($event)"></app-timer></b></div>
+        <div>Ecuación nº: <b>{{ info.ecuationList.length }}</b></div>
+    </div>
+
+    <app-balancing-game-balancer #balancer [ecuation]="info.ecuation" (next)="next()" [graphical]="!info.textOnly">
     </app-balancing-game-balancer>
 </div>
