@@ -105,4 +105,15 @@ export class SpellGameComponent implements OnInit {
       this.timer.stop();
     }
   }
+
+  difficultyText(difficulty: Difficulty){
+    switch(difficulty){
+      case Difficulty.Hard:
+        return 'Difícil';
+      case Difficulty.Normal:
+        return 'Normal';
+      case Difficulty.Easy:
+        return 'Fácil';
+    }
+  }
 }
