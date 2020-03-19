@@ -22,7 +22,7 @@ export class PairGameComponent implements OnInit {
   @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
 
   private easyElements = [ 'O', 'C', 'H', 'N', 'Ca', 'P', 'K', 'S', 'Na', 'Cl', 'Fe', 'Al', 'Au', 'Ag' ];
-  private normalElements = this.easyElements.concat(['He', 'Li', 'F', 'Cu', 'Ar', 'I', 'Si', 'Hg', 'Zn', 'Cr']);
+  private normalElements = this.easyElements.concat(['He', 'Li', 'F', 'Cu', 'Ar', 'I', 'Si', 'Hg', 'Zn', 'Cr', 'U']);
 
   constructor(
     private elementService: ElementService,
@@ -30,7 +30,6 @@ export class PairGameComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.elementService.elementsObservable.subscribe((dummy) => {});
   }
 
   btnClick(){

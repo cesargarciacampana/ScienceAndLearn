@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
@@ -41,6 +41,7 @@ import { BalancingGameComponent } from './chemistry/components/balancing-game/ba
 import { EcuationComponent } from './chemistry/components/ecuation/ecuation.component';
 import { CompoundComponent } from './chemistry/components/compound/compound.component';
 import { BalancingGameBalancerComponent } from './chemistry/components/balancing-game-balancer/balancing-game-balancer.component';
+import { ElementService } from '@chem-shared/services/element.service';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,10 @@ import { BalancingGameBalancerComponent } from './chemistry/components/balancing
 	PairGameOptionsComponent,
 	ElementInfoComponent
   ],
-  providers: [],
+  providers: [
+    ElementService,
+    { provide: APP_INITIALIZER, useFactory: (elementService: ElementService) => () => elementService.load(), deps: [ElementService], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

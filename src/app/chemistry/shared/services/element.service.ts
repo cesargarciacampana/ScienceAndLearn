@@ -14,13 +14,12 @@ export class ElementService {
 
     constructor(
         private httpClient: HttpClient
-    ) { 
-        this.init();
-    }
+    ) { }
 
-    private init(){
+    load(){
         this.elementsObservable = this.httpClient.get<ElementsDTO>(`/assets/elements-${this.language}.json`);
-        this.elementsObservable.subscribe((data : ElementsDTO) => this.elements = data.elements);
+        this.elementsObservable.subscribe((data : ElementsDTO) =>  this.elements = data.elements);
+        return this.elementsObservable.toPromise();
     }
 
     findElement(symbol : string){

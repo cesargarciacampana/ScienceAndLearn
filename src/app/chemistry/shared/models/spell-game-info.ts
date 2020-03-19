@@ -3,7 +3,8 @@ import { GameInfo } from '@shared/models/game-info';
 
 export enum Difficulty{
     Easy = 0,
-    Normal = 1
+    Normal = 1,
+    Hard = 2
 }
 
 export class SpellGameInfo extends GameInfo{

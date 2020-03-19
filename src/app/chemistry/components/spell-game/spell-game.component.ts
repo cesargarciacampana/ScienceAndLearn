@@ -19,9 +19,13 @@ export class SpellGameComponent implements OnInit {
 
   Difficulty: any = Difficulty;
 
+  private easyElements = [ 'O', 'C', 'H', 'N', 'Ca', 'P', 'K', 'S', 'Na', 'Cl', 'Fe', 'Al', 'Au', 'Ag' ];
+  private normalElements = this.easyElements.concat(['He', 'Li', 'F', 'Cu', 'Ar', 'I', 'Si', 'Hg', 'Zn', 'Cr', 'U']);
+
   private availableElementsByLevel = [
-    [ 'O', 'C', 'H', 'N', 'Ca', 'P', 'K', 'S', 'Na', 'Cl', 'Fe', 'Al', 'Au', 'Ag' ], //Easy
-    null //Normal (all elements)
+    this.easyElements,
+    this.normalElements,
+    null //Hard (all elements)
   ]
 
   constructor (

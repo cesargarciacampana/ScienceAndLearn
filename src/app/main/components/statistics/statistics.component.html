@@ -29,6 +29,16 @@
               <app-statistics-table [stats]="stats['spell1']" [columns]="spellColumns"></app-statistics-table>
             </ng-template>
           </mat-expansion-panel>
+          <mat-expansion-panel (opened)="loadStatistics('spell2')">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Difícil
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-statistics-table [stats]="stats['spell2']" [columns]="spellColumns"></app-statistics-table>
+            </ng-template>
+          </mat-expansion-panel>
         </mat-accordion>
       </div>
     </mat-expansion-panel>
