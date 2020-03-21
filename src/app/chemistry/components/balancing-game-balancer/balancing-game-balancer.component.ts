@@ -91,6 +91,8 @@ export class BalancingGameBalancerComponent implements OnInit {
   }
 
   counterArray(n: number): any[] {
+    if (n > 4)
+      n = 1;
     return Array(n);
   }
 }

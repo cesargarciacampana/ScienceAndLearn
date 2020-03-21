@@ -5,7 +5,7 @@ import { MatInputModule, MatSidenavModule, MatButtonModule, MatToolbarModule,
   MatTooltipModule,MatCheckboxModule, MatIconModule, MatListModule, 
   MatAutocompleteModule, MatChipsModule, MatSnackBarModule, MatProgressSpinnerModule,
   MatBottomSheetModule, MatSelectModule, MatTableModule, MatExpansionModule,
-  MatRadioModule
+  MatRadioModule, MatBadgeModule
 } from '@angular/material';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -101,7 +101,8 @@ import { BalancingGameOptionsComponent } from './chemistry/components/balancing-
     MatSelectModule,
     MatTableModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatBadgeModule
   ],
   entryComponents: [
     SpellGameOptionsComponent,

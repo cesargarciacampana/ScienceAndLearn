@@ -237,7 +237,6 @@ export class EcuationHelper {
     'O2 + Cr = CrO3',
     'O2 + Si = SiO4',
     'O2 + P4 = P2O5',
-    'O2 + Cu = CuO2',
     'O2 + Cr = Cr2O3',
     'O2 + FeO = Fe2O3',
     'O2 + Cu = Cu2O',

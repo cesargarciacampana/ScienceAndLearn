@@ -22,6 +22,7 @@
                 <div class="basket-left">
                     <div class="basket-column" *ngFor="let compound of ecuation.left; let j = index">
                         <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
+                            [matBadge]="'x' + compound.times" [matBadgeHidden]="compound.times <= 4" matBadgePosition="after"
                             [style.margin-right]="j == ecuation.left.length - 1 ? 0 : '3px'">
                             <app-compound [compound]="compound"></app-compound>
                         </span>
@@ -37,6 +38,7 @@
                 <div class="basket-right">
                     <div class="basket-column" *ngFor="let compound of ecuation.right; let j = index">
                         <span class="compound" *ngFor="let item of counterArray(compound.times); let i = index"
+                            [matBadge]="'x' + compound.times" [matBadgeHidden]="compound.times <= 4" matBadgePosition="after"
                             [style.margin-right]="j == ecuation.right.length - 1 ? 0 : '3px'">
                             <app-compound [compound]="compound" ></app-compound>
                         </span>
