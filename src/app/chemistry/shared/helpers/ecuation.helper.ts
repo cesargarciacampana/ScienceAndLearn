@@ -133,7 +133,7 @@ export class EcuationHelper {
 
     getBalancedBruteForce(secuation: string) : Ecuation{
         let ecuation = this.parseEcuation(secuation);
-        const max = 10;
+        const max = 11;
 
         if (this.auxBalance(ecuation, 0, max))
             return ecuation;

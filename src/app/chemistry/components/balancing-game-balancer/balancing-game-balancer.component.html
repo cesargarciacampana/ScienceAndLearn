@@ -7,10 +7,12 @@
         </button>
     </div> 
     <ng-template #notBalanced>
-        <h3 class="fail">Estado: No ajustada</h3>
-        <button class="button" mat-raised-button (click)="solve()">
-            Me rindo
-        </button>
+        <p>
+            <button mat-raised-button (click)="solve()">
+                Me rindo
+            </button>
+        </p>
+        <h3 class="fail">Estado: No ajustada</h3>     
     </ng-template>
     <div *ngIf="graphical; else notGraphical">
         <div class="ecuation"><app-ecuation [ecuation]="ecuation"></app-ecuation></div>

@@ -44,9 +44,15 @@ export class BalancingGameBalancerComponent implements OnInit {
   }
 
   solve(){
-    this.ecuation = this.ecuationHelper.getBalancedBruteForce(this.ecuation.toString());
-    this.hintUsed = true;
-    this.checkBalanced();
+    let text = this.ecuation.toString();
+    let solved = this.ecuationHelper.getBalancedBruteForce(text);
+    if (solved){
+      this.ecuation = solved;
+      this.hintUsed = true;
+      this.checkBalanced();
+    }
+    else  
+      alert('No se ha encontrado solución para la ecuación ' + text);
   }
 
   drop(event: CdkDragDrop<any>, left: boolean){
