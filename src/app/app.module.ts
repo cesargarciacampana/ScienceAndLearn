@@ -42,6 +42,7 @@ import { EcuationComponent } from './chemistry/components/ecuation/ecuation.comp
 import { CompoundComponent } from './chemistry/components/compound/compound.component';
 import { BalancingGameBalancerComponent } from './chemistry/components/balancing-game-balancer/balancing-game-balancer.component';
 import { ElementService } from '@chem-shared/services/element.service';
+import { BalancingGameOptionsComponent } from './chemistry/components/balancing-game-options/balancing-game-options.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { ElementService } from '@chem-shared/services/element.service';
     BalancingGameComponent,
     EcuationComponent,
     CompoundComponent,
-    BalancingGameBalancerComponent
+    BalancingGameBalancerComponent,
+    BalancingGameOptionsComponent
   ],
   imports: [
 	FormsModule,
@@ -103,8 +105,9 @@ import { ElementService } from '@chem-shared/services/element.service';
   ],
   entryComponents: [
     SpellGameOptionsComponent,
-	PairGameOptionsComponent,
-	ElementInfoComponent
+    PairGameOptionsComponent,
+    BalancingGameOptionsComponent,
+    ElementInfoComponent
   ],
   providers: [
     ElementService,

@@ -1,12 +1,11 @@
 <h3>Ajusta la ecuación</h3>
 
-<p>Ajusta la siguiente ecuación química arrastrando los componentes a la balanza hasta que esté equilibrada</p>
+<p>Ajusta la ecuación química arrastrando los componentes a la balanza hasta que esté equilibrada</p>
 
 <div *ngIf="!info.started || info.finished">
-	<button class="button" mat-raised-button (click)="next()">
+	<button class="button" mat-raised-button (click)="newGame()">
 		{{ 'Jugar' + (info.finished ? ' de nuevo' : '') }}
 	</button>
-	<span class="option"><mat-checkbox [(ngModel)]="info.textOnly">Usar versión en solo texto</mat-checkbox></span>
 </div>
 
 <div *ngIf="info.started">
