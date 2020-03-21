@@ -1,12 +1,16 @@
 <div *ngIf="ecuation" class="container">
     <div class="success" *ngIf="balanced; else notBalanced">
-        <h2>¡Bien hecho!</h2>
+        <h2 *ngIf="!hintUsed">¡Bien hecho!</h2>
+        <h2 class="fail" *ngIf="hintUsed">Sigue intentándolo</h2>
         <button class="button" mat-raised-button (click)="nextClick()">
             Siguiente ecuación
         </button>
     </div> 
     <ng-template #notBalanced>
         <h3 class="fail">Estado: No ajustada</h3>
+        <button class="button" mat-raised-button (click)="solve()">
+            Me rindo
+        </button>
     </ng-template>
     <div *ngIf="graphical; else notGraphical">
         <div class="ecuation"><app-ecuation [ecuation]="ecuation"></app-ecuation></div>

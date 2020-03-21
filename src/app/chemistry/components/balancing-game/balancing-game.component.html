@@ -10,8 +10,6 @@
 </div>
 
 <div *ngIf="info.started">
-    <!--<app-ecuation *ngFor="let ecuation of ecuations" [ecuation]="ecuation"></app-ecuation>-->
-
     <div *ngIf="!info.finished">
         <div>Tiempo: <b><app-timer (tick)="tick($event)"></app-timer></b></div>
         <div>Ecuación nº: <b>{{ info.ecuationList.length }}</b></div>

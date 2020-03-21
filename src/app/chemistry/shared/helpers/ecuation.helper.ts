@@ -109,6 +109,39 @@ export class EcuationHelper {
         else return 0;
     }
 
+    private auxBalance(ecuation: Ecuation, index: number, max: number) : boolean{
+        let compound = null;
+        if (index > ecuation.left.length + ecuation.right.length - 1)
+            return this.isBalanced(ecuation) == 0;
+
+        if (index < ecuation.left.length){
+            compound = ecuation.left[index];
+        }
+        else{
+            let rindex = index - ecuation.left.length;
+            compound = ecuation.right[rindex]
+        }
+
+        for (let i = 1; i <= max; i++){
+            compound.times = i;
+            this.auxBalance(ecuation, index + 1, max);
+            if (this.isBalanced(ecuation) == 0)
+                return true;
+        }
+        return false;
+    }
+
+    getBalancedBruteForce(secuation: string) : Ecuation{
+        let ecuation = this.parseEcuation(secuation);
+        const max = 10;
+
+        if (this.auxBalance(ecuation, 0, max))
+            return ecuation;
+
+        console.log('Solución no encontrada');
+        return null;
+    }
+
     private getElementWeight(compounds: EcuationCompound[]): number{
         let weight = 0;
         for(let i = 0; i < compounds.length; i++){
@@ -157,7 +190,7 @@ export class EcuationHelper {
     'Fe2O3 + CO = CO2 + Fe',
     'Na2CO3 + H2O + CO2 = NaHCO3',
     'Cr2O3 + Al = Al2O3 + Cr',
-    'Ag + HNO3 = NO + H2O + AgNO3',
+    'Ag + HNO3 = NO2 + H2O + AgNO3',
     'CuFeS2 + O2 = SO2 + CuO + FeO',
     'C2H6 + O2 = CO2 + H2O',
     'FeS2 + O2 = Fe2O3 + SO2',

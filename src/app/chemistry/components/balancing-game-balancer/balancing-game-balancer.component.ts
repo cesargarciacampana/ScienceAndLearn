@@ -14,6 +14,7 @@ export class BalancingGameBalancerComponent implements OnInit {
   @Input() ecuation: Ecuation;
   @Input() graphical = false;
   balanced = false;
+  hintUsed = false;
   unbalancedLeft = false;
   unbalancedRight = false;
 
@@ -28,13 +29,24 @@ export class BalancingGameBalancerComponent implements OnInit {
 
   ngOnInit() {
     if (this.ecuation)
-      this.checkBalanced();
+      this.init();
+  }
+
+  init(){
+    this.checkBalanced();
+    this.hintUsed = false;
   }
 
   nextClick(){
     this.next.emit();
     const that = this;
-    setTimeout(() => that.checkBalanced(), 50);
+    setTimeout(() => that.init(), 50);
+  }
+
+  solve(){
+    this.ecuation = this.ecuationHelper.getBalancedBruteForce(this.ecuation.toString());
+    this.hintUsed = true;
+    this.checkBalanced();
   }
 
   drop(event: CdkDragDrop<any>, left: boolean){
