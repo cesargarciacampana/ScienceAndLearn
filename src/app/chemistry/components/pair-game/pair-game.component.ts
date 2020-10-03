@@ -6,7 +6,7 @@ import { PairGameInfo, Difficulty } from '@chem-shared/models/pair-game-info';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { TimerComponent } from '@main/timer/timer.component';
 import { PairGameOptionsComponent } from '@chem/pair-game-options/pair-game-options.component';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-pair-game',

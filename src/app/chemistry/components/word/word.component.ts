@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Word } from '@chem-shared/models/word';
-import { MatTooltip } from '@angular/material';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-word',

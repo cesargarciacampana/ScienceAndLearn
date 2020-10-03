@@ -6,7 +6,6 @@ import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { OverlayRef, Overlay, ConnectedPosition } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { ElementInfoComponent, ELEMENT_INFO_DATA } from '@chem/element-info/element-info.component';
-import { throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 
 @Component({
   selector: 'app-periodic-table',

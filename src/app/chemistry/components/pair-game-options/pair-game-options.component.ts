@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Difficulty } from '@chem-shared/models/pair-game-info';
-import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { ElementService } from '@chem-shared/services/element.service';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { RandomHelper } from '@shared/helpers/random.helper';

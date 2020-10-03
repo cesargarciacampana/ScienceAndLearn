@@ -7,7 +7,7 @@ import { WordService } from '@chem-shared/services/word.service';
 import { WordHelper } from '@chem-shared/helpers/word.helper';
 import { ElementSelectorComponent } from '../element-selector/element-selector.component';
 import { StringHelper } from '@shared/helpers/string.helper';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 

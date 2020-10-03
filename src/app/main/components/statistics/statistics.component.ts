@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSelect } from '@angular/material';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({

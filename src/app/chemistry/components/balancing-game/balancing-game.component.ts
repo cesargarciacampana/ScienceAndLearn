@@ -3,7 +3,7 @@ import { EcuationHelper } from '@chem-shared/helpers/ecuation.helper';
 import { BalancingGameInfo } from '@chem-shared/models/balancing-game-info';
 import { TimerComponent } from '@main/timer/timer.component';
 import { BalancingGameOptionsComponent } from '@chem/balancing-game-options/balancing-game-options.component';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-balancing-game',

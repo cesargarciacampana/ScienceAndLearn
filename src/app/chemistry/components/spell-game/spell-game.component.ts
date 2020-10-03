@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SpellGameWordComponent } from '../spell-game-word/spell-game-word.component';
 import { SpellGameInfo, Difficulty } from '../../shared/models/spell-game-info';
 import { Observable } from 'rxjs';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { SpellGameOptionsComponent } from '@chem/spell-game-options/spell-game-options.component';
 import { TimerComponent } from '@main/timer/timer.component';
 
