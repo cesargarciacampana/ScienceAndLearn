@@ -19,7 +19,7 @@ export class PairGameComponent implements OnInit {
   data = { level: 0, card1: 'name', card2: 'symbol' };
   locked = false;
 
-  @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
+  @ViewChild(TimerComponent) timer: TimerComponent;
 
   private easyElements = [ 'O', 'C', 'H', 'N', 'Ca', 'P', 'K', 'S', 'Na', 'Cl', 'Fe', 'Al', 'Au', 'Ag' ];
   private normalElements = this.easyElements.concat(['He', 'Li', 'F', 'Cu', 'Ar', 'I', 'Si', 'Hg', 'Zn', 'Cr', 'U']);

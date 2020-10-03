@@ -43,8 +43,8 @@ export class CalculationGameComponent implements OnInit {
     new FormulaOptions(10, 11, 19, this.defaultOperations)
   ];
 
-  @ViewChild(CalculationComponent, {static:false}) calculation : CalculationComponent;
-  @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
+  @ViewChild(CalculationComponent) calculation : CalculationComponent;
+  @ViewChild(TimerComponent) timer: TimerComponent;
   
   constructor() { }
 

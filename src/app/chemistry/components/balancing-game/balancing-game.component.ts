@@ -14,7 +14,7 @@ export class BalancingGameComponent implements OnInit {
 
   info = new BalancingGameInfo();
   
-  @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
+  @ViewChild(TimerComponent) timer: TimerComponent;
 
   constructor(
     private ecuationHelper: EcuationHelper,

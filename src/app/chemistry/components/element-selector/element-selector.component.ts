@@ -21,7 +21,7 @@ export class ElementSelectorComponent implements OnInit {
 
   @Output() valueChanged = new EventEmitter<ElementCheckable>();
 
-  @ViewChild('elementInput', {static:false}) elementInput: ElementRef<HTMLInputElement>;
+  @ViewChild('elementInput') elementInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private elementService : ElementService,

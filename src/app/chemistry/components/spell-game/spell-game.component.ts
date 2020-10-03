@@ -33,7 +33,7 @@ export class SpellGameComponent implements OnInit {
   ) { }
 
   @ViewChild(SpellGameWordComponent, { static: true }) gameWordComponent: SpellGameWordComponent;
-  @ViewChild(TimerComponent, { static: false }) timer: TimerComponent;
+  @ViewChild(TimerComponent) timer: TimerComponent;
 
   ngOnInit() {
     this.info = new SpellGameInfo()

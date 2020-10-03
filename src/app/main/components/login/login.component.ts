@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   @Input() gameInfo: GameInfo;
   @Input() gameName: string;
-  @ViewChild(MatInput, { static: false}) name: MatInput;
+  @ViewChild(MatInput) name: MatInput;
 
   constructor(private firestore: AngularFirestore) { }
 

@@ -37,7 +37,7 @@ export class SpellGameWordComponent implements OnInit {
   @Output() pointsChanged = new EventEmitter<number>();
   @Output() completed = new EventEmitter<any>();
 
-  @ViewChild(ElementSelectorComponent, { static: false }) elementsComponent: ElementSelectorComponent;
+  @ViewChild(ElementSelectorComponent) elementsComponent: ElementSelectorComponent;
 
   constructor(
     private wordService : WordService,
