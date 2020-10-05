@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, InjectionToken, Inject } from '@angular/core';
-import { ElementDTO } from '@chem-shared/dtos/element.dto';
+import { Component, OnInit, InjectionToken, Inject } from '@angular/core';
 
 export const ELEMENT_INFO_DATA = new InjectionToken<{}>('ELEMENT_INFO_DATA');
 
@@ -11,7 +10,7 @@ export const ELEMENT_INFO_DATA = new InjectionToken<{}>('ELEMENT_INFO_DATA');
 export class ElementInfoComponent implements OnInit {
 
   constructor(
-	@Inject(ELEMENT_INFO_DATA) public data: any
+	  @Inject(ELEMENT_INFO_DATA) public data: any
   ) { }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Ecuation } from '@chem-shared/models/ecuation';
 import { EcuationHelper } from '@chem-shared/helpers/ecuation.helper';
-import { CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { EcuationCompound } from '@chem-shared/models/ecuation-compound';
 
 @Component({

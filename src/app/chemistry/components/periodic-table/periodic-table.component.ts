@@ -1,10 +1,10 @@
-import { Component, OnInit, Injector, ElementRef } from '@angular/core';
+import { Component, OnInit, Injector, ElementRef, StaticProvider } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ElementsDTO } from '@chem-shared/dtos/elements.dto';
 import { ElementService } from '@chem-shared/services/element.service';
 import { ElementDTO } from '@chem-shared/dtos/element.dto';
 import { OverlayRef, Overlay, ConnectedPosition } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ElementInfoComponent, ELEMENT_INFO_DATA } from '@chem/element-info/element-info.component';
 
 @Component({
@@ -29,8 +29,8 @@ export class PeriodicTableComponent implements OnInit {
   ];
 
   table2 = [
-	57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,  69,  70,  71,
-	89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103
+    57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,  69,  70,  71,
+    89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103
   ];
 
   private overlayRef: OverlayRef;
@@ -47,12 +47,12 @@ export class PeriodicTableComponent implements OnInit {
   }
 
   getElement(elements: ElementsDTO, index: number){
-	return index > 0 ? elements.elements[index-1] : null
+	  return index > 0 ? elements.elements[index-1] : null
   }
 
   
   getOverlayPositions(): ConnectedPosition[]{
-	return [{
+	  return [{
         originX: 'start',
         originY: 'bottom',
         overlayX: 'start',
@@ -76,37 +76,36 @@ export class PeriodicTableComponent implements OnInit {
   }
 
   show(element: ElementDTO, elementRef: ElementRef){
-	this.hide();
+    this.hide();
 
-	if (!element)
-		return;
+    if (!element)
+      return;
 
-	const positions = this.getOverlayPositions();
-	const positionStrategy = this.overlay.position()
-		.flexibleConnectedTo(elementRef)
-		.withPositions(positions).withPush(true);
+    const positions = this.getOverlayPositions();
+    const positionStrategy = this.overlay.position()
+      .flexibleConnectedTo(elementRef)
+      .withPositions(positions).withPush(true);
 
-	this.overlayRef = this.overlay.create({
-		positionStrategy: positionStrategy
-	});
+    this.overlayRef = this.overlay.create({
+      positionStrategy: positionStrategy
+    });
 
-	const data = { 
-		element:element, 
-		closeDelegate: () => this.hide(),
-		enterDelegate: () => this.clearTimer() };
-	const elementPortal = new ComponentPortal(ElementInfoComponent, null, 
-		this.createInjector(data));
-	this.overlayRef.attach(elementPortal);
+    const data = { 
+      element:element, 
+      closeDelegate: () => this.hide(),
+      enterDelegate: () => this.clearTimer() };
+    const elementPortal = new ComponentPortal(ElementInfoComponent, null, 
+      this.createInjector(data));
+    this.overlayRef.attach(elementPortal);
   }
 
   hide(){
-	if (!this.overlayRef)
-		return;
-	
-	this.clearTimer();
-	this.overlayRef.dispose();
-	this.overlayRef = null;
-
+    if (!this.overlayRef)
+      return;
+    
+    this.clearTimer();
+    this.overlayRef.dispose();
+    this.overlayRef = null;
   }
 
   hideTimer(){
@@ -115,13 +114,18 @@ export class PeriodicTableComponent implements OnInit {
   }
 
   clearTimer(){
-	if (this.timer)
-		clearTimeout(this.timer)
+    if (this.timer)
+      clearTimeout(this.timer)
   }
 
-  createInjector(dataToPass): PortalInjector {
-    const injectorTokens = new WeakMap();
-    injectorTokens.set(ELEMENT_INFO_DATA, dataToPass);
-    return new PortalInjector(this.injector, injectorTokens);
+  createInjector(dataToPass): Injector {
+    const providers: StaticProvider[] = [
+      { provide: ELEMENT_INFO_DATA, useValue: dataToPass } 
+    ];
+
+    return Injector.create({
+      parent: this.injector,
+      providers: providers
+    });
   }
 }
