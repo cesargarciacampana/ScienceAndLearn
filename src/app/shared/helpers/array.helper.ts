@@ -15,5 +15,9 @@ export class ArrayHelper {
             }
         }
         return true; 
-    } 
+    }
+
+    static numberArray(length: number) : number[]{
+        return Array.from(Array(length)).map((x, i) => i );
+    }
 }
