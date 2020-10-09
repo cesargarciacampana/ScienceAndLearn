@@ -8,6 +8,7 @@ import { StatisticsComponent } from '@main/statistics/statistics.component';
 import { PairGameComponent } from '@chem/pair-game/pair-game.component';
 import { PeriodicTableComponent } from '@chem/periodic-table/periodic-table.component';
 import { BalancingGameComponent } from '@chem/balancing-game/balancing-game.component';
+import { WordSearchComponent } from './general/word-search/components/word-search/word-search.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'calculation', component: CalculationGameComponent },
   { path: 'stats', component: StatisticsComponent },
   { path: 'table', component: PeriodicTableComponent },
+  { path: 'word-search', component: WordSearchComponent },
 
   { path: '**', redirectTo: '' }
 ];

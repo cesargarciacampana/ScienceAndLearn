@@ -32,4 +32,17 @@ export class WordService {
                 )})
         );
     }
+
+    randomWords(count: number) : Observable<string[]>{
+        return this.words.pipe(
+            map(data =>{
+                var list = [];
+                for (let i=0; i < count; i++){
+                    let rnd = RandomHelper.randomIntFromInterval(0, data.length);
+                    list.push(data[rnd]);
+                }
+                return list;
+            })
+        );
+    }
 }
