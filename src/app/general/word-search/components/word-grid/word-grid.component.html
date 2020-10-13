@@ -1,8 +1,8 @@
-<div class="row" *ngFor="let i of rowArray">
+<div *ngFor="let i of rowArray">
     <div class="letter" *ngFor="let j of colArray">
         {{ grid[j + cols * i] }}
     </div>
 </div>
-<div *ngFor="let word of words">
-    {{word}}
-</div>
+<ul *ngFor="let word of words">
+    <li>{{word}}</li>
+</ul>
