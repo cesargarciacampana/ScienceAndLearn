@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PairGameOptionsComponent } from './pair-game-options.component';
 
@@ -6,7 +6,7 @@ describe('PairGameOptionsComponent', () => {
   let component: PairGameOptionsComponent;
   let fixture: ComponentFixture<PairGameOptionsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PairGameOptionsComponent ]
     })
