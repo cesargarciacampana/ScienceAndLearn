@@ -3,12 +3,10 @@ import { ArrayHelper } from '@shared/helpers/array.helper';
 import { RandomHelper } from '@shared/helpers/random.helper';
 import { StringHelper } from '@shared/helpers/string.helper';
 
-const nDirections = 4;
-
 enum WordDirection{
 		HRight,
-		HLeft,
 		VDown,
+		HLeft,
 		VUp
 }
 
@@ -25,10 +23,12 @@ class WordPosition{
 })
 export class WordGridComponent implements OnInit {
 
-  rows = 10;
-  cols = 15;
-  rowArray = ArrayHelper.numberArray(this.rows);
-  colArray = ArrayHelper.numberArray(this.cols);
+  @Input() rows: number;
+	@Input() cols :number;
+	@Input() nDirections: number;
+
+  rowArray: number[];
+  colArray: number[];
 
   grid: string[];
 
@@ -97,14 +97,13 @@ export class WordGridComponent implements OnInit {
 			let word = this.words[i];
 			let wordPosition = new WordPosition();
 			wordPosition.word = word;			
-			wordPosition.directions = ArrayHelper.shuffleArray(ArrayHelper.numberArray(4));
-			wordPosition.positions = new Array<number[]>(4);
-			for(let j = 0; j < nDirections; j++)
+			wordPosition.directions = ArrayHelper.shuffleArray(ArrayHelper.numberArray(this.nDirections));
+			wordPosition.positions = new Array<number[]>(this.nDirections);
+			for(let j = 0; j < this.nDirections; j++)
 				wordPosition.positions[j] = this.generateRandomPositionsList(wordPosition.directions[j], word.length);
 
 				this.wordPositions[i] = wordPosition;
 		}
-		console.log(this.wordPositions);
 	}
 
 	calculateIndex(basePosition: number, direction: WordDirection, index: number){
@@ -136,13 +135,13 @@ export class WordGridComponent implements OnInit {
 			let word = this.words[wordIndex];
 			let wordPosition = this.wordPositions[wordIndex];
 			let directionIndex = 0;
-			while(!placed[wordIndex] && directionIndex < nDirections)
+			while(!placed[wordIndex] && directionIndex < this.nDirections)
 			{
 				let direction = wordPosition.directions[directionIndex];
 
 				let positionIndex = 0;		
 				let positions = wordPosition.positions[directionIndex];			
-				while(positions.length > 0 && !placed[wordIndex] && positionIndex < nDirections){
+				while(positions.length > 0 && !placed[wordIndex] && positionIndex < positions.length){
 					let position = positions[positionIndex];
 					
 					if (this.isPositionValid(position, direction, word)){
@@ -162,6 +161,9 @@ export class WordGridComponent implements OnInit {
     let size = this.rows * this.cols;
     this.grid = new Array(size);
 		
+		this.rowArray = ArrayHelper.numberArray(this.rows);
+		this.colArray = ArrayHelper.numberArray(this.cols);
+
 		this.generateAllPossibleWordPositions();
     this.placeWords();
 
