@@ -1,3 +1,5 @@
+import { RandomHelper } from './random.helper';
+
 export class ArrayHelper {
     constructor() { }
     
@@ -19,5 +21,15 @@ export class ArrayHelper {
 
     static numberArray(length: number) : number[]{
         return Array.from(Array(length)).map((x, i) => i );
-    }
+		}
+		
+		static shuffleArray(array: any[]) : any[]{
+			for(let i = array.length - 1; i > 0; i--){
+				const j = RandomHelper.randomIntFromInterval(0, i);
+				const temp = array[i]
+				array[i] = array[j]
+				array[j] = temp
+			}
+			return array;
+		}
 }
