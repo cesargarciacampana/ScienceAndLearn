@@ -26,7 +26,7 @@ class WordPosition{
 export class WordGridComponent implements OnInit {
 
   rows = 10;
-  cols = 20;
+  cols = 15;
   rowArray = ArrayHelper.numberArray(this.rows);
   colArray = ArrayHelper.numberArray(this.cols);
 
@@ -42,8 +42,14 @@ export class WordGridComponent implements OnInit {
     this.inicializar();
   }
 
-  isPositionValid(index: number, direction: WordDirection , word: string){
-    return true;
+  isPositionValid(position: number, direction: WordDirection, word: string){
+    for (let j = 0; j < word.length; j++){
+			let index = this.calculateIndex(position, direction, j);
+			let gridChar = this.grid[index];
+			if (gridChar && gridChar != StringHelper.removeAccents(word[j]).toUpperCase())
+				return false;
+		}
+		return true;
   }
 
 	generateRandomPositionsList(direction: WordDirection, wordLength: number) : number[]{
@@ -132,12 +138,13 @@ export class WordGridComponent implements OnInit {
 			let directionIndex = 0;
 			while(!placed[wordIndex] && directionIndex < nDirections)
 			{
+				let direction = wordPosition.directions[directionIndex];
+
 				let positionIndex = 0;		
-				let positions = wordPosition.positions[directionIndex];
-				
+				let positions = wordPosition.positions[directionIndex];			
 				while(positions.length > 0 && !placed[wordIndex] && positionIndex < nDirections){
 					let position = positions[positionIndex];
-					let direction = wordPosition.directions[directionIndex];
+					
 					if (this.isPositionValid(position, direction, word)){
 						this.placeWord(position, direction, word);
 						placed[wordIndex] = true;
