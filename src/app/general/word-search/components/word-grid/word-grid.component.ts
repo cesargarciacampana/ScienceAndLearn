@@ -6,8 +6,8 @@ import { StringHelper } from '@shared/helpers/string.helper';
 const nDirections = 4;
 
 enum WordDirection{
-		HLeft,
 		HRight,
+		HLeft,
 		VDown,
 		VUp
 }
@@ -42,30 +42,21 @@ export class WordGridComponent implements OnInit {
     this.inicializar();
   }
 
-  isPositionValid(index: number, length: number){
-    return (index + length) % this.cols > index % this.cols;
-  }
-
-  isPositionUsed(used: Array<number>, start: number, length: number){
-    for(let i = start; i < start + length; i++)
-    {
-      if (used.indexOf(i) >= 0)
-        return true;
-    }
-    return false;
+  isPositionValid(index: number, direction: WordDirection , word: string){
+    return true;
   }
 
 	generateRandomPositionsList(direction: WordDirection, wordLength: number) : number[]{
 		let list = [];
 		let rowinit, rowend, colinit, colend;
 		switch(direction){
-			case WordDirection.HLeft:
+			case WordDirection.HRight:
 				rowinit = 0;
 				rowend = this.rows - 1;
 				colinit = 0;
 				colend = this.cols - wordLength;
 				break;
-			case WordDirection.HRight:
+			case WordDirection.HLeft:
 				rowinit = 0;
 				rowend = this.rows - 1;
 				colinit = wordLength - 1;
@@ -94,14 +85,14 @@ export class WordGridComponent implements OnInit {
 	}
 
 	generateAllPossibleWordPositions(){
-		this.wordPositions = new Array(this.words.length);
+		this.wordPositions = new Array<WordPosition>(this.words.length);
 
     for (let i = 0; i < this.words.length; i++){
 			let word = this.words[i];
 			let wordPosition = new WordPosition();
 			wordPosition.word = word;			
 			wordPosition.directions = ArrayHelper.shuffleArray(ArrayHelper.numberArray(4));
-			wordPosition.positions = new Array(4);
+			wordPosition.positions = new Array<number[]>(4);
 			for(let j = 0; j < nDirections; j++)
 				wordPosition.positions[j] = this.generateRandomPositionsList(wordPosition.directions[j], word.length);
 
@@ -110,24 +101,54 @@ export class WordGridComponent implements OnInit {
 		console.log(this.wordPositions);
 	}
 
-  placeWords(){
-    let indexes = [];
-    let size = this.rows * this.cols;
+	calculateIndex(basePosition: number, direction: WordDirection, index: number){
+		switch(direction){
+			case WordDirection.HRight:
+				return basePosition + index;
+			case WordDirection.HLeft:
+				return basePosition - index;
+			case WordDirection.VDown:
+				return basePosition + this.cols * index;
+			case WordDirection.VUp:
+				return basePosition - this.cols * index;
+		}
+	}
 
-		for (let i = 0; i < this.words.length; i++){
-			let word = this.words[i];
-			let index = RandomHelper.randomIntFromInterval(0, size);
-      while (!this.isPositionValid(index, word.length)
-        || this.isPositionUsed(indexes, index, word.length)){
-        index = RandomHelper.randomIntFromInterval(0, size);
-      }
+	placeWord(position: number, direction: WordDirection, word: string){
+		for (let j = 0; j < word.length; j++){
+			let index = this.calculateIndex(position, direction, j);
+			this.grid[index] = StringHelper.removeAccents(word[j]).toUpperCase();
+		}
+	}
 
-      for (let j = 0; j < word.length; j++){
-        this.grid[index + j] = StringHelper.removeAccents(word[j]).toUpperCase();
-        indexes.push(index + j);
-      }
-    }
-  }
+	placeWords(){
+		let size = this.words.length;
+		let placed = new Array<boolean>();
+
+		let wordIndex = 0;
+		while (wordIndex < size){
+			let word = this.words[wordIndex];
+			let wordPosition = this.wordPositions[wordIndex];
+			let directionIndex = 0;
+			while(!placed[wordIndex] && directionIndex < nDirections)
+			{
+				let positionIndex = 0;		
+				let positions = wordPosition.positions[directionIndex];
+				
+				while(positions.length > 0 && !placed[wordIndex] && positionIndex < nDirections){
+					let position = positions[positionIndex];
+					let direction = wordPosition.directions[directionIndex];
+					if (this.isPositionValid(position, direction, word)){
+						this.placeWord(position, direction, word);
+						placed[wordIndex] = true;
+					}
+					positionIndex++;
+				}
+				directionIndex++;
+			}
+			wordIndex++;
+		}
+	}
 
   inicializar(){
     let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
