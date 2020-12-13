@@ -1,4 +1,4 @@
-<div *ngFor="let i of rowArray">
+<div [style.width]="cols * 25 + 'px'" *ngFor="let i of rowArray">
     <div class="letter" *ngFor="let j of colArray">
         {{ grid[j + cols * i] }}
     </div>
