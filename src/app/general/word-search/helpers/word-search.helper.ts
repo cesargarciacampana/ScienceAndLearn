@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ArrayHelper } from "@shared/helpers/array.helper";
+import { RandomHelper } from "@shared/helpers/random.helper";
 import { StringHelper } from "@shared/helpers/string.helper";
-import { WordDirection, WordPosition, WordSearchModel } from "../models/word-search.model";
+import { Letter, WordDirection, WordPosition, WordSearchModel } from "../models/word-search.model";
 
 @Injectable({providedIn: 'root'})
 export class WordSearchHelper {
@@ -10,7 +11,7 @@ export class WordSearchHelper {
 		for (let j = 0; j < word.length; j++){
 				let index = this.calculateIndex(wsModel.cols, position, direction, j);
 				let gridChar = wsModel.grid[index];
-				if (gridChar && gridChar != StringHelper.removeAccents(word[j]).toUpperCase())
+				if (gridChar && gridChar.letter != StringHelper.removeAccents(word[j]).toUpperCase())
 					return false;
 			}
 			return true;
@@ -88,7 +89,7 @@ export class WordSearchHelper {
 	private placeWord(wsModel: WordSearchModel, position: number, direction: WordDirection, word: string){
 		for (let j = 0; j < word.length; j++){
 			let index = this.calculateIndex(wsModel.cols, position, direction, j);
-			wsModel.grid[index] = StringHelper.removeAccents(word[j]).toUpperCase();
+			wsModel.grid[index] = new Letter(StringHelper.removeAccents(word[j]).toUpperCase(), true);
 		}
 	}
 
@@ -123,16 +124,16 @@ export class WordSearchHelper {
 	}
 	
 	generate(rows: number, cols: number, words: string[], nDirections: number) : WordSearchModel{
-		let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		let wsModel = new WordSearchModel(rows, cols);
 
 		let positions = this.generateAllPossibleWordPositions(wsModel, words, nDirections);
 		this.placeWords(wsModel, words, nDirections, positions);
 
-		//for (let i = 0; i < size; i++){
-		//  if (!this.grid[i])
-			//   this.grid[i] = chars[RandomHelper.randomIntFromInterval(0, chars.length)];
-		//}
+		let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		for (let i = 0; i < wsModel.cols * wsModel.rows; i++){
+		  if (!wsModel.grid[i])
+			   wsModel.grid[i] = new Letter(chars[RandomHelper.randomIntFromInterval(0, chars.length)]);
+		}
 
 		return wsModel;
 	}

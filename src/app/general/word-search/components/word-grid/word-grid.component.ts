@@ -2,8 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ArrayHelper } from '@shared/helpers/array.helper';
 import { WordSearchModel } from '../../models/word-search.model';
 
-
-
 @Component({
   selector: 'app-word-grid',
   templateUrl: './word-grid.component.html',
@@ -24,5 +22,9 @@ export class WordGridComponent implements OnInit {
   initialize(){
 	this.rowArray = ArrayHelper.numberArray(this.wsModel.rows);
 	this.colArray = ArrayHelper.numberArray(this.wsModel.cols);
+  }
+
+  getLetter(i: number, j: number){
+	  return this.wsModel.grid[j + this.wsModel.cols * i];;
   }
 }

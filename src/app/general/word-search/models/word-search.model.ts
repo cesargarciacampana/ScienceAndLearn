@@ -11,10 +11,20 @@ directions: WordDirection[];
 positions: number[][];
 }
 
+export class Letter{
+	letter: string;
+	isWord: boolean;
+
+	constructor(letter: string, isWord: boolean = false){
+		this.letter = letter;
+		this.isWord = isWord;
+	}
+}
+
 export class WordSearchModel{
 	rows: number;
 	cols: number;
-	grid: string[];
+	grid: Letter[];
 
     constructor(rows: number, cols: number){
 		this.rows = rows;

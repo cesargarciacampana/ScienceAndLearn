@@ -60,6 +60,10 @@ export class WordSearchComponent implements OnInit {
 		this.userWords.splice(this.userWords.length - 1, 1);
   }
 
+  generate(){
+	this.wsModel = this.wordSearchHelper.generate(this.rows, this.cols, this.words, this.nDirections);
+  }
+
   btnClick(){
 	this.resetWords();
 
@@ -67,13 +71,13 @@ export class WordSearchComponent implements OnInit {
 		this.wordService.randomWords(this.nWords).subscribe(
 			data => {
 				this.words = data
-				this.wsModel = this.wordSearchHelper.generate(this.rows, this.cols, this.words, this.nDirections);
+				this.generate();
 			}
 		  );
 	}
 	else{
 		this.words = this.userWords;
-		this.wsModel = this.wordSearchHelper.generate(this.rows, this.cols, this.words, this.nDirections);
+		this.generate();
 	}
   }
 }

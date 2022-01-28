@@ -1,5 +1,6 @@
 <div [style.width]="wsModel.cols * 25 + 'px'" *ngFor="let i of rowArray">
-    <div class="letter" *ngFor="let j of colArray">
-        {{ wsModel.grid[j + wsModel.cols * i] }}
+    <div class="letter" *ngFor="let j of colArray"
+		[style.background]="getLetter(i, j).isWord ? 'red' : 'none'">
+        {{ getLetter(i, j).letter }}
     </div>
 </div>
