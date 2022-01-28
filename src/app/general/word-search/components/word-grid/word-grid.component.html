@@ -1,8 +1,5 @@
-<div [style.width]="cols * 25 + 'px'" *ngFor="let i of rowArray">
+<div [style.width]="wsModel.cols * 25 + 'px'" *ngFor="let i of rowArray">
     <div class="letter" *ngFor="let j of colArray">
-        {{ grid[j + cols * i] }}
+        {{ wsModel.grid[j + wsModel.cols * i] }}
     </div>
 </div>
-<ul *ngFor="let word of words">
-    <li>{{word}}</li>
-</ul>
