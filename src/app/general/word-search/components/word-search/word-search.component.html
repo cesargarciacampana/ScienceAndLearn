@@ -1,5 +1,5 @@
-<h3>Generar sopa de letras</h3>
-<div>
+<h3>Crear sopa de letras</h3>
+<div *ngIf="allowRandomGenerate">
 	<mat-radio-group aria-label="Elige una opción" [(ngModel)]="generateWords" (change)="onGenerateChanged()">
 		<mat-radio-button [value]="Generate.User">Personalizado</mat-radio-button>
 		<mat-radio-button [value]="Generate.Random">Palabras aleatorias</mat-radio-button>
@@ -8,11 +8,11 @@
 <div *ngIf="generateWords == Generate.User">
 	<div>Escribe la lista de palabras</div>
 	<div>
-		<span *ngFor="let word of userWords; let i = index; trackBy: customTrackBy">
+		<div *ngFor="let word of userWords; let i = index; trackBy: customTrackBy">
 			<mat-form-field>
 				<input matInput placeholder="Introduce una palabra" [(ngModel)]="userWords[i]"/>
 			</mat-form-field>
-		</span>
+		</div>
 	</div>
 	<button mat-icon-button aria-label="Añadir" matTooltip="Añadir" (click)="newWord()">
 		<mat-icon>add</mat-icon>
@@ -24,7 +24,7 @@
 
 <div>
 	<button mat-raised-button (click)="btnClick()">
-		Generar
+		Generar sopa de letras
 	</button>
 </div>
 
@@ -36,6 +36,3 @@
 	</ul>
 </div>
 
-<div *ngIf="wsModel">
-    <app-word-grid [wsModel]="wsModel"></app-word-grid>
-</div>

@@ -1,0 +1,20 @@
+<h3>Sopa de letras</h3>
+<div *ngIf="wsModel; else error">
+	<div>
+		<app-word-grid [wsModel]="wsModel"></app-word-grid>
+	</div>
+	<div>
+		<button mat-raised-button (click)="GenerarClick()">
+			Volver a generar
+		</button>
+		<button mat-raised-button [routerLink]="['/word-search']" queryParamsHandling="preserve">
+			Cambiar palabras
+		</button>
+	</div>
+</div>
+
+<ng-template #error>
+	<div><button mat-raised-button [routerLink]="['/word-search']">
+		Crear sopa de letras
+	</button></div>
+</ng-template>

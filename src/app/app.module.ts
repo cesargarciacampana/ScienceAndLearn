@@ -57,6 +57,7 @@ import { ElementService } from '@chem-shared/services/element.service';
 import { BalancingGameOptionsComponent } from './chemistry/components/balancing-game-options/balancing-game-options.component';
 import { WordSearchComponent } from './general/word-search/components/word-search/word-search.component';
 import { WordGridComponent } from './general/word-search/components/word-grid/word-grid.component';
+import { WordSearchResultComponent } from './general/word-search/components/word-search-result/word-search-result.component';
 
 @NgModule({
     declarations: [
@@ -87,7 +88,8 @@ import { WordGridComponent } from './general/word-search/components/word-grid/wo
         BalancingGameBalancerComponent,
         BalancingGameOptionsComponent,
         WordSearchComponent,
-        WordGridComponent
+        WordGridComponent,
+        WordSearchResultComponent
     ],
     imports: [
         FormsModule,

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { WordService } from '@chem-shared/services/word.service';
-import { WordSearchHelper } from '../../helpers/word-search.helper';
-import { WordSearchModel } from '../../models/word-search.model';
-import { WordGridComponent } from '../word-grid/word-grid.component';
+import { WordSearchConfig } from '../../models/word-search-config';
+import { WordSearchResultComponent } from '../word-search-result/word-search-result.component';
 
 export enum Generate{
     Random = 0,
@@ -17,30 +18,28 @@ export enum Generate{
 
 export class WordSearchComponent implements OnInit {
 
-	rows = 10;
-	cols = 15;
-	nDirections = 2;
-	nWords = 8;
-	
-	wsModel: WordSearchModel;
+	allowRandomGenerate = false;
+	wsConfig: WordSearchConfig;
+	nWords = 5;
+
 	words: string[];
-	userWords: string[] = [''];
+	userWords: string[] = new Array(this.nWords);
 
 	Generate: any = Generate;
 	generateWords: Generate = Generate.User;
 
   constructor(
     private wordService : WordService,
-	private wordSearchHelper : WordSearchHelper
+	private router: Router,
+	private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    
+	this.wsConfig = new WordSearchConfig(10, 15, 2, []);
   }
 
   resetWords(){
 	this.words = null;
-	this.wsModel = null;
   }
 
   onGenerateChanged(){
@@ -61,7 +60,8 @@ export class WordSearchComponent implements OnInit {
   }
 
   generate(){
-	this.wsModel = this.wordSearchHelper.generate(this.rows, this.cols, this.words, this.nDirections);
+	this.wsConfig.words = this.words;
+	this.router.navigateByUrl(`/word-search-result?${WordSearchResultComponent.wsConfigParamName}=${this.wsConfig.Serialize()}`);
   }
 
   btnClick(){
@@ -76,8 +76,23 @@ export class WordSearchComponent implements OnInit {
 		  );
 	}
 	else{
-		this.words = this.userWords;
-		this.generate();
+		var temp = [];
+		for(var word of this.userWords)
+		{
+			if (word)	
+			temp.push(word);
+		}
+		if (temp.length > 0){
+			this.words = temp;
+			this.generate();
+		}
+		else{
+			this.snackBar.open("Debes introducir al menos una palabra", null, 
+				{ 
+					duration: 1500, 
+					verticalPosition: 'top'
+				});
+		}
 	}
   }
 }
