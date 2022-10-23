@@ -19,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSliderModule } from '@angular/material/slider';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -58,6 +60,7 @@ import { BalancingGameOptionsComponent } from './chemistry/components/balancing-
 import { WordSearchComponent } from './general/word-search/components/word-search/word-search.component';
 import { WordGridComponent } from './general/word-search/components/word-grid/word-grid.component';
 import { WordSearchResultComponent } from './general/word-search/components/word-search-result/word-search-result.component';
+import { WordSearchOptionsComponent } from './general/word-search/components/word-search-options/word-search-options.component';
 
 @NgModule({
     declarations: [
@@ -89,7 +92,8 @@ import { WordSearchResultComponent } from './general/word-search/components/word
         BalancingGameOptionsComponent,
         WordSearchComponent,
         WordGridComponent,
-        WordSearchResultComponent
+        WordSearchResultComponent,
+        WordSearchOptionsComponent
     ],
     imports: [
         FormsModule,
@@ -117,7 +121,9 @@ import { WordSearchResultComponent } from './general/word-search/components/word
         MatTableModule,
         MatExpansionModule,
         MatRadioModule,
-        MatBadgeModule
+        MatBadgeModule,
+		MatDialogModule,
+		MatSliderModule
     ],
     providers: [
         ElementService,

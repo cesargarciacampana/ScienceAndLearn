@@ -18,12 +18,20 @@ export class WordSearchResultComponent implements OnInit {
 
   constructor(
 	private wordSearchHelper : WordSearchHelper,
-	private router: ActivatedRoute
+	private actRoute: ActivatedRoute
   ) { }
 
+  static getWsConfigFromParams(actRoute: ActivatedRoute){
+	var wsConfigString = actRoute.snapshot.queryParamMap.get(WordSearchResultComponent.wsConfigParamName);
+	var wsConfig = WordSearchConfig.Deserialize(wsConfigString);
+	if (wsConfig && wsConfig.isValid())
+		return wsConfig;
+	else
+		return null;
+  }
+
   ngOnInit(): void {
-	var wsConfigString = this.router.snapshot.queryParamMap.get(WordSearchResultComponent.wsConfigParamName);
-	this.wsConfig = WordSearchConfig.Deserialize(wsConfigString);
+	this.wsConfig = WordSearchResultComponent.getWsConfigFromParams(this.actRoute);
 	if (this.wsConfig && this.wsConfig.isValid())
 		this.Generar();
   }

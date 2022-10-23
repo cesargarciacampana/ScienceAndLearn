@@ -8,17 +8,20 @@
 <div *ngIf="generateWords == Generate.User">
 	<div>Escribe la lista de palabras</div>
 	<div>
-		<div *ngFor="let word of userWords; let i = index; trackBy: customTrackBy">
+		<div *ngFor="let word of wsConfig.words; let i = index; trackBy: customTrackBy">
 			<mat-form-field>
-				<input matInput placeholder="Introduce una palabra" [(ngModel)]="userWords[i]"/>
+				<input matInput placeholder="Introduce una palabra" [(ngModel)]="wsConfig.words[i]"/>
 			</mat-form-field>
 		</div>
 	</div>
-	<button mat-icon-button aria-label="Añadir" matTooltip="Añadir" (click)="newWord()">
+	<button mat-icon-button aria-label="Añadir palabra" matTooltip="Añadir palabra" (click)="newWord()">
 		<mat-icon>add</mat-icon>
 	</button>
-	<button mat-icon-button aria-label="Quitar" matTooltip="Quitar" (click)="deleteWord()">
+	<button mat-icon-button aria-label="Quitar última palabra" matTooltip="Quitar última palabra" (click)="deleteWord()">
 		<mat-icon>delete</mat-icon>
+	</button>
+	<button mat-icon-button aria-label="Opciones" matTooltip="Opciones" (click)="ShowSettingsClick()">
+		<mat-icon>settings</mat-icon>
 	</button>
 </div>
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WordService } from '@chem-shared/services/word.service';
 import { WordSearchConfig } from '../../models/word-search-config';
+import { WordSearchOptionsComponent } from '../word-search-options/word-search-options.component';
 import { WordSearchResultComponent } from '../word-search-result/word-search-result.component';
 
 export enum Generate{
@@ -23,7 +25,6 @@ export class WordSearchComponent implements OnInit {
 	nWords = 5;
 
 	words: string[];
-	userWords: string[] = new Array(this.nWords);
 
 	Generate: any = Generate;
 	generateWords: Generate = Generate.User;
@@ -31,11 +32,20 @@ export class WordSearchComponent implements OnInit {
   constructor(
     private wordService : WordService,
 	private router: Router,
-	private snackBar: MatSnackBar
+	private actRouter: ActivatedRoute,
+	private snackBar: MatSnackBar,
+	private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-	this.wsConfig = new WordSearchConfig(10, 15, 2, []);
+	this.wsConfig = WordSearchResultComponent.getWsConfigFromParams(this.actRouter);
+	if (!this.wsConfig || !this.wsConfig.isValid()){
+		this.wsConfig = new WordSearchConfig(
+			WordSearchOptionsComponent.defaultRows, 
+			WordSearchOptionsComponent.defaultCols, 
+			WordSearchOptionsComponent.defaultNDirections, 
+			new Array(this.nWords));
+	}
   }
 
   resetWords(){
@@ -51,17 +61,17 @@ export class WordSearchComponent implements OnInit {
 }
 
   newWord(){
-	this.userWords.push('');
+	this.wsConfig.words.push('');
   }
 
   deleteWord(){
-	if(this.userWords.length > 0)
-		this.userWords.splice(this.userWords.length - 1, 1);
+	if(this.wsConfig.words.length > 0)
+		this.wsConfig.words.splice(this.wsConfig.words.length - 1, 1);
   }
 
   generate(){
 	this.wsConfig.words = this.words;
-	this.router.navigateByUrl(`/word-search-result?${WordSearchResultComponent.wsConfigParamName}=${this.wsConfig.Serialize()}`);
+	this.router.navigateByUrl(`/word-search-result?${WordSearchResultComponent.wsConfigParamName}=${encodeURIComponent(this.wsConfig.Serialize())}`);
   }
 
   btnClick(){
@@ -77,7 +87,7 @@ export class WordSearchComponent implements OnInit {
 	}
 	else{
 		var temp = [];
-		for(var word of this.userWords)
+		for(var word of this.wsConfig.words)
 		{
 			if (word)	
 			temp.push(word);
@@ -94,5 +104,15 @@ export class WordSearchComponent implements OnInit {
 				});
 		}
 	}
+  }
+
+  ShowSettingsClick(){
+	let dialogRef = this.dialog.open(WordSearchOptionsComponent, { data: { wsConfig: this.wsConfig }} );
+	dialogRef.afterClosed().subscribe(result => {
+		if (result){
+			this.wsConfig.rows = result.rows;
+			this.wsConfig.cols = result.cols;
+		}
+	  });
   }
 }

@@ -1,0 +1,20 @@
+<div>Elige el número de filas</div>
+<mat-slider [min]="minRows" [max]="maxRows" step="1" [(value)]="rows" thumbLabel></mat-slider>
+<mat-form-field class="short-field">
+	<input matInput type="number" [(ngModel)]="rows" [min]="minRows" [max]="maxRows"/>
+</mat-form-field>
+
+<div>Elige el número de columnas</div>
+<mat-slider min="10" max="50" step="1" [(value)]="cols" thumbLabel></mat-slider>
+<mat-form-field class="short-field">
+	<input matInput type="number" [(ngModel)]="cols" [min]="minCols" [max]="maxCols"/>
+</mat-form-field>
+
+<div>
+	<button type="button" color="primary" mat-raised-button (click)="ok()">
+		Aceptar
+	</button>
+	<button type="button" mat-raised-button mat-dialog-close>
+		Cancelar
+	</button>
+</div>
