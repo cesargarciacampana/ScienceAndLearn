@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs/operators';
+import { StatisticsService } from '../../services/statistics/statistics.service';
 
 @Component({
   selector: 'app-statistics',
@@ -14,7 +13,7 @@ export class StatisticsComponent implements OnInit {
   calculationColumns = ['index', 'name', 'points', 'level', 'success', 'fails'];
   pairsColumns = ['index', 'name', 'moves', 'time'];
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private statisticsService: StatisticsService) { }
 
   ngOnInit() {
   }
@@ -23,15 +22,6 @@ export class StatisticsComponent implements OnInit {
     if (this.stats[name])
       return;
 
-    this.stats[name] = this.firestore
-      .collection(name + '-statistics', 
-        ref => ref.orderBy('points', 'desc').orderBy('seconds', 'asc').limit(10))
-      .valueChanges().pipe(
-        map((data) => {
-          for(let i = 0; i < data.length; i++)
-            data[i]['info'] = JSON.parse(data[i]['info']);
-          return data;
-        }
-      ));
+    this.stats[name] = this.statisticsService.load(name);
   }
 }
