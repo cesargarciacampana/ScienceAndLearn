@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Statistics } from '@shared/models/statistics';
 import { Observable } from 'rxjs';
 
@@ -12,9 +13,15 @@ export class StatisticsTableComponent implements OnInit {
   @Input() stats: Observable<Statistics[]>;
   @Input() columns = [];
 
-  constructor() { }
+  statistics: Statistics[];
+  error = false;
+
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+	this.stats.subscribe(
+		(x) => this.statistics = x, 
+		(error) => this.showError(error));
   }
 
   countClues(words: any[]){
@@ -28,5 +35,12 @@ export class StatisticsTableComponent implements OnInit {
       }
     }
     return count;
+  }
+
+  showError(error){
+	this.error = true;
+	this.snackBar.open('No se ha podido cargar la clasificación'
+		, null, { duration: 5000, verticalPosition: 'top' });
+	console.log(error.message);
   }
 }
