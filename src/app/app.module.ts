@@ -38,9 +38,6 @@ import { CalculationComponent } from './mathematics/components/calculation/calcu
 import { CalculationGameComponent } from './mathematics/components/calculation-game/calculation-game.component';
 import { FormatTimePipe } from '@shared/pipes/format-time.pipe';
 import { SpellGameOptionsComponent } from './chemistry/components/spell-game-options/spell-game-options.component';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { environment } from '../environments/environment';
 import { LoginComponent } from './main/components/login/login.component';
 import { StatisticsComponent } from './main/components/statistics/statistics.component';
 import { StatisticsTableComponent } from './main/components/statistics-table/statistics-table.component';
@@ -101,8 +98,6 @@ import { WordSearchOptionsComponent } from './general/word-search/components/wor
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFirestoreModule,
         DragDropModule,
         MatInputModule,
         MatSidenavModule,

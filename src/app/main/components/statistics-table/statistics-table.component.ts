@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Statistics } from '@shared/models/statistics';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class StatisticsTableComponent implements OnInit {
 
-  @Input() stats: Observable<any[]>;
+  @Input() stats: Observable<Statistics[]>;
   @Input() columns = [];
 
   constructor() { }

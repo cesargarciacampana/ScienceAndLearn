@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatInput } from '@angular/material/input';
 import { GameInfo } from '@shared/models/game-info';
+import { Statistics } from '@shared/models/statistics';
 import { StatisticsService } from '../../services/statistics/statistics.service';
 
 @Component({
@@ -25,15 +26,16 @@ export class LoginComponent implements OnInit {
     if (!this.name.value)
       return;
 
-    let stats = {
-      user: this.name.value, points: this.gameInfo.points,
-      seconds: this.gameInfo.seconds, info: this.gameInfo.toJson()
-    };
-    this.statisticsService.save(this.gameName, stats)
-    .then(()=>
+    let stats = new Statistics(this.gameName, this.name.value, this.gameInfo.points,
+      this.gameInfo.seconds, this.gameInfo.toJson());
+
+    this.statisticsService.save(stats)
+    .subscribe(
+		()=>
       {
         this.saved = true;
-      }
-    ).catch((reason) => alert('No se ha podido guardar: ' + reason));
+      },
+	  (reason) => alert('No se ha podido guardar: ' + reason)
+    );
   }
 }

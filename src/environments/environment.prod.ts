@@ -1,12 +1,4 @@
 export const environment = {
   production: true,
-  firebase: {
-    apiKey: "AIzaSyDLuVhA7T_li91Q36ZtqVrgs3AMfUh1UJA",
-    authDomain: "scienceandlearnapi.firebaseapp.com",
-    databaseURL: "https://scienceandlearnapi.firebaseio.com",
-    projectId: "scienceandlearnapi",
-    storageBucket: "scienceandlearnapi.appspot.com",
-    messagingSenderId: "943047332869",
-    appId: "1:943047332869:web:e00d4df464b49fba47786c"
-  }
+  api: 'https://83nt50m124.execute-api.eu-west-3.amazonaws.com/Prod/api/'
 };

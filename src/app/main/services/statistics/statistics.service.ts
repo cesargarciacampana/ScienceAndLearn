@@ -1,28 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Statistics } from '@shared/models/statistics';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatisticsService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private http: HttpClient) { }
 
-  load(name: string){
-	return this.firestore
-	.collection(name + '-statistics', 
-	  ref => ref.orderBy('points', 'desc').orderBy('seconds', 'asc').limit(10))
-	.valueChanges().pipe(
-	  map((data) => {
-		for(let i = 0; i < data.length; i++)
-		  data[i]['info'] = JSON.parse(data[i]['info']);
-		return data;
-	  }
-	));
+  private getUrl(){
+	return environment.api + 'statistics';
   }
 
-  save(name: string, stats: object){
-	return this.firestore.collection(name + '-statistics').add(stats);
+  load(game: string) {
+	return this.http.get<any[]>(this.getUrl() + '/' + game)
+		.pipe(
+			map(list => list.map(x => Object.assign(new Statistics(), x)))
+		);
+  }
+
+  save(stats: Statistics){
+	return this.http.post(this.getUrl(), stats);
   }
 }
