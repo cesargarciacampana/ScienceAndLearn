@@ -1,13 +1,12 @@
 <p class="title">
-	{{title}}
-	<button mat-icon-button aria-label="Más información" [matTooltip]="description">
+	<a [routerLink]="route" class="nostyle">{{caption}}</a>
+	<button mat-icon-button aria-label="Más información" [matTooltip]="description" (click)="showDescription()">
 		<mat-icon>help_outline</mat-icon>
 	</button>
 </p>
 
 <div *ngIf="image; else noimage">
-	
-	<a *ngIf="image" [routerLink]="route">
+	<a [routerLink]="route">
 		<img class="image" [src]="image" height="180px"/>
 	</a>
 </div>

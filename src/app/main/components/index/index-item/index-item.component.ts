@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-index-item',
@@ -7,14 +8,18 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class IndexItemComponent implements OnInit {
 
-  @Input() title;
+  @Input() caption;
   @Input() description;
   @Input() route;
   @Input() image;
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
   }
 
+  showDescription(){
+	this.snackBar.open(this.description, null,
+		{ duration: 5000, verticalPosition: 'top' });
+  }
 }
