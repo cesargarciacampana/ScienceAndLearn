@@ -58,6 +58,7 @@ import { WordSearchComponent } from './general/word-search/components/word-searc
 import { WordGridComponent } from './general/word-search/components/word-grid/word-grid.component';
 import { WordSearchResultComponent } from './general/word-search/components/word-search-result/word-search-result.component';
 import { WordSearchOptionsComponent } from './general/word-search/components/word-search-options/word-search-options.component';
+import { IndexItemComponent } from './main/components/index/index-item/index-item.component';
 
 @NgModule({
     declarations: [
@@ -90,7 +91,8 @@ import { WordSearchOptionsComponent } from './general/word-search/components/wor
         WordSearchComponent,
         WordGridComponent,
         WordSearchResultComponent,
-        WordSearchOptionsComponent
+        WordSearchOptionsComponent,
+        IndexItemComponent
     ],
     imports: [
         FormsModule,

@@ -1,0 +1,18 @@
+<p class="title">
+	{{title}}
+	<button mat-icon-button aria-label="Más información" [matTooltip]="description">
+		<mat-icon>help_outline</mat-icon>
+	</button>
+</p>
+
+<div *ngIf="image; else noimage">
+	
+	<a *ngIf="image" [routerLink]="route">
+		<img class="image" [src]="image" height="180px"/>
+	</a>
+</div>
+<ng-template #noimage>
+	<button mat-raised-button [routerLink]="route">
+		Jugar ahora
+	</button>
+</ng-template>

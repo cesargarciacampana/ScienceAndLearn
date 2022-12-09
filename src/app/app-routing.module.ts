@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'spell', component: SpellGameComponent },
   { path: 'pairs', component: PairGameComponent },
   { path: 'balancing', component: BalancingGameComponent },
-  { path: 'solve', component: ResolutorComponent },
+  { path: 'spell-solver', component: ResolutorComponent },
   { path: 'calculation', component: CalculationGameComponent },
   { path: 'stats', component: StatisticsComponent },
   { path: 'table', component: PeriodicTableComponent },

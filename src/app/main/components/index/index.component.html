@@ -2,62 +2,68 @@
 
 <h2 class="sectionTitle mtop">QUÍMICA</h2>
 
-<div>
-    <p class="title">Crea palabras usando la tabla periódica</p>
-    <p>Aprende los elementos de la tabla periódica con este divertido juego, en el que sumarás puntos por cada elemento que aciertes</p>
-    <button mat-raised-button [routerLink]="['/spell']">
-        Jugar ahora
-    </button>
-</div>
+<div class="items">
+	<div class="item">
+		<app-index-item title="Crea palabras con la tabla periódica"
+			description="Aprende los elementos de la tabla periódica con este divertido juego, en el que sumarás puntos por cada elemento que aciertes"
+			route="/spell"
+			image="assets/image/spell.png">
+		</app-index-item>
+	</div>
 
-<div>
-    <p class="title">Encuentra la pareja</p>
-    <p>Aprende los elementos de la tabla periódica con el clásico juego de buscar parejas, en el que deberás encontrar el elemento y su símbolo</p>
-    <button mat-raised-button [routerLink]="['/pairs']">
-        Jugar ahora
-    </button>
-</div>
+	<div class="item">
+		<app-index-item title="Encuentra la pareja"
+			description="Aprende los elementos de la tabla periódica con el clásico juego de buscar parejas, en el que deberás encontrar el elemento y su símbolo"
+			route="/pairs"
+			image="assets/image/pairs.png">
+		</app-index-item>
+	</div>
 
-<div>
-    <p class="title">Ajusta la ecuación</p>
-    <p>Aprende a ajustar ecuaciones químicas con este divertido juego</p>
-    <button mat-raised-button [routerLink]="['/balancing']">
-        Jugar ahora
-    </button>
-</div>
+	<div class="item">
+		<app-index-item title="Ajusta la ecuación"
+			description="Aprende a ajustar ecuaciones químicas con este divertido juego"
+			route="/balancing"
+			image="assets/image/balancing.png">
+		</app-index-item>
+	</div>
 
-<div class="section mtop">
-    <p class="title">Deletreador</p>
-    <p>¿Tu nombre se puede escribir usando elementos de la tabla periódica?</p>
-    <button mat-raised-button [routerLink]="['/solve']">
-        Descúbrelo aquí
-    </button>
-</div>
+	<div class="item">
+		<app-index-item title="Deletreador"
+			description="¿Tu nombre se puede escribir usando elementos de la tabla periódica?"
+			route="/spell-solver"
+			image="assets/image/spell-solver.png">
+		</app-index-item>
+	</div>
 
-<div class="section mtop">
-    <p class="title">Tabla periódica</p>
-    <p>Tabla periódica de los elementos interactiva</p>
-    <button mat-raised-button [routerLink]="['/table']">
-        Ver tabla
-    </button>
+	<div class="item">
+		<app-index-item title="Tabla periódica"
+			description="Tabla periódica de los elementos interactiva"
+			route="/table"
+			image="assets/image/periodic-table.png">
+		</app-index-item>
+	</div>
 </div>
 
 <h2 class="sectionTitle mtop">MATEMÁTICAS</h2>
 
-<div>
-    <p class="title">Cálculo mental</p>
-    <p>Pon a prueba tu agilidad mental con este divertido juego en el que realizarás operaciones aritméticas contrarreloj</p>
-    <button mat-raised-button [routerLink]="['/calculation']">
-        Jugar ahora
-    </button>
+<div class="items">
+	<div class="item">
+		<app-index-item title="Cálculo mental"
+			description="Pon a prueba tu agilidad mental con este divertido juego en el que realizarás operaciones aritméticas contrarreloj"
+			route="/calculation"
+			image="assets/image/calculation.png">
+		</app-index-item>
+	</div>
 </div>
 
 <h2 class="sectionTitle mtop">OTROS</h2>
 
-<div>
-    <p class="title">Sopa de letras</p>
-    <p>Crear sopas de letras</p>
-    <button mat-raised-button [routerLink]="['/word-search']">
-        Crear sopa de letras
-    </button>
+<div class="items">
+	<div class="item">
+		<app-index-item title="Sopa de letras"
+			description="Crear sopas de letras"
+			route="/word-search"
+			image="assets/image/word-search.png">
+		</app-index-item>
+	</div>
 </div>

@@ -1,9 +1,26 @@
 .sectionTitle{
     color: #AAAAAA;
 }
-.title{
-    font-weight: bold;
-}
 .mtop{
     margin-top: 30px;
+}
+
+.items{
+	max-width: 1100px;
+	display: grid;
+	grid-template-columns: 33.33% 33.33% 33.33%;
+}
+.item{
+	padding: 20px;
+	padding-top: 0;
+}
+@media(max-width: 850px){
+	.items{
+		grid-template-columns: 50% 50%;
+	}
+}
+@media(max-width: 600px){
+	.items{
+		grid-template-columns: 100%;
+	}
 }
