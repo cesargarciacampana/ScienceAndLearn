@@ -3,6 +3,16 @@
     <mat-toolbar color="primary" class="toolbar">
         <button mat-icon-button (click)="toggleNav()"><mat-icon>menu</mat-icon></button>
         <div class="title" [routerLink]="['/']" (click)="closeNav()">Ciencia y aprende</div>
+		<div class="group" *ngIf="!authService.groupCode">
+			<mat-form-field>
+				<input matInput #groupCode placeholder="Código de grupo" />
+			</mat-form-field>
+			<button *ngIf="groupCode.value" mat-raised-button (click)="login()">Guardar</button>
+		</div>
+		<div class="grupo" *ngIf="authService.groupCode">
+			{{authService.groupCode}}
+			<button mat-raised-button (click)="logout()" *ngIf="allowChangeGroupCode">Cambiar</button>
+		</div>
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container">

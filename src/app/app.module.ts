@@ -26,7 +26,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpellGameComponent } from '@chem/spell-game/spell-game.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ResolutorComponent } from '@chem/resolutor/resolutor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from '@main/menu/menu.component';
@@ -59,6 +59,7 @@ import { WordGridComponent } from './general/word-search/components/word-grid/wo
 import { WordSearchResultComponent } from './general/word-search/components/word-search-result/word-search-result.component';
 import { WordSearchOptionsComponent } from './general/word-search/components/word-search-options/word-search-options.component';
 import { IndexItemComponent } from './main/components/index/index-item/index-item.component';
+import { AuthInterceptor } from './main/interceptors/auth.interceptor';
 
 @NgModule({
     declarations: [
@@ -124,7 +125,8 @@ import { IndexItemComponent } from './main/components/index/index-item/index-ite
     ],
     providers: [
         ElementService,
-        { provide: APP_INITIALIZER, useFactory: (elementService: ElementService) => () => elementService.load(), deps: [ElementService], multi: true }
+        { provide: APP_INITIALIZER, useFactory: (elementService: ElementService) => () => elementService.load(), deps: [ElementService], multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

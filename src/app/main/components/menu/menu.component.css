@@ -30,3 +30,7 @@
 .title{
     cursor: pointer;
 }
+.group{
+	position:absolute;
+	right:30px;
+}
