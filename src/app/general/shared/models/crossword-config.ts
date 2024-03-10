@@ -37,7 +37,7 @@ export class CrosswordConfig implements WordList{
 			return null;
 
 		var temp = from.split('-');
-		if (temp.length < 4)
+		if (temp.length < 3)
 			return null;
 
 		return new CrosswordConfig(Number(temp[1]), Number(temp[2]), temp[0].split(','));

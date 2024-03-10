@@ -11,6 +11,7 @@ import { BalancingGameComponent } from '@chem/balancing-game/balancing-game.comp
 import { WordSearchComponent } from './general/word-search/components/word-search/word-search.component';
 import { WordSearchResultComponent } from './general/word-search/components/word-search-result/word-search-result.component';
 import { CrosswordComponent } from './general/crossword/components/crossword/crossword.component';
+import { CrosswordResultComponent } from './general/crossword/components/crossword-result/crossword-result.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'word-search', component: WordSearchComponent },
   { path: 'word-search-result', component: WordSearchResultComponent },
   { path: 'crossword', component: CrosswordComponent },
+  { path: 'crossword-result', component: CrosswordResultComponent },
 
   { path: '**', redirectTo: '' }
 ];

@@ -1,0 +1,6 @@
+<div [style.width]="wordGridModel.cols * 25 + 'px'" *ngFor="let i of rowArray">
+    <div class="letter" *ngFor="let j of colArray"
+		  [style.background]="solve && getLetter(i, j).isWord ? 'lightblue' : 'none'">
+      {{ getLetter(i, j)?.letter ?? ' ' }}
+    </div>
+</div>

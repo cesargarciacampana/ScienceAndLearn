@@ -55,13 +55,14 @@ import { BalancingGameBalancerComponent } from './chemistry/components/balancing
 import { ElementService } from '@chem-shared/services/element.service';
 import { BalancingGameOptionsComponent } from './chemistry/components/balancing-game-options/balancing-game-options.component';
 import { WordSearchComponent } from './general/word-search/components/word-search/word-search.component';
-import { WordGridComponent } from './general/word-search/components/word-grid/word-grid.component';
+import { WordGridComponent } from './general/shared/components/word-grid/word-grid.component';
 import { WordSearchResultComponent } from './general/word-search/components/word-search-result/word-search-result.component';
 import { WordSearchOptionsComponent } from './general/word-search/components/word-search-options/word-search-options.component';
 import { IndexItemComponent } from './main/components/index/index-item/index-item.component';
 import { AuthInterceptor } from './main/interceptors/auth.interceptor';
 import { CrosswordComponent } from './general/crossword/components/crossword/crossword.component';
-import { WordListInputComponent } from './general/word-list-input/word-list-input.component';
+import { WordListInputComponent } from './general/shared/components/word-list-input/word-list-input.component';
+import { CrosswordResultComponent } from './general/crossword/components/crossword-result/crossword-result.component';
 
 @NgModule({
     declarations: [
@@ -97,7 +98,8 @@ import { WordListInputComponent } from './general/word-list-input/word-list-inpu
         WordSearchOptionsComponent,
         IndexItemComponent,
         CrosswordComponent,
-        WordListInputComponent
+        WordListInputComponent,
+        CrosswordResultComponent
     ],
     imports: [
         FormsModule,

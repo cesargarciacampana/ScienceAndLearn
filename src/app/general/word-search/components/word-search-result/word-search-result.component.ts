@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WordSearchHelper } from '../../helpers/word-search.helper';
-import { WordSearchConfig } from '../../../models/word-search-config';
-import { WordSearchModel } from '../../../models/word-search.model';
+import { WordGridHelper } from '../../../shared/helpers/word-grid.helper';
+import { WordSearchConfig } from '../../../shared/models/word-search-config';
+import { WordGridModel } from '../../../shared/models/word-grid.model';
 
 @Component({
   selector: 'app-word-search-result',
@@ -11,10 +11,10 @@ import { WordSearchModel } from '../../../models/word-search.model';
 })
 export class WordSearchResultComponent implements OnInit {
   wsConfig: WordSearchConfig;
-  wsModel: WordSearchModel;
+  wsModel: WordGridModel;
 
   constructor(
-    private wordSearchHelper : WordSearchHelper,
+    private wordGridHelper : WordGridHelper,
     private actRoute: ActivatedRoute
   ) { }
 
@@ -25,7 +25,7 @@ export class WordSearchResultComponent implements OnInit {
   }
 
   private Generar(){
-    this.wsModel = this.wordSearchHelper.generate(this.wsConfig.rows, this.wsConfig.cols, this.wsConfig.words, this.wsConfig.nDirections);
+    this.wsModel = this.wordGridHelper.generate(this.wsConfig.rows, this.wsConfig.cols, this.wsConfig.words, this.wsConfig.nDirections);
   }
 
   GenerarClick(){
