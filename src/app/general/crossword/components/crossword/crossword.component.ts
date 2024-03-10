@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CrosswordConfig } from '../../models/crossword-config';
+import { CrosswordConfig } from '../../../models/crossword-config';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WordService } from '@chem-shared/services/word.service';
-import { WordSearchConfig } from '../../models/word-search-config';
+import { WordSearchConfig } from '../../../models/word-search-config';
 import { WordSearchOptionsComponent } from '../word-search-options/word-search-options.component';
 import { MatDialog } from '@angular/material/dialog';
 

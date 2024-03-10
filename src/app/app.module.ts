@@ -60,8 +60,8 @@ import { WordSearchResultComponent } from './general/word-search/components/word
 import { WordSearchOptionsComponent } from './general/word-search/components/word-search-options/word-search-options.component';
 import { IndexItemComponent } from './main/components/index/index-item/index-item.component';
 import { AuthInterceptor } from './main/interceptors/auth.interceptor';
-import { CrosswordComponent } from './general/word-search/components/crossword/crossword.component';
-import { WordListInputComponent } from './general/word-search/components/word-list-input/word-list-input.component';
+import { CrosswordComponent } from './general/crossword/components/crossword/crossword.component';
+import { WordListInputComponent } from './general/word-list-input/word-list-input.component';
 
 @NgModule({
     declarations: [

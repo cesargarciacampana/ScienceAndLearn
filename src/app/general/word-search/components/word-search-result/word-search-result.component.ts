@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WordSearchHelper } from '../../helpers/word-search.helper';
-import { WordSearchConfig } from '../../models/word-search-config';
-import { WordSearchModel } from '../../models/word-search.model';
+import { WordSearchConfig } from '../../../models/word-search-config';
+import { WordSearchModel } from '../../../models/word-search.model';
 
 @Component({
   selector: 'app-word-search-result',

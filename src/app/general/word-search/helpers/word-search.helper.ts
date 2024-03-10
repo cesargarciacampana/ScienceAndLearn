@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { ArrayHelper } from "@shared/helpers/array.helper";
 import { RandomHelper } from "@shared/helpers/random.helper";
 import { StringHelper } from "@shared/helpers/string.helper";
-import { Letter, WordDirection, WordPosition, WordSearchModel } from "../models/word-search.model";
+import { Letter, WordDirection, WordPosition, WordSearchModel } from "../../models/word-search.model";
 
 @Injectable({providedIn: 'root'})
 export class WordSearchHelper {

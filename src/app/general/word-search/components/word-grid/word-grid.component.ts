@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ArrayHelper } from '@shared/helpers/array.helper';
-import { WordSearchModel } from '../../models/word-search.model';
+import { WordSearchModel } from '../../../models/word-search.model';
 
 @Component({
   selector: 'app-word-grid',
