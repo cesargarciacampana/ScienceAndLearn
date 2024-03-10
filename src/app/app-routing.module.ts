@@ -10,6 +10,7 @@ import { PeriodicTableComponent } from '@chem/periodic-table/periodic-table.comp
 import { BalancingGameComponent } from '@chem/balancing-game/balancing-game.component';
 import { WordSearchComponent } from './general/word-search/components/word-search/word-search.component';
 import { WordSearchResultComponent } from './general/word-search/components/word-search-result/word-search-result.component';
+import { CrosswordComponent } from './general/word-search/components/crossword/crossword.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'table', component: PeriodicTableComponent },
   { path: 'word-search', component: WordSearchComponent },
   { path: 'word-search-result', component: WordSearchResultComponent },
+  { path: 'crossword', component: CrosswordComponent },
 
   { path: '**', redirectTo: '' }
 ];

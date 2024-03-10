@@ -35,9 +35,12 @@
             <mat-nav-list>
                 <a mat-list-item [routerLink]="['/calculation']" (click)="closeNav()">Juega: Cálculo mental</a>
             </mat-nav-list>
-            <div class="section">OTROS</div>
+            <div class="section">GENERADORES DE MATERIAL</div>
             <mat-nav-list>
-                <a mat-list-item [routerLink]="['/word-search']" (click)="closeNav()">Crear sopa de letras</a>
+                <a mat-list-item [routerLink]="['/word-search']" (click)="closeNav()">Generar sopa de letras</a>
+            </mat-nav-list>
+			<mat-nav-list>
+                <a mat-list-item [routerLink]="['/crossword']" (click)="closeNav()">Generar crucigrama</a>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="content">

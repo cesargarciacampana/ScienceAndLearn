@@ -1,4 +1,4 @@
-<h3>Crear sopa de letras</h3>
+<h3>Generar sopa de letras</h3>
 <div *ngIf="allowRandomGenerate">
 	<mat-radio-group aria-label="Elige una opción" [(ngModel)]="generateWords" (change)="onGenerateChanged()">
 		<mat-radio-button [value]="Generate.User">Personalizado</mat-radio-button>
@@ -6,28 +6,12 @@
 	</mat-radio-group>
 </div>
 <div *ngIf="generateWords == Generate.User">
-	<div>Escribe la lista de palabras</div>
-	<div>
-		<div *ngFor="let word of wsConfig.words; let i = index; trackBy: customTrackBy">
-			<mat-form-field>
-				<input matInput placeholder="Introduce una palabra" [(ngModel)]="wsConfig.words[i]"/>
-			</mat-form-field>
-		</div>
-	</div>
-	<button mat-icon-button aria-label="Añadir palabra" matTooltip="Añadir palabra" (click)="newWord()">
-		<mat-icon>add</mat-icon>
-	</button>
-	<button mat-icon-button aria-label="Quitar última palabra" matTooltip="Quitar última palabra" (click)="deleteWord()">
-		<mat-icon>delete</mat-icon>
-	</button>
-	<button mat-icon-button aria-label="Opciones" matTooltip="Opciones" (click)="ShowSettingsClick()">
-		<mat-icon>settings</mat-icon>
-	</button>
+	<app-word-list-input [wordList]="wsConfig" [showSettings]="showSettingsDelegate"></app-word-list-input>
 </div>
 
 <div>
 	<button mat-raised-button (click)="btnClick()">
-		Generar sopa de letras
+		Generar
 	</button>
 </div>
 

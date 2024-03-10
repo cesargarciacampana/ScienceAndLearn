@@ -1,8 +1,13 @@
 <h3>Sopa de letras</h3>
 <div *ngIf="wsModel; else error">
 	<div>
-		<app-word-grid [wsModel]="wsModel"></app-word-grid>
+		<app-word-grid [wsModel]="wsModel" [solve]="checkbox.checked"></app-word-grid>
 	</div>
+  <div class="solve-checkbox-wrapper">
+    <mat-checkbox #checkbox="matCheckbox">
+      Mostrar solución
+    </mat-checkbox>
+  </div>
 	<div>
 		<button mat-raised-button (click)="GenerarClick()">
 			Volver a generar

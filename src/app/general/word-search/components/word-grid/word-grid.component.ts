@@ -9,7 +9,8 @@ import { WordSearchModel } from '../../models/word-search.model';
 })
 export class WordGridComponent implements OnInit {
 
-	@Input() wsModel: WordSearchModel;
+  @Input() wsModel: WordSearchModel;
+  @Input() solve: boolean;
   rowArray: number[];
   colArray: number[];
 
@@ -20,11 +21,11 @@ export class WordGridComponent implements OnInit {
   }
 
   initialize(){
-	this.rowArray = ArrayHelper.numberArray(this.wsModel.rows);
-	this.colArray = ArrayHelper.numberArray(this.wsModel.cols);
+    this.rowArray = ArrayHelper.numberArray(this.wsModel.rows);
+    this.colArray = ArrayHelper.numberArray(this.wsModel.cols);
   }
 
   getLetter(i: number, j: number){
-	  return this.wsModel.grid[j + this.wsModel.cols * i];;
+    return this.wsModel.grid[j + this.wsModel.cols * i];;
   }
 }
